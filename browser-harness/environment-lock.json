@@ -1,7 +1,7 @@
 {
   "schemaVersion": "html5assay.browser-environment.v1",
   "packageManager": "pnpm@10.34.5",
-  "repositoryNode": "20.20.2",
+  "repositoryNode": "24.19.0",
   "playwright": {
     "version": "1.62.1",
     "integrity": "sha512-0M+L3LAD8/nm554LOla9Ayx0j0tmFZ0FBcoQ7F1VuVHpM/XpiC8RcDzBQB8W5+hA8L22THxELzeF+2WcUzvcLg==",

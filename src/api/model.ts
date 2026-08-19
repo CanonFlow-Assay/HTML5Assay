@@ -97,7 +97,7 @@ export interface CffReceipt {
   readonly toolchain: {
     readonly node: string;
     readonly htmlParser: 'parse5/7.2.1';
-    readonly cssParser: 'postcss/8.5.6';
+    readonly cssParser: 'postcss/8.5.26';
   };
   readonly verdict: RunVerdict;
   readonly resultDigest: Digest;

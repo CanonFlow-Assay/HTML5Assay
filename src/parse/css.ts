@@ -52,7 +52,10 @@ export const parseCss = (
   hostSource = source
 ): ParsedCss => {
   const evidencePath = path.replace(/#style-\d+$/u, '');
-  const root = postcss.parse(source, { from: undefined });
+  // Source-map annotations are untrusted assay evidence. Disabling map loading
+  // prevents PostCSS from dereferencing sourceMappingURL while the explicit
+  // comment walk below still records the URL for offline policy evaluation.
+  const root = postcss.parse(source, { from: undefined, map: false });
   const rules: CssRuleRecord[] = [];
   const atRules: ParsedCss['atRules'][number][] = [];
   const urls: ParsedCss['urls'][number][] = [];

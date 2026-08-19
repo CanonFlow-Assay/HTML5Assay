@@ -21,47 +21,126 @@ jobs:
     timeout-minutes: 45
 
     steps:
+      - name: Validate exact candidate input
+        env:
+          EXPECTED_COMMIT: ${{ inputs.candidate_commit }}
+        run: |
+          if [[ ! "$EXPECTED_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "candidate_commit must be a full lowercase Git commit" >&2
+            exit 1
+          fi
+
       - name: Check out exact candidate
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ inputs.candidate_commit }}
           persist-credentials: false
 
+      - name: Confirm checked-out identity
+        env:
+          EXPECTED_COMMIT: ${{ inputs.candidate_commit }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
+
       - name: Set up pnpm
-        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
         with:
           version: 10.34.5
           run_install: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 20.20.2
+          node-version: 24.19.0
           cache: pnpm
 
-      - name: Validate candidate identity
-        env:
-          EXPECTED_COMMIT: ${{ inputs.candidate_commit }}
-        run: |
-          [[ "$EXPECTED_COMMIT" =~ ^[0-9a-f]{40}$ ]]
-          test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
-
-      - name: Install exact harness dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Install exact dependencies without lifecycle scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Validate browser environment lock
         run: pnpm run browser:lock:check
 
-      - name: Build and digest the single candidate archive
+      - name: Build, inspect, and qualify one archive
         id: candidate
         run: |
-          mkdir candidate
-          pnpm pack --pack-destination candidate
-          archive="$(find candidate -maxdepth 1 -type f -name '*.tgz' -print -quit)"
-          test -n "$archive"
-          test "$(find candidate -maxdepth 1 -type f -name '*.tgz' | wc -l)" -eq 1
+          rm -rf "$GITHUB_WORKSPACE/dist"
+          pnpm run build
+
+          candidate_dir="$RUNNER_TEMP/html5assay-candidate"
+          consumer_dir="$RUNNER_TEMP/html5assay-consumer"
+          rm -rf "$candidate_dir" "$consumer_dir"
+          install -d -m 0700 "$candidate_dir" "$consumer_dir"
+
+          pnpm pack --pack-destination "$candidate_dir"
+          mapfile -t archives < <(find "$candidate_dir" -maxdepth 1 -type f -name '*.tgz' -print)
+          if [[ "${#archives[@]}" -ne 1 ]]; then
+            echo "expected exactly one package archive, found ${#archives[@]}" >&2
+            exit 1
+          fi
+          archive="$(realpath "${archives[0]}")"
+          tar -tzf "$archive" > "$RUNNER_TEMP/archive-list.txt"
+
+          if awk '
+            /^\// || /^[A-Za-z]:[\\/]/ || /^\\\\/ || /(^|\/)\.\.($|\/)/ { bad = 1 }
+            END { exit bad ? 0 : 1 }
+          ' "$RUNNER_TEMP/archive-list.txt"; then
+            echo "package archive contains an unsafe path" >&2
+            exit 1
+          fi
+
+          for required in \
+            package/package.json \
+            package/dist/src/api/index.js \
+            package/dist/src/api/index.d.ts \
+            package/dist/src/cli/index.js; do
+            grep -Fxq "$required" "$RUNNER_TEMP/archive-list.txt" || {
+              echo "package archive is missing $required" >&2
+              exit 1
+            }
+          done
+
+          tar -xOzf "$archive" package/package.json | node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            const value = JSON.parse(readFileSync(0, "utf8"));
+            if (value.exports?.["."]?.import !== "./dist/src/api/index.js") {
+              throw new Error("archive export does not target the public API");
+            }
+            if (value.bin?.html5assay !== "dist/src/cli/index.js") {
+              throw new Error("archive bin does not target the public CLI");
+            }
+          '
+
+          ARCHIVE="$archive" CONSUMER="$consumer_dir" node --input-type=module -e '
+            import { readFileSync, writeFileSync } from "node:fs";
+            import { join } from "node:path";
+            const repositoryPackage = JSON.parse(readFileSync("package.json", "utf8"));
+            writeFileSync(join(process.env.CONSUMER, "package.json"), JSON.stringify({
+              name: "html5assay-candidate-consumer",
+              private: true,
+              type: "module",
+              packageManager: repositoryPackage.packageManager,
+              dependencies: { "@canonflow/html5-assay": `file:${process.env.ARCHIVE}` }
+            }));
+            writeFileSync(join(process.env.CONSUMER, "index.html"),
+              "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Candidate smoke</title></head><body><main><h1>Candidate smoke</h1></main></body></html>");
+          '
+          (
+            cd "$consumer_dir"
+            npm_config_offline=true pnpm install --offline --ignore-scripts --no-frozen-lockfile
+            node --input-type=module -e '
+              import { analyze, ruleCatalog } from "@canonflow/html5-assay";
+              const result = await analyze({ root: ".", entries: ["index.html"], policy: { id: "cff-web-strict" } });
+              if (result.assay.id !== "html5assay" || ruleCatalog.length !== 58) {
+                throw new Error("candidate public API smoke test failed");
+              }
+            '
+            pnpm exec html5assay catalog H5A-DOC-001 --format json > /dev/null
+          )
+
           digest="$(sha256sum "$archive" | cut -d ' ' -f 1)"
-          printf '%s  %s\n' "$digest" "$(basename "$archive")" > candidate/SHA256SUMS
+          printf '%s  %s\n' "$digest" "$(basename "$archive")" > "$candidate_dir/SHA256SUMS"
+          chmod 0444 "$archive" "$candidate_dir/SHA256SUMS"
+          echo "archive=$archive" >> "$GITHUB_OUTPUT"
+          echo "directory=$candidate_dir" >> "$GITHUB_OUTPUT"
           echo "sha256=$digest" >> "$GITHUB_OUTPUT"
 
       - name: Pull reviewed browser image
@@ -70,33 +149,70 @@ jobs:
       - name: Run host-network-denied browser matrix
         env:
           CANDIDATE_COMMIT: ${{ inputs.candidate_commit }}
+          CANDIDATE_DIRECTORY: ${{ steps.candidate.outputs.directory }}
           CANDIDATE_SHA256: ${{ steps.candidate.outputs.sha256 }}
         run: |
+          evidence_dir="$RUNNER_TEMP/html5assay-browser-evidence"
+          rm -rf "$evidence_dir"
+          install -d -m 0777 "$evidence_dir"
           docker run --rm \
             --network none \
             --platform linux/amd64 \
             --ipc host \
+            --read-only \
             --security-opt no-new-privileges \
+            --tmpfs /tmp:rw,nosuid,nodev,size=1g \
+            -e HOME=/tmp \
             -e HTML5ASSAY_GIT_COMMIT="$CANDIDATE_COMMIT" \
             -e HTML5ASSAY_CANDIDATE_SHA256="$CANDIDATE_SHA256" \
             -e HTML5ASSAY_HOST_NETWORK_DENIAL=docker-network-none \
-            -v "$GITHUB_WORKSPACE:/work" \
+            --mount type=bind,source="$GITHUB_WORKSPACE",target=/work,readonly \
+            --mount type=bind,source="$CANDIDATE_DIRECTORY",target=/candidate,readonly \
+            --mount type=bind,source="$evidence_dir",target=/evidence \
             -w /work \
             "$BROWSER_IMAGE" \
-            node browser-harness/runner.mjs browser-evidence.json
+            node browser-harness/runner.mjs /evidence/browser-evidence.json
 
-      - name: Verify browser evidence envelope
-        if: always()
-        run: node browser-harness/verify-evidence.mjs browser-evidence.json
+      - name: Verify post-browser candidate digest
+        id: post_browser_digest
+        env:
+          CANDIDATE_ARCHIVE: ${{ steps.candidate.outputs.archive }}
+          EXPECTED_SHA256: ${{ steps.candidate.outputs.sha256 }}
+        run: |
+          actual="$(sha256sum "$CANDIDATE_ARCHIVE" | cut -d ' ' -f 1)"
+          test "$actual" = "$EXPECTED_SHA256"
+          echo "sha256=$actual" >> "$GITHUB_OUTPUT"
 
-      - name: Upload browser evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Verify accepted browser evidence
+        env:
+          HTML5ASSAY_EXPECTED_GIT_COMMIT: ${{ inputs.candidate_commit }}
+          HTML5ASSAY_EXPECTED_CANDIDATE_SHA256: ${{ steps.post_browser_digest.outputs.sha256 }}
+        run: node browser-harness/verify-evidence.mjs "$RUNNER_TEMP/html5assay-browser-evidence/browser-evidence.json"
+
+      - name: Lock final candidate digest
+        env:
+          CANDIDATE_ARCHIVE: ${{ steps.candidate.outputs.archive }}
+          EXPECTED_SHA256: ${{ steps.post_browser_digest.outputs.sha256 }}
+        run: test "$(sha256sum "$CANDIDATE_ARCHIVE" | cut -d ' ' -f 1)" = "$EXPECTED_SHA256"
+
+      - name: Upload accepted candidate and evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: candidate-browser-evidence-${{ inputs.candidate_commit }}
+          name: accepted-candidate-browser-evidence-${{ inputs.candidate_commit }}
           path: |
-            candidate/*.tgz
-            candidate/SHA256SUMS
-            browser-evidence.json
+            ${{ steps.candidate.outputs.archive }}
+            ${{ steps.candidate.outputs.directory }}/SHA256SUMS
+            ${{ runner.temp }}/html5assay-browser-evidence/browser-evidence.json
           if-no-files-found: error
           retention-days: 90
+
+      - name: Upload failure diagnostics only
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: browser-qualification-diagnostics-${{ inputs.candidate_commit }}
+          path: |
+            ${{ runner.temp }}/archive-list.txt
+            ${{ runner.temp }}/html5assay-browser-evidence/browser-evidence.json
+          if-no-files-found: ignore
+          retention-days: 30

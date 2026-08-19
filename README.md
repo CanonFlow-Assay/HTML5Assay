@@ -26,7 +26,7 @@ plugins, inspect an unsupplied server response, or make an HTTP request.
 
 ## Requirements
 
-- Node.js 20.20.2
+- Node.js 24.19.0 LTS
 - pnpm 10.34.5 through Corepack
 
 Dependencies use exact versions and the committed lockfile.

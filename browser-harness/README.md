@@ -9,7 +9,7 @@ one candidate `.tgz` SHA-256.
 
 `environment-lock.json` pins Playwright 1.62.1 and its package integrities,
 Chromium revision 1234 (151.0.7922.34), Firefox revision 1538 (153.0), WebKit
-revision 2336 (26.5), repository Node 20.20.2, pnpm 10.34.5, and the reviewed
+revision 2336 (26.5), repository Node 24.19.0 LTS, pnpm 10.34.5, and the reviewed
 Linux/amd64 Playwright container by immutable digest. The container digest locks
 its runtime Node build, whose exact version is recorded from `process.version`
 in each run. `pnpm run browser:lock:check` validates the repository lockfile and
@@ -32,13 +32,15 @@ duplicated, or unexpected entries.
 
 ## Evidence
 
-The evidence envelope records the candidate commit and archive digest,
+The evidence envelope records the candidate commit and post-run archive digest,
 Playwright version, locked and executable browser revisions, operating system,
 Node version, execution timestamps and duration, network controls, result,
 failures, and a canonical SHA-256 evidence digest. Validate an artifact with:
 
 ```sh
-pnpm run browser:evidence:verify -- browser-evidence.json
+HTML5ASSAY_EXPECTED_GIT_COMMIT=<40-character-commit> \
+HTML5ASSAY_EXPECTED_CANDIDATE_SHA256=<post-run-sha256> \
+  pnpm run browser:evidence:verify -- browser-evidence.json
 ```
 
 An automated Pass still requires the separate human and assistive-technology

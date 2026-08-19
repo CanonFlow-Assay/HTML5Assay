@@ -27,8 +27,7 @@
     "html5assay": "dist/src/cli/index.js"
   },
   "engines": {
-    "node": "20.20.2",
-    "npm": "10.8.2"
+    "node": "24.19.0"
   },
   "packageManager": "pnpm@10.34.5",
   "scripts": {
@@ -41,7 +40,7 @@
     "generate:goldens": "pnpm run build && node scripts/generate-goldens.mjs",
     "generate:check": "node scripts/generate-data.mjs --check",
     "goldens:check": "node scripts/generate-goldens.mjs --check",
-    "test": "pnpm run build && node --test dist/test",
+    "test": "pnpm run build && node --test \"dist/test/*.test.js\"",
     "browser:lock:check": "node browser-harness/runner.mjs --validate",
     "browser:evidence:verify": "node browser-harness/verify-evidence.mjs",
     "release:evidence:check": "node release-evidence/verify.mjs release-evidence/0.1.0.json",
@@ -51,16 +50,16 @@
   },
   "dependencies": {
     "parse5": "7.2.1",
-    "postcss": "8.5.6"
+    "postcss": "8.5.26"
   },
   "devDependencies": {
-    "@eslint/js": "9.17.0",
-    "@types/node": "22.10.5",
-    "ajv": "8.17.1",
-    "eslint": "9.17.0",
+    "@eslint/js": "9.39.5",
+    "@types/node": "24.13.3",
+    "ajv": "8.20.0",
+    "eslint": "9.39.5",
     "playwright": "1.62.1",
     "prettier": "3.4.2",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.18.0"
+    "typescript-eslint": "8.67.0"
   }
 }

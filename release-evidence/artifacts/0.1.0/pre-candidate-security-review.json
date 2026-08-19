@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "html5assay.pre-candidate-security-review.v1",
+  "reviewedAt": "2026-08-19",
+  "result": "local-correction-checks-pass",
+  "headAcceptance": "pending-fresh-ci-and-exact-head-review",
+  "candidateGenerated": false,
+  "runtime": {
+    "node": "24.19.0",
+    "npmEngineDeclared": false,
+    "packageManager": "pnpm@10.34.5",
+    "nodeArchiveSha256VerifiedAgainstOfficialShasums": true,
+    "release": "https://nodejs.org/en/blog/release/v24.19.0"
+  },
+  "dependencies": [
+    {
+      "name": "postcss",
+      "version": "8.5.26",
+      "scope": "runtime",
+      "automaticSourceMapLoadingDisabled": true,
+      "addressedAdvisories": ["GHSA-6g55-p6wh-862q", "GHSA-r28c-9q8g-f849", "GHSA-fxqj-rqcc-2cmp"]
+    },
+    {
+      "name": "ajv",
+      "version": "8.20.0",
+      "scope": "development",
+      "addressedAdvisories": ["GHSA-2g4f-4pwh-qvx6"]
+    },
+    {
+      "name": "@eslint/plugin-kit",
+      "version": "0.4.1",
+      "scope": "transitive-development",
+      "resolvedThrough": "eslint@9.39.5",
+      "addressedAdvisories": ["GHSA-xffm-g5w8-qvg7"]
+    }
+  ],
+  "audit": {
+    "productionCommand": "pnpm audit --prod --json",
+    "fullCommand": "pnpm audit --json",
+    "productionVulnerabilities": 0,
+    "fullVulnerabilities": 0
+  },
+  "lockfile": {
+    "version": "9.0",
+    "packageRecords": 124,
+    "sha512IntegrityRecords": 124,
+    "nonRegistryPackageSources": 0,
+    "requiresBuildRecords": 0,
+    "packageJsonSha256": "c0fc77f98fb9e192286e8b061fc3a2d1370039f830a857f2a11b5252cec37ea2",
+    "pnpmLockSha256": "6895a025f485911e88cce1f67cd70f1441f3c525d23855edef4606daba7caeab"
+  },
+  "workflowActionReview": "release-evidence/workflow-actions.json",
+  "limitations": [
+    "This local correction review is not candidate approval.",
+    "Fresh Ubuntu, macOS, and Windows CI and an exact-head pre-candidate review remain required.",
+    "No browser qualification, companion acceptance, candidate security review, accessibility review, merge, tag, or publish action was performed."
+  ]
+}

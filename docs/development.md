@@ -1,6 +1,8 @@
 # Development
 
-Use the pinned Node and pnpm versions.
+Use Node.js 24.19.0 LTS from `.nvmrc` and the exact `pnpm@10.34.5`
+`packageManager` pin. npm is not a supported repository package manager and is
+therefore not declared as a package engine.
 
 ```text
 corepack enable
@@ -34,3 +36,6 @@ even when the implementation diff is small.
 Keep adversarial coverage for traversal, final and parent-directory symlinks,
 missing assets, malformed HTML and CSS, invalid encoding, deep trees, size and
 finding limits, remote URLs, CSS imports, source maps, and inert script content.
+Untrusted CSS must always be parsed with PostCSS automatic source-map loading
+disabled. `sourceMappingURL` remains inert evidence and must never cause a map
+file to be read, even through absolute, encoded-traversal, or symlink paths.

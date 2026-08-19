@@ -46,9 +46,9 @@
   },
   "toolFailures": [],
   "toolchain": {
-    "cssParser": "postcss/8.5.6",
+    "cssParser": "postcss/8.5.26",
     "htmlParser": "parse5/7.2.1",
-    "node": "20.20.2"
+    "node": "24.19.0"
   },
   "verdict": "Fail"
 }

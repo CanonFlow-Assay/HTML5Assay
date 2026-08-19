@@ -189,10 +189,23 @@ export const buildGraph = async (options: BuildGraphOptions): Promise<DocumentGr
       range: SourceRange,
       depth: number,
       readKind: AssetRecord['kind'] | null,
-      resolutionValue = value
+      resolutionValue = value,
+      inertFile = false
     ): Promise<LoadedAsset | null> => {
       const trimmed = resolutionValue.trim();
       if (trimmed === '' || trimmed.startsWith('#')) {
+        references.push({
+          sourcePath,
+          elementIndex,
+          attribute,
+          value,
+          kind: 'embedded',
+          resolvedPath: null,
+          range
+        });
+        return null;
+      }
+      if (attribute === 'sourceMappingURL' && /^data:/iu.test(trimmed)) {
         references.push({
           sourcePath,
           elementIndex,
@@ -228,7 +241,22 @@ export const buildGraph = async (options: BuildGraphOptions): Promise<DocumentGr
         });
         return null;
       }
-      const withoutQuery = trimmed.split(/[?#]/u, 1)[0] ?? '';
+      const encodedPath = trimmed.split(/[?#]/u, 1)[0] ?? '';
+      let withoutQuery: string;
+      try {
+        withoutQuery = decodeURIComponent(encodedPath);
+      } catch {
+        references.push({
+          sourcePath,
+          elementIndex,
+          attribute,
+          value,
+          kind: 'invalid',
+          resolvedPath: null,
+          range
+        });
+        return null;
+      }
       const candidate = withoutQuery.startsWith('/')
         ? resolve(root, `.${withoutQuery}`)
         : resolve(root, dirname(sourcePath), withoutQuery);
@@ -258,7 +286,7 @@ export const buildGraph = async (options: BuildGraphOptions): Promise<DocumentGr
       // Navigation and form-action URLs are inert graph evidence, not files that
       // the assay needs to open. A same-root route remains local even when there
       // is no corresponding static file on disk.
-      if (readKind === null) {
+      if (readKind === null && !inertFile) {
         const path = normalizePath(relative(root, candidate));
         references.push({
           sourcePath,
@@ -286,7 +314,7 @@ export const buildGraph = async (options: BuildGraphOptions): Promise<DocumentGr
           resolvedPath: path,
           range
         });
-        incompleteReasons.push(`Referenced local file is unavailable: ${path}`);
+        if (!inertFile) incompleteReasons.push(`Referenced local file is unavailable: ${path}`);
         return null;
       }
       if (!insideRoot(root, canonical)) {
@@ -323,6 +351,7 @@ export const buildGraph = async (options: BuildGraphOptions): Promise<DocumentGr
         resolvedPath: path,
         range
       });
+      if (readKind === null) return null;
       return loadAsset(canonical, path, readKind, depth);
     };
 
@@ -471,6 +500,7 @@ export const buildGraph = async (options: BuildGraphOptions): Promise<DocumentGr
         const resolveCssReference = async (
           cssReference: ParsedCss['urls'][number]
         ): Promise<void> => {
+          const inertSourceMap = cssReference.kind === 'source-map';
           const kind: AssetRecord['kind'] = cssReference.kind === 'import' ? 'css' : 'asset';
           const cssAttribute =
             cssReference.kind === 'import'
@@ -488,8 +518,9 @@ export const buildGraph = async (options: BuildGraphOptions): Promise<DocumentGr
             cssReference.value,
             cssReference.range,
             depth + 1,
-            kind,
-            resolutionValue
+            inertSourceMap ? null : kind,
+            resolutionValue,
+            inertSourceMap
           );
           if (linked !== null) {
             addPageAsset(linked.record);

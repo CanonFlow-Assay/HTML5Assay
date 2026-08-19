@@ -122,7 +122,7 @@ void test('browser evidence schema and digest bind the full qualification enviro
         version: browser.browserVersion
       })),
       operatingSystem: { platform: 'linux', release: 'test', architecture: 'x64' },
-      nodeVersion: 'v20.20.2',
+      nodeVersion: 'v24.19.0',
       container: lock.container
     },
     executionTime: {
@@ -166,11 +166,26 @@ void test('browser evidence schema and digest bind the full qualification enviro
   try {
     const evidencePath = join(root, 'evidence.json');
     await writeFile(evidencePath, `${JSON.stringify(evidence)}\n`);
-    const verified = await execute(process.execPath, [
-      'browser-harness/verify-evidence.mjs',
-      evidencePath
-    ]);
+    const verifierEnvironment = {
+      ...process.env,
+      HTML5ASSAY_EXPECTED_GIT_COMMIT: payload.candidate.gitCommit,
+      HTML5ASSAY_EXPECTED_CANDIDATE_SHA256: payload.candidate.archiveSha256
+    };
+    const verified = await execute(
+      process.execPath,
+      ['browser-harness/verify-evidence.mjs', evidencePath],
+      { env: verifierEnvironment }
+    );
     assert.match(verified.stdout, /browser evidence digest verified/u);
+    await assert.rejects(
+      execute(process.execPath, ['browser-harness/verify-evidence.mjs', evidencePath], {
+        env: {
+          ...verifierEnvironment,
+          HTML5ASSAY_EXPECTED_CANDIDATE_SHA256: 'c'.repeat(64)
+        }
+      }),
+      /does not match the post-run candidate digest/u
+    );
 
     const completeResults = expectedBrowserResults();
     const firstResult = completeResults.at(0);
@@ -198,7 +213,9 @@ void test('browser evidence schema and digest bind the full qualification enviro
       const invalidPath = join(root, `${invalid.name}.json`);
       await writeFile(invalidPath, `${JSON.stringify(invalidEvidence)}\n`);
       await assert.rejects(
-        execute(process.execPath, ['browser-harness/verify-evidence.mjs', invalidPath]),
+        execute(process.execPath, ['browser-harness/verify-evidence.mjs', invalidPath], {
+          env: verifierEnvironment
+        }),
         /Browser evidence matrix validation failed/u
       );
     }

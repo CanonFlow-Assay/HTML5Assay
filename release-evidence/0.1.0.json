@@ -52,8 +52,8 @@
       "evidence": [
         {
           "kind": "security-review",
-          "locator": "pending:dependency-lockfile-review",
-          "state": "pending",
+          "locator": "release-evidence/artifacts/0.1.0/pre-candidate-security-review.json",
+          "state": "available",
           "candidateBound": true
         }
       ],

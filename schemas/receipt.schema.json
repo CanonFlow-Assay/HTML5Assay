@@ -39,7 +39,7 @@
       "properties": {
         "node": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+" },
         "htmlParser": { "const": "parse5/7.2.1" },
-        "cssParser": { "const": "postcss/8.5.6" }
+        "cssParser": { "const": "postcss/8.5.26" }
       }
     },
     "verdict": { "enum": ["Pass", "Fail", "Inconclusive", "ToolFailure"] },

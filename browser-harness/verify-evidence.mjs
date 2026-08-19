@@ -7,6 +7,12 @@ import { browserMatrixIssues } from './matrix.mjs';
 const input = process.argv[2];
 if (input === undefined) throw new Error('Usage: verify-evidence.mjs <browser-evidence.json>');
 const evidence = JSON.parse(await readFile(resolve(input), 'utf8'));
+const expectedGitCommit = process.env.HTML5ASSAY_EXPECTED_GIT_COMMIT;
+const expectedArchiveSha256 = process.env.HTML5ASSAY_EXPECTED_CANDIDATE_SHA256;
+if (!/^[0-9a-f]{40}$/u.test(expectedGitCommit ?? ''))
+  throw new Error('Expected candidate Git commit is required for evidence verification');
+if (!/^[0-9a-f]{64}$/u.test(expectedArchiveSha256 ?? ''))
+  throw new Error('Expected post-run candidate SHA-256 is required for evidence verification');
 const matrixIssues = browserMatrixIssues(evidence.results);
 if (matrixIssues.length > 0)
   throw new Error(`Browser evidence matrix validation failed: ${matrixIssues.join('; ')}`);
@@ -30,6 +36,10 @@ if (!/^[0-9a-f]{40}$/u.test(evidence.candidate?.gitCommit ?? ''))
   throw new Error('Browser evidence does not bind a full Git commit');
 if (!/^[0-9a-f]{64}$/u.test(evidence.candidate?.archiveSha256 ?? ''))
   throw new Error('Browser evidence does not bind a candidate archive SHA-256');
+if (evidence.candidate.gitCommit !== expectedGitCommit)
+  throw new Error('Browser evidence Git commit does not match the expected candidate');
+if (evidence.candidate.archiveSha256 !== expectedArchiveSha256)
+  throw new Error('Browser evidence archive digest does not match the post-run candidate digest');
 if (evidence.result === 'Pass' && evidence.failures.length !== 0)
   throw new Error('Passing browser evidence contains failures');
 if (evidence.result === 'Fail' && evidence.failures.length === 0)

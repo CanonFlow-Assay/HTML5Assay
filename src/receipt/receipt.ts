@@ -24,7 +24,7 @@ export const createReceipt = (input: ReceiptInput): CffReceipt => ({
   toolchain: {
     node: process.versions.node,
     htmlParser: 'parse5/7.2.1',
-    cssParser: 'postcss/8.5.6'
+    cssParser: 'postcss/8.5.26'
   },
   verdict: input.verdict,
   resultDigest: input.resultDigest,
@@ -99,7 +99,7 @@ export const verifyReceipt = (
     typeof toolchain.node !== 'string' ||
     !/^\d+\.\d+\.\d+/u.test(toolchain.node) ||
     toolchain.htmlParser !== 'parse5/7.2.1' ||
-    toolchain.cssParser !== 'postcss/8.5.6'
+    toolchain.cssParser !== 'postcss/8.5.26'
   )
     reasons.push('Toolchain identity is invalid.');
   if (!validDigest(value.resultDigest) || !validDigest(value.findingsDigest))

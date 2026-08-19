@@ -14,6 +14,9 @@ Review date: 2026-08-19
   families.
 - Added deterministic HTML/CSS parsing, bounded local graph construction,
   canonical JSON, SARIF 2.1.0, receipt projection, public API, and thin CLI.
+- Hardened the pre-candidate toolchain on Node.js 24.19.0 LTS, disabled
+  automatic PostCSS source-map loading, upgraded reviewed dependency pins, and
+  added immutable archive and workflow evidence controls.
 - Added CFF Evidence `cff-evidence/1.0.0` light, dark, forced-colors,
   increased-contrast, and reduced-motion tokens.
 - Added a bundled offline playground specimen with the exact

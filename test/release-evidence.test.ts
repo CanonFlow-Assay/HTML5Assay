@@ -1,4 +1,5 @@
 import { strict as assert } from 'node:assert';
+import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -8,6 +9,10 @@ interface ActionReview {
   readonly actions: ReadonlyArray<{
     readonly repository: string;
     readonly commit: string;
+    readonly sourceTag: string;
+    readonly actionRuntime: string;
+    readonly publishedSecurityAdvisories: number;
+    readonly githubVerifiedCommit: boolean;
   }>;
 }
 
@@ -32,6 +37,47 @@ interface ReleaseRecord {
 }
 
 const json = async <T>(path: string): Promise<T> => JSON.parse(await readFile(path, 'utf8')) as T;
+const sha256 = (value: string): string => createHash('sha256').update(value).digest('hex');
+
+void test('pre-candidate dependency review remains bound to package and lock inputs', async () => {
+  const review = await json<{
+    readonly result: string;
+    readonly headAcceptance: string;
+    readonly candidateGenerated: boolean;
+    readonly runtime: { readonly node: string; readonly packageManager: string };
+    readonly audit: {
+      readonly productionVulnerabilities: number;
+      readonly fullVulnerabilities: number;
+    };
+    readonly lockfile: {
+      readonly packageJsonSha256: string;
+      readonly pnpmLockSha256: string;
+      readonly packageRecords: number;
+      readonly sha512IntegrityRecords: number;
+      readonly nonRegistryPackageSources: number;
+      readonly requiresBuildRecords: number;
+    };
+  }>('release-evidence/artifacts/0.1.0/pre-candidate-security-review.json');
+  const packageSource = await readFile('package.json', 'utf8');
+  const lockSource = await readFile('pnpm-lock.yaml', 'utf8');
+  const packageValue = JSON.parse(packageSource) as {
+    readonly engines: { readonly node: string; readonly npm?: string };
+    readonly packageManager: string;
+  };
+  assert.equal(review.result, 'local-correction-checks-pass');
+  assert.equal(review.headAcceptance, 'pending-fresh-ci-and-exact-head-review');
+  assert.equal(review.candidateGenerated, false);
+  assert.equal(review.runtime.node, packageValue.engines.node);
+  assert.equal(review.runtime.packageManager, packageValue.packageManager);
+  assert.equal(packageValue.engines.npm, undefined);
+  assert.equal(review.audit.productionVulnerabilities, 0);
+  assert.equal(review.audit.fullVulnerabilities, 0);
+  assert.equal(review.lockfile.packageJsonSha256, sha256(packageSource));
+  assert.equal(review.lockfile.pnpmLockSha256, sha256(lockSource));
+  assert.equal(review.lockfile.packageRecords, review.lockfile.sha512IntegrityRecords);
+  assert.equal(review.lockfile.nonRegistryPackageSources, 0);
+  assert.equal(review.lockfile.requiresBuildRecords, 0);
+});
 
 void test('release evidence maps every stable checklist gate to evidence and a reviewer', async () => {
   const { releaseEvidenceConsistencyIssues } = (await import(
@@ -143,6 +189,14 @@ void test('every GitHub Action is pinned to its reviewed full commit SHA', async
   const seen = new Set<string>();
   for (const name of workflowNames) {
     const workflow = await readFile(`.github/workflows/${name}`, 'utf8');
+    const checkoutCount = [...workflow.matchAll(/uses:\s*actions\/checkout@/gu)].length;
+    const nonPersistentCheckoutCount = [...workflow.matchAll(/persist-credentials:\s*false/gu)]
+      .length;
+    assert.equal(
+      nonPersistentCheckoutCount,
+      checkoutCount,
+      `${name}: every checkout must disable persisted credentials`
+    );
     for (const match of workflow.matchAll(/^\s*uses:\s*([^@\s]+)@([^\s#]+)/gmu)) {
       const repository = match[1];
       const commit = match[2];
@@ -153,6 +207,12 @@ void test('every GitHub Action is pinned to its reviewed full commit SHA', async
     }
   }
   assert.deepEqual([...seen].sort(), [...reviewed.keys()].sort());
+  for (const action of review.actions) {
+    assert.equal(action.actionRuntime, 'node24');
+    assert.equal(action.publishedSecurityAdvisories, 0);
+    assert.equal(action.githubVerifiedCommit, true);
+    assert.match(action.sourceTag, /^v\d+\.\d+\.\d+$/u);
+  }
 });
 
 void test('browser workflow uses the reviewed immutable container with host networking denied', async () => {
@@ -164,8 +224,20 @@ void test('browser workflow uses the reviewed immutable container with host netw
   assert.equal(environment.container.networkMode, 'none');
   assert.match(workflow, /docker run --rm \\\n+\s+--network none/gu);
   assert.match(workflow, /HTML5ASSAY_HOST_NETWORK_DENIAL=docker-network-none/gu);
-  assert.match(workflow, /pnpm pack --pack-destination candidate/gu);
-  assert.match(workflow, /sha256sum "\$archive"/gu);
-  assert.match(workflow, /CANDIDATE_SHA256: \$\{\{ steps\.candidate\.outputs\.sha256 \}\}/gu);
-  assert.match(workflow, /candidate\/\*\.tgz/gu);
+  assert.match(workflow, /rm -rf "\$GITHUB_WORKSPACE\/dist"/gu);
+  assert.match(workflow, /pnpm run build/gu);
+  assert.match(workflow, /pnpm pack --pack-destination "\$candidate_dir"/gu);
+  assert.match(workflow, /package\/dist\/src\/api\/index\.js/gu);
+  assert.match(workflow, /package\/dist\/src\/cli\/index\.js/gu);
+  assert.match(workflow, /pnpm install --offline --ignore-scripts/gu);
+  assert.match(workflow, /--read-only/gu);
+  assert.match(workflow, /target=\/work,readonly/gu);
+  assert.match(workflow, /target=\/candidate,readonly/gu);
+  assert.match(workflow, /target=\/evidence/gu);
+  assert.ok((workflow.match(/sha256sum "\$CANDIDATE_ARCHIVE"/gu) ?? []).length >= 2);
+  assert.match(workflow, /HTML5ASSAY_EXPECTED_CANDIDATE_SHA256/gu);
+  const acceptedUpload = workflow.indexOf('Upload accepted candidate and evidence');
+  const failureUpload = workflow.indexOf('Upload failure diagnostics only');
+  assert.ok(acceptedUpload > 0 && failureUpload > acceptedUpload);
+  assert.equal(workflow.slice(failureUpload).includes('candidate/*.tgz'), false);
 });
