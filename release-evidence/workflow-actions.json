@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "html5assay.workflow-action-review.v1",
+  "reviewedAt": "2026-08-19",
+  "reviewScope": "Immutable full-SHA identity, exact upstream release resolution, Node 24 action runtime, GitHub commit verification, and official repository advisory review. Candidate-bound workflow approval remains a release gate until the corrected head and generated archive are reviewed.",
+  "reviewer": "codex-release-process",
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "sourceTag": "v7.0.1",
+      "release": "https://github.com/actions/checkout/releases/tag/v7.0.1",
+      "commit": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "actionRuntime": "node24",
+      "publishedSecurityAdvisories": 0,
+      "githubVerifiedCommit": true
+    },
+    {
+      "repository": "actions/setup-node",
+      "sourceTag": "v7.0.0",
+      "release": "https://github.com/actions/setup-node/releases/tag/v7.0.0",
+      "commit": "820762786026740c76f36085b0efc47a31fe5020",
+      "actionRuntime": "node24",
+      "publishedSecurityAdvisories": 0,
+      "githubVerifiedCommit": true
+    },
+    {
+      "repository": "actions/upload-artifact",
+      "sourceTag": "v7.0.1",
+      "release": "https://github.com/actions/upload-artifact/releases/tag/v7.0.1",
+      "commit": "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "actionRuntime": "node24",
+      "publishedSecurityAdvisories": 0,
+      "githubVerifiedCommit": true
+    },
+    {
+      "repository": "pnpm/action-setup",
+      "sourceTag": "v6.0.10",
+      "release": "https://github.com/pnpm/action-setup/releases/tag/v6.0.10",
+      "commit": "0977fd99725f1db4007ccb2928dbb4e90d06cc86",
+      "actionRuntime": "node24",
+      "publishedSecurityAdvisories": 0,
+      "githubVerifiedCommit": true
+    }
+  ]
+}

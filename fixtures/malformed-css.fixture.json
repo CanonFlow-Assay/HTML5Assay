@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "html5assay.adversarial-fixture.v1",
+  "id": "malformed-css",
+  "description": "Malformed required local CSS produces a parser ToolFailure.",
+  "entries": ["index.html"],
+  "files": {
+    "index.html": "<!doctype html><html lang=\"en\"><title>Malformed CSS</title><head><link rel=\"stylesheet\" href=\"broken.css\"></head><body><main>Parser evidence</main></body></html>",
+    "broken.css": "main{color:"
+  },
+  "policy": { "base": "cff-web-strict" },
+  "expected": { "verdict": "ToolFailure", "toolFailureCodes": ["H5A-PARSER-CSS"] }
+}

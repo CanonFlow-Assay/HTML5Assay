@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; font-src 'self'; base-uri 'none'; form-action 'none'"
+    />
+    <title>HTML5Assay offline playground</title>
+    <link rel="stylesheet" href="../theme/cff-evidence.css" />
+    <link rel="stylesheet" href="./playground.css" />
+    <script type="module" src="./playground.mjs"></script>
+  </head>
+  <body data-cff-shell="1.0.0" data-cff-theme="cff-evidence/1.0.0" data-page-kind="playground">
+    <a class="skip-link" href="#main">Skip to primary content</a>
+
+    <header
+      class="product-header"
+      data-cff-product="HTML5Assay"
+      data-cff-version="0.1.0"
+      data-cff-status="Preview"
+      data-cff-authority="Static source evidence"
+    >
+      <div class="shell header-content">
+        <div>
+          <a class="product-name" href="#main">CanonFlow Foundation · HTML5Assay</a>
+          <p class="product-meta">Version 0.1.0 · Preview · Static source evidence</p>
+        </div>
+        <nav aria-label="Primary">
+          <ul class="primary-nav">
+            <li><a href="../README.md">Documentation</a></li>
+            <li><a aria-current="page" href="#workbench">Playground</a></li>
+            <li><a href="../rules/catalog.json">Catalogue</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell" id="main">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Local source preview</p>
+        <h1 id="page-title">Inspect bundled HTML without a network request</h1>
+        <p>
+          Load a reviewed specimen or edit local text. Analysis starts only when you choose Analyze
+          local text.
+        </p>
+      </section>
+
+      <section class="workbench" id="workbench" aria-label="HTML analysis workbench">
+        <div class="input-panel panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Input</p>
+              <h2>HTML source</h2>
+            </div>
+            <span class="relationship-label">Local only</span>
+          </div>
+
+          <div class="control-grid">
+            <label for="example">Bundled example</label>
+            <div class="control-row">
+              <select id="example" name="example"></select>
+              <button class="secondary-action" id="load-example" type="button">Load example</button>
+            </div>
+
+            <label for="policy">Policy</label>
+            <select id="policy" name="policy">
+              <option value="cff-web-strict">cff-web-strict</option>
+              <option value="cff-web-balanced">cff-web-balanced</option>
+            </select>
+          </div>
+
+          <label for="source">Editable HTML</label>
+          <textarea id="source" name="source" rows="24" spellcheck="false"></textarea>
+          <p class="muted" id="specimen-identity"></p>
+
+          <div class="action-row">
+            <button class="primary-action" id="analyze" type="button">Analyze local text</button>
+          </div>
+          <p class="visually-hidden" id="example-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <section class="result-panel panel" aria-labelledby="result-title">
+          <div class="result-heading">
+            <div>
+              <p class="eyebrow">Result</p>
+              <h2 id="result-title">Preview result</h2>
+            </div>
+            <p class="trust-label" id="trust-label">Preview only — non-authoritative</p>
+          </div>
+
+          <div class="verdict-card" id="verdict-card" data-verdict="Inconclusive">
+            <p class="verdict-icon" id="verdict-icon" aria-hidden="true">?</p>
+            <div>
+              <p class="verdict" id="verdict">Not analyzed</p>
+              <p class="muted" id="result-summary">
+                Choose Analyze local text to run the bundled preview subset. Untested rules remain
+                inconclusive.
+              </p>
+            </div>
+          </div>
+
+          <dl class="identity-grid">
+            <div>
+              <dt>Policy</dt>
+              <dd id="result-policy">cff-web-strict</dd>
+            </div>
+            <div>
+              <dt>Subject digest</dt>
+              <dd><code id="subject-digest">Not available</code></dd>
+            </div>
+            <div>
+              <dt>Assay</dt>
+              <dd>html5assay-preview/0.1.0</dd>
+            </div>
+            <div>
+              <dt>Authority</dt>
+              <dd>Non-authoritative source preview</dd>
+            </div>
+          </dl>
+
+          <section aria-labelledby="findings-title">
+            <h3 id="findings-title">Findings</h3>
+            <ol class="findings" id="findings">
+              <li class="status-empty" data-cff-state="empty">No preview has run.</li>
+            </ol>
+          </section>
+
+          <details>
+            <summary>Automation limits</summary>
+            <p>
+              This page runs a small bundled source-only demonstration. It does not prove WCAG
+              conformance, execute scripts, calculate browser layout, or approve release evidence.
+            </p>
+          </details>
+        </section>
+      </section>
+    </main>
+
+    <footer class="product-footer">
+      <div class="shell footer-content">
+        <p>HTML5Assay 0.1.0 · Ruleset html5assay-core/1.0.0</p>
+        <p>
+          <a href="../rules/catalog.json">Ruleset digest source</a>
+          <span aria-hidden="true"> · </span>
+          Static findings are evidence, not certification
+          <span aria-hidden="true"> · </span>
+          <a href="../LICENSE">Apache-2.0 licence</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

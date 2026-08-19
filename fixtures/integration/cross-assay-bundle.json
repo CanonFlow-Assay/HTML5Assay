@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "cff.assay.compatibility-fixture.v1",
+  "foreignReceipts": [
+    {
+      "assayId": "typescriptassay",
+      "receipt": {
+        "schemaVersion": "ts-assay-receipt/0.1",
+        "mode": "verify",
+        "verdict": { "kind": "Fail" },
+        "findingsDigest": "typescript-fixture-digest",
+        "opaqueExtension": { "mustRemain": true }
+      }
+    },
+    {
+      "assayId": "steassay",
+      "receipt": {
+        "schemaVersion": 1,
+        "command": "verify",
+        "verdict": "Inconclusive",
+        "findingsDigest": "ste-fixture-digest",
+        "opaqueExtension": ["preserve", "unchanged"]
+      }
+    }
+  ],
+  "findingProjections": [
+    {
+      "assayId": "typescriptassay",
+      "ruleId": "TSA-BOUNDARY-001",
+      "ruleVersion": "0.1.0",
+      "path": "src/page.ts",
+      "range": { "start": { "line": 3, "column": 1 }, "end": { "line": 3, "column": 10 } }
+    },
+    {
+      "assayId": "steassay",
+      "ruleId": "STE-S01",
+      "ruleVersion": "0.1.0",
+      "path": "docs/page.md",
+      "range": { "start": { "line": 8, "column": 1 }, "end": { "line": 8, "column": 40 } }
+    }
+  ]
+}

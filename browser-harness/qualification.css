@@ -1,0 +1,44 @@
+:root {
+  color: var(--cf-text);
+  background: var(--cf-surface);
+  font:
+    100%/1.5 system-ui,
+    sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+}
+
+main {
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+  overflow-wrap: anywhere;
+}
+
+button,
+input {
+  min-height: 2.75rem;
+  max-width: 100%;
+}
+
+:where(a, button, input):focus-visible {
+  outline: 0.1875rem solid var(--cf-focus);
+  outline-offset: 0.1875rem;
+}
+
+dialog,
+[popover] {
+  color: var(--cf-text);
+  background: var(--cf-surface-raised);
+  border: 0.125rem solid var(--cf-outline);
+}
+
+@media (forced-colors: active) {
+  :where(button, input, dialog, [popover]) {
+    border: 0.125rem solid ButtonText;
+    forced-color-adjust: auto;
+  }
+}

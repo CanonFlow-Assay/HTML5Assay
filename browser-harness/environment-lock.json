@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "html5assay.browser-environment.v1",
+  "packageManager": "pnpm@10.34.5",
+  "repositoryNode": "24.19.0",
+  "playwright": {
+    "version": "1.62.1",
+    "integrity": "sha512-0M+L3LAD8/nm554LOla9Ayx0j0tmFZ0FBcoQ7F1VuVHpM/XpiC8RcDzBQB8W5+hA8L22THxELzeF+2WcUzvcLg==",
+    "coreIntegrity": "sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw==",
+    "release": "https://github.com/microsoft/playwright/releases/tag/v1.62.1"
+  },
+  "browsers": [
+    {
+      "name": "chromium",
+      "revision": "1234",
+      "browserVersion": "151.0.7922.34"
+    },
+    {
+      "name": "firefox",
+      "revision": "1538",
+      "browserVersion": "153.0"
+    },
+    {
+      "name": "webkit",
+      "revision": "2336",
+      "browserVersion": "26.5"
+    }
+  ],
+  "container": {
+    "image": "mcr.microsoft.com/playwright:v1.62.1-noble",
+    "platform": "linux/amd64",
+    "digest": "sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac",
+    "reference": "mcr.microsoft.com/playwright@sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac",
+    "networkMode": "none"
+  }
+}

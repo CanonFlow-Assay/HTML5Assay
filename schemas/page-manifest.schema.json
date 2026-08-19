@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canonflow.dev/schemas/cff.page-manifest.v1.json",
+  "title": "CFF page manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "pages", "requiredTheme"],
+  "properties": {
+    "schemaVersion": { "const": "cff.page-manifest.v1" },
+    "root": { "type": "string" },
+    "entries": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "pages": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "overview",
+          "documentation",
+          "playground",
+          "results",
+          "catalogue",
+          "evidence",
+          "governance",
+          "changelog",
+          "status"
+        ]
+      }
+    },
+    "fragments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["contextElement"],
+        "properties": {
+          "contextElement": { "type": "string", "minLength": 1 },
+          "contextNamespace": { "enum": ["html", "svg", "mathml"] }
+        }
+      }
+    },
+    "localAssetRoots": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "generatedExclusions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "requiredShellVersion": { "type": "string" },
+    "requiredTheme": { "const": "cff-evidence/1.0.0" },
+    "html5AssayPolicy": { "type": "string" },
+    "typescriptAssayProfile": { "type": "string" },
+    "steAssayPolicy": { "type": "string" },
+    "deploymentHeaders": { "type": "string" },
+    "approvedSuppressions": { "$ref": "#/$defs/suppressions" }
+  },
+  "$defs": {
+    "suppressions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ruleId", "owner", "reason", "expires"],
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "pattern": "^H5A-(DOC|SEM|A11Y|CSS|SAFE|CFF|PERF|THEME)-[0-9]{3}$"
+          },
+          "path": { "type": "string" },
+          "owner": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 },
+          "expires": { "type": "string", "format": "date" }
+        }
+      }
+    }
+  }
+}

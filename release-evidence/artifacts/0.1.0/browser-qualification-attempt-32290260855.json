@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "html5assay.browser-qualification-attempt.v1",
+  "recordedAt": "2026-08-19T19:00:07Z",
+  "candidateCommit": "d3a12dbb71301e8663ef989cd5c0a118608f5910",
+  "workflowRun": {
+    "id": 32290260855,
+    "url": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32290260855",
+    "conclusion": "failure"
+  },
+  "failedStage": "network-denied-browser-matrix",
+  "finding": "The first default probe exposed duplicate human-readable focus keys and 320px overflow; the next probe used a CSP-blocked inline zoom stylesheet and aborted the remaining matrix.",
+  "transientArchiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+  "diagnosticsArtifact": {
+    "id": 9379209100,
+    "name": "browser-qualification-diagnostics-d3a12dbb71301e8663ef989cd5c0a118608f5910"
+  },
+  "acceptedCandidateArtifactUploaded": false,
+  "candidateArchiveRetained": false,
+  "browserMatrixExecuted": false,
+  "observedBrowserResults": 1,
+  "expectedBrowserResults": 51,
+  "automaticRetryPermitted": false,
+  "requiredRecovery": "Correct the harness and product reflow, pass fresh three-operating-system CI, and repeat exact-head pre-candidate security review before generating another archive."
+}
