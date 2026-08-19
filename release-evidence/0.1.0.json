@@ -1,0 +1,467 @@
+{
+  "schemaVersion": "html5assay.release-evidence.v1",
+  "releaseVersion": "0.1.0",
+  "candidate": {
+    "gitCommit": null,
+    "archiveSha256": null
+  },
+  "invalidationPolicy": "A candidate Git commit or archive digest change invalidates every affected candidate-bound item; evidence and reviewer acceptance must be collected again for the new identity.",
+  "items": [
+    {
+      "id": "RG-01",
+      "requirement": "Bind exact candidate commit and archive digest.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "candidate-identity",
+          "locator": "release-evidence/0.1.0.json#/candidate",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-02",
+      "requirement": "Invalidate affected evidence after candidate changes.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "policy",
+          "locator": "release-evidence/README.md",
+          "state": "available",
+          "candidateBound": false
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-03",
+      "requirement": "Complete dependency and lockfile security review.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "security-review",
+          "locator": "pending:dependency-lockfile-review",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-04",
+      "requirement": "Complete workflow-action security review with immutable action pins.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "action-identity-review",
+          "locator": "release-evidence/workflow-actions.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-05",
+      "requirement": "Complete candidate package security review.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "security-review",
+          "locator": "pending:candidate-package-review",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-06",
+      "requirement": "Install and run the packed package offline.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "ci-test",
+          "locator": "package.json#scripts.test:package",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-07",
+      "requirement": "Prove API and CLI canonical-result parity.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-api.test.ts",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-08",
+      "requirement": "Prove cross-operating-system determinism.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "ci-matrix",
+          "locator": ".github/workflows/ci.yml",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-09",
+      "requirement": "Execute three determinate examples for every rule.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/catalog-examples.test.ts",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "LLM judge",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-10",
+      "requirement": "Execute cantTell examples wherever evidence can be unavailable.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/catalog-examples.test.ts",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "LLM judge",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-11",
+      "requirement": "Review standards automation limits.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "standards-record",
+          "locator": "standards/standards-snapshot.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "standards reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-12",
+      "requirement": "Pass canonical artifact goldens.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "fixtures/golden/basic",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-13",
+      "requirement": "Pass adversarial and resource-bound tests.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/adversarial-fixtures.test.ts",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-14",
+      "requirement": "Pass theme token and contrast checks.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-playground.test.ts",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "accessibility reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-15",
+      "requirement": "Pass the network-denied locked browser matrix.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "workflow-artifact",
+          "locator": ".github/workflows/browser-qualification.yml",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "accessibility reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-16",
+      "requirement": "Prove strict-policy remote and telemetry rejection.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-api.test.ts",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-17",
+      "requirement": "Review playground specimens and trust label.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-playground.test.ts",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "product reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-18",
+      "requirement": "Audit public package boundaries.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "scripts/test-package.mjs",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-19",
+      "requirement": "Obtain companion-assay and CFF-host acceptance.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "external-acceptance",
+          "locator": "pending:companion-assay-acceptance",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "companion maintainers",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-20",
+      "requirement": "Obtain independent tester and judge review.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "review",
+          "locator": "pending:candidate-independent-review",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-21",
+      "requirement": "Complete scoped WCAG-EM 2.0 human and assistive-technology review.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "human-review",
+          "locator": "pending:wcag-em-2.0-report",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "human accessibility lead",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-22",
+      "requirement": "Obtain authorized human approval of the final commit.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "human-approval",
+          "locator": "pending:final-commit-approval",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "authorized human release approver",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-23",
+      "requirement": "Verify trusted-main CI after approved merge.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "ci-run",
+          "locator": "pending:trusted-main-ci",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-24",
+      "requirement": "Publish only through the approved release procedure.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "release-record",
+          "locator": "pending:approved-publish-procedure",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "authorized human release approver",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    }
+  ]
+}

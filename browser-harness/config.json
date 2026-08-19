@@ -2,7 +2,11 @@
   "schemaVersion": "html5assay.browser-harness.v1",
   "target": "/playground/index.html",
   "flowTarget": "/browser-harness/qualification.html",
-  "network": "loopback-only",
+  "network": {
+    "browserRequests": "loopback-only",
+    "serviceWorkers": "block",
+    "hostDenial": "docker-network-none"
+  },
   "browsers": ["chromium", "firefox", "webkit"],
   "viewports": [320, 768, 1024, 1440],
   "probes": [

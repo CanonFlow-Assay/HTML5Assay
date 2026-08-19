@@ -13,23 +13,34 @@ const validators = async (): Promise<Readonly<Record<string, ValidateFunction>>>
   const ajv = new Ajv2020({
     strict: true,
     allErrors: true,
-    formats: { date: /^\d{4}-\d{2}-\d{2}$/u }
+    formats: {
+      date: /^\d{4}-\d{2}-\d{2}$/u,
+      'date-time': /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/u
+    }
   });
-  const files = ['finding', 'receipt', 'result', 'policy', 'page-manifest'];
+  const files = [
+    'finding',
+    'receipt',
+    'result',
+    'policy',
+    'page-manifest',
+    'browser-evidence',
+    'release-evidence'
+  ];
   for (const name of files)
     ajv.addSchema((await loadJson(`schemas/${name}.schema.json`)) as AnySchema);
   return Object.fromEntries(
     files.map((name) => {
-      const schemaId =
-        name === 'page-manifest'
-          ? 'cff.page-manifest.v1'
-          : name === 'policy'
-            ? 'cff.html5assay.policy.v1'
-            : name === 'finding'
-              ? 'cff.assay.finding.v1'
-              : name === 'receipt'
-                ? 'cff.assay.receipt.v1'
-                : 'cff.assay.result.v1';
+      const schemaId = {
+        'page-manifest': 'cff.page-manifest.v1',
+        policy: 'cff.html5assay.policy.v1',
+        finding: 'cff.assay.finding.v1',
+        receipt: 'cff.assay.receipt.v1',
+        result: 'cff.assay.result.v1',
+        'browser-evidence': 'html5assay.browser-evidence.v1',
+        'release-evidence': 'html5assay.release-evidence.v1'
+      }[name];
+      if (schemaId === undefined) throw new Error(`Unknown schema ${name}`);
       const validate = ajv.getSchema(`https://canonflow.dev/schemas/${schemaId}.json`);
       if (validate === undefined) throw new Error(`Missing schema validator ${name}`);
       return [name, validate];
@@ -48,6 +59,12 @@ void test('published schemas accept emitted artifacts and reviewed data packs', 
     validate['page-manifest']?.(manifest),
     true,
     JSON.stringify(validate['page-manifest']?.errors)
+  );
+  const releaseEvidence = await loadJson('release-evidence/0.1.0.json');
+  assert.equal(
+    validate['release-evidence']?.(releaseEvidence),
+    true,
+    JSON.stringify(validate['release-evidence']?.errors)
   );
 
   const root = await mkdtemp(join(tmpdir(), 'html5assay-schema-'));

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "html5assay.workflow-action-review.v1",
+  "reviewedAt": "2026-08-19",
+  "reviewScope": "Immutable identity, upstream v4 tag resolution, and GitHub commit verification only. Full workflow-action security approval remains a release gate.",
+  "reviewer": "codex-release-process",
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "sourceTag": "v4",
+      "commit": "11d5960a326750d5838078e36cf38b85af677262",
+      "githubVerifiedCommit": true
+    },
+    {
+      "repository": "actions/setup-node",
+      "sourceTag": "v4",
+      "commit": "49933ea5288caeca8642d1e84afbd3f7d6820020",
+      "githubVerifiedCommit": true
+    },
+    {
+      "repository": "actions/upload-artifact",
+      "sourceTag": "v4",
+      "commit": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "githubVerifiedCommit": true
+    },
+    {
+      "repository": "pnpm/action-setup",
+      "sourceTag": "v4",
+      "commit": "b906affcce14559ad1aafd4ab0e942779e9f58b1",
+      "githubVerifiedCommit": true
+    }
+  ]
+}

@@ -1,9 +1,14 @@
 import { createServer } from 'node:http';
 import { readFile, writeFile } from 'node:fs/promises';
+import { connect } from 'node:net';
+import { arch, platform, release } from 'node:os';
 import { extname, relative, resolve, sep } from 'node:path';
+import { digestEvidence } from './evidence.mjs';
+import { loadLockedBrowserEnvironment } from './environment.mjs';
 
 const repositoryRoot = resolve(import.meta.dirname, '..');
 const config = JSON.parse(await readFile(new URL('./config.json', import.meta.url), 'utf8'));
+const lockedEnvironment = await loadLockedBrowserEnvironment();
 const requiredProbes = new Set([
   'keyboard-order',
   'focus-visibility',
@@ -19,8 +24,12 @@ const requiredProbes = new Set([
 const validateConfig = () => {
   if (config.schemaVersion !== 'html5assay.browser-harness.v1')
     throw new Error('Browser harness schemaVersion is invalid');
-  if (config.network !== 'loopback-only')
-    throw new Error('Browser harness must block non-loopback network access');
+  if (
+    config.network?.browserRequests !== 'loopback-only' ||
+    config.network?.serviceWorkers !== 'block' ||
+    config.network?.hostDenial !== 'docker-network-none'
+  )
+    throw new Error('Browser harness network boundaries are invalid');
   if (typeof config.target !== 'string' || typeof config.flowTarget !== 'string')
     throw new Error('Browser harness targets are invalid');
   if (JSON.stringify(config.viewports) !== JSON.stringify([320, 768, 1024, 1440]))
@@ -72,14 +81,42 @@ const address = server.address();
 if (address === null || typeof address === 'string')
   throw new Error('Browser harness did not acquire a loopback port');
 const origin = `http://127.0.0.1:${address.port}`;
+const startedAt = new Date();
+const startedMilliseconds = Date.now();
+const gitCommit = process.env.HTML5ASSAY_GIT_COMMIT ?? null;
+const archiveSha256 = process.env.HTML5ASSAY_CANDIDATE_SHA256 ?? null;
+const declaredHostDenial = process.env.HTML5ASSAY_HOST_NETWORK_DENIAL ?? null;
 const evidence = {
   schemaVersion: 'html5assay.browser-evidence.v1',
   authoritative: false,
-  network: 'loopback-only',
+  candidate: { gitCommit, archiveSha256 },
+  environment: {
+    playwrightVersion: lockedEnvironment.playwrightVersion,
+    browserRevisions: lockedEnvironment.browsers,
+    browserExecutables: [],
+    operatingSystem: { platform: platform(), release: release(), architecture: arch() },
+    nodeVersion: process.version,
+    container: lockedEnvironment.lock.container
+  },
+  executionTime: {
+    startedAt: startedAt.toISOString(),
+    finishedAt: null,
+    durationMilliseconds: null
+  },
+  network: {
+    browserRequests: 'loopback-only',
+    serviceWorkers: 'block',
+    hostDenial: {
+      required: 'docker-network-none',
+      declared: declaredHostDenial,
+      probe: null
+    }
+  },
   target: config.target,
   flowTarget: config.flowTarget,
   results: [],
   failures: [],
+  result: 'Fail',
   humanApprovalRequired: true
 };
 
@@ -100,11 +137,36 @@ const installNetworkBoundary = async (context, blocked) => {
 
 const openIsolatedPage = async (browser, width, options = {}) => {
   const blocked = [];
-  const context = await browser.newContext({ viewport: { width, height: 900 }, ...options });
+  const context = await browser.newContext({
+    viewport: { width, height: 900 },
+    ...options,
+    serviceWorkers: 'block'
+  });
   await installNetworkBoundary(context, blocked);
   const page = await context.newPage();
   return { context, page, blocked };
 };
+
+const probeHostNetworkDenial = () =>
+  new Promise((resolveProbe) => {
+    let finished = false;
+    const finish = (denied, detail) => {
+      if (finished) return;
+      finished = true;
+      resolveProbe({ denied, detail });
+    };
+    const socket = connect({ host: '1.1.1.1', port: 443 });
+    socket.setTimeout(1500);
+    socket.once('connect', () => {
+      socket.destroy();
+      finish(false, 'external TCP connection succeeded');
+    });
+    socket.once('timeout', () => {
+      socket.destroy();
+      finish(true, 'external TCP connection timed out under host denial');
+    });
+    socket.once('error', (error) => finish(true, error.code ?? error.message));
+  });
 
 const keyboardEvidence = async (page) => {
   const selector =
@@ -345,6 +407,25 @@ const outputArgument = process.argv.find((argument) => argument.endsWith('.json'
 const outputPath = resolve(outputArgument ?? 'browser-evidence.json');
 
 try {
+  assertion(
+    /^[0-9a-f]{40}$/u.test(gitCommit ?? ''),
+    'harness/identity',
+    'A full candidate Git commit is required'
+  );
+  assertion(
+    /^[0-9a-f]{64}$/u.test(archiveSha256 ?? ''),
+    'harness/identity',
+    'A candidate archive SHA-256 is required'
+  );
+  assertion(
+    declaredHostDenial === 'docker-network-none',
+    'harness/network',
+    'Host-level Docker network denial was not declared'
+  );
+  const hostProbe = await probeHostNetworkDenial();
+  evidence.network.hostDenial.probe = hostProbe;
+  assertion(hostProbe.denied, 'harness/network', 'Host-level external network is reachable');
+
   let playwright;
   try {
     playwright = await import('playwright');
@@ -357,6 +438,19 @@ try {
       throw new Error(`Playwright browser type ${browserName} is unavailable`);
     const browser = await browserType.launch({ headless: true });
     try {
+      const executableVersion = browser.version();
+      const expectedBrowser = lockedEnvironment.browsers.find(
+        (candidate) => candidate.name === browserName
+      );
+      assertion(
+        executableVersion === expectedBrowser?.browserVersion,
+        `${browserName}/environment`,
+        `Executable version ${executableVersion} does not match locked version ${expectedBrowser?.browserVersion ?? '(missing)'}`
+      );
+      evidence.environment.browserExecutables.push({
+        name: browserName,
+        version: executableVersion
+      });
       for (const width of config.viewports) {
         await runDefaultMode(browser, browserName, width);
         await runZoomMode(browser, browserName, width);
@@ -374,6 +468,10 @@ try {
     message: error instanceof Error ? error.message : String(error)
   });
 } finally {
+  evidence.executionTime.finishedAt = new Date().toISOString();
+  evidence.executionTime.durationMilliseconds = Date.now() - startedMilliseconds;
+  evidence.result = evidence.failures.length === 0 ? 'Pass' : 'Fail';
+  evidence.evidenceDigest = digestEvidence(evidence);
   await writeFile(outputPath, `${JSON.stringify(evidence, null, 2)}\n`);
   await new Promise((resolveClosed) => server.close(resolveClosed));
 }

@@ -1,0 +1,102 @@
+name: Browser qualification
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_commit:
+        description: Full Git commit for the reviewed candidate archive
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  BROWSER_IMAGE: mcr.microsoft.com/playwright@sha256:c091b21d9fae78c76e85cd4356431e9b018402f172a214fc7d7a5e9a7e29d8ac
+
+jobs:
+  qualify:
+    name: Network-denied browser matrix
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out exact candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ inputs.candidate_commit }}
+          persist-credentials: false
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10.34.5
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20.20.2
+          cache: pnpm
+
+      - name: Validate candidate identity
+        env:
+          EXPECTED_COMMIT: ${{ inputs.candidate_commit }}
+        run: |
+          [[ "$EXPECTED_COMMIT" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
+
+      - name: Install exact harness dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate browser environment lock
+        run: pnpm run browser:lock:check
+
+      - name: Build and digest the single candidate archive
+        id: candidate
+        run: |
+          mkdir candidate
+          pnpm pack --pack-destination candidate
+          archive="$(find candidate -maxdepth 1 -type f -name '*.tgz' -print -quit)"
+          test -n "$archive"
+          test "$(find candidate -maxdepth 1 -type f -name '*.tgz' | wc -l)" -eq 1
+          digest="$(sha256sum "$archive" | cut -d ' ' -f 1)"
+          printf '%s  %s\n' "$digest" "$(basename "$archive")" > candidate/SHA256SUMS
+          echo "sha256=$digest" >> "$GITHUB_OUTPUT"
+
+      - name: Pull reviewed browser image
+        run: docker pull "$BROWSER_IMAGE"
+
+      - name: Run host-network-denied browser matrix
+        env:
+          CANDIDATE_COMMIT: ${{ inputs.candidate_commit }}
+          CANDIDATE_SHA256: ${{ steps.candidate.outputs.sha256 }}
+        run: |
+          docker run --rm \
+            --network none \
+            --platform linux/amd64 \
+            --ipc host \
+            --security-opt no-new-privileges \
+            -e HTML5ASSAY_GIT_COMMIT="$CANDIDATE_COMMIT" \
+            -e HTML5ASSAY_CANDIDATE_SHA256="$CANDIDATE_SHA256" \
+            -e HTML5ASSAY_HOST_NETWORK_DENIAL=docker-network-none \
+            -v "$GITHUB_WORKSPACE:/work" \
+            -w /work \
+            "$BROWSER_IMAGE" \
+            node browser-harness/runner.mjs browser-evidence.json
+
+      - name: Verify browser evidence envelope
+        if: always()
+        run: node browser-harness/verify-evidence.mjs browser-evidence.json
+
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: candidate-browser-evidence-${{ inputs.candidate_commit }}
+          path: |
+            candidate/*.tgz
+            candidate/SHA256SUMS
+            browser-evidence.json
+          if-no-files-found: error
+          retention-days: 90
