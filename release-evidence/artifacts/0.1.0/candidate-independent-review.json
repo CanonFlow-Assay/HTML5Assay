@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "html5assay.candidate-independent-review.v1",
+  "reviewer": {
+    "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+    "role": "independent tester",
+    "reviewedAt": "2026-08-19T19:28:20Z"
+  },
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveFilename": "canonflow-html5-assay-0.1.0.tgz",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "qualification": {
+    "workflowRun": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489",
+    "artifactId": 9379867515,
+    "artifactApiDigest": "sha256:0c0adef915c93852d94930872dc53dfcc5f5ce2aa940823595e66f84f1288160",
+    "artifactFileCount": 3,
+    "archiveFileSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+    "checksumFileSha256": "45894093a0039e567ff1c17da7d01cd3f183c0ad7a88b375157897b79dd6278c",
+    "browserEvidenceFileSha256": "f1d016d8230d13fc4e23afbc4d2776a1433f3de458fc2dd26b8c1d87e5a2d277",
+    "canonicalBrowserEvidenceSha256": "b1f2c49f93d9edb201088fcec37f18b222e1529e8c703dea791b2d11e26c34c7",
+    "browserResults": 51,
+    "browserResultsPerEngine": 17,
+    "missingResults": 0,
+    "duplicateResults": 0,
+    "unexpectedResults": 0,
+    "failures": 0,
+    "serviceWorkers": "block",
+    "hostNetworkDenial": "docker-network-none",
+    "hostNetworkProbe": "ENETUNREACH",
+    "archiveRehashUnchanged": true
+  },
+  "package": {
+    "archiveMembers": 87,
+    "unsafePaths": 0,
+    "symlinks": 0,
+    "requiredPublicApiAndCliPresent": true,
+    "nodeVersion": "24.19.0",
+    "pnpmVersion": "10.34.5",
+    "freshOfflineInstallPassed": true,
+    "frozenOfflineReinstallPassed": true,
+    "externalNetworkProbeDenied": "EAI_AGAIN",
+    "apiAssayId": "html5assay",
+    "apiRuleCount": 58,
+    "packagedCliPassed": true
+  },
+  "canonicalEvidence": {
+    "apiCliCanonicalJsonByteLength": 18475,
+    "apiCliCanonicalJsonByteIdentical": true,
+    "goldenJsonByteLength": 18475,
+    "goldenSarifByteLength": 57758,
+    "goldenReceiptByteLength": 1618,
+    "installedCandidateMatchesPackagedGoldens": true
+  },
+  "crossOperatingSystem": {
+    "pushRun": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291756601",
+    "pullRequestRun": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291762682",
+    "operatingSystems": ["Ubuntu", "macOS", "Windows"],
+    "testsPerJob": 99,
+    "allJobsPassed": true,
+    "candidateCommitMatched": true
+  },
+  "companionCompatibility": {
+    "mechanicalCffReceiptRoundTripPassed": true,
+    "foreignReceiptsPreserved": 2,
+    "fivePartFindingIdentitiesUnique": true,
+    "typeScriptAssayMaintainerAcceptance": "pending",
+    "steAssayMaintainerAcceptance": "pending",
+    "cffHostMaintainerAcceptance": "pending",
+    "limitation": "Local companion checkouts have no configured acceptance policy or CFF host acceptance executable; mechanical compatibility is not maintainer acceptance."
+  },
+  "gateDecisions": [
+    { "id": "RG-06", "decision": "accepted" },
+    { "id": "RG-07", "decision": "accepted" },
+    { "id": "RG-08", "decision": "accepted" },
+    { "id": "RG-12", "decision": "accepted" },
+    { "id": "RG-20-independent-tester", "decision": "accepted" },
+    { "id": "RG-19", "decision": "pending" },
+    { "id": "RG-20", "decision": "pending" }
+  ],
+  "result": "accepted-with-external-gates-pending"
+}

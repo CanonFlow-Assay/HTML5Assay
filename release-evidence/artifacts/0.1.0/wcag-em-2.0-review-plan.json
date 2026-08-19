@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "html5assay.wcag-em-2.0-review-plan.v1",
+  "createdAt": "2026-08-19T19:24:10Z",
+  "status": "pending-human-execution",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveFilename": "canonflow-html5-assay-0.1.0.tgz",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "methodology": {
+    "name": "Website Accessibility Conformance Evaluation Methodology 2.0",
+    "source": "https://www.w3.org/TR/wcag-em-2/",
+    "status": "W3C Group Note",
+    "steps": [
+      "Define the scope of the evaluation",
+      "Explore the product",
+      "Select a representative sample",
+      "Evaluate the selected sample",
+      "Report the evaluation findings"
+    ]
+  },
+  "scope": {
+    "target": "HTML5Assay 0.1.0 candidate web and terminal interfaces",
+    "conformanceTarget": "WCAG 2.2 Level AA",
+    "included": [
+      "Bundled playground initial state and safe/unsafe specimen analysis flows",
+      "Keyboard-only traversal, visible focus, status communication, errors, and state recovery",
+      "Light, dark, forced-colors, reduced-motion, and 200 percent text presentations",
+      "Native dialog and popover flows exercised by the browser qualification page",
+      "CLI help, pretty result, error, and Inconclusive output read through an accessible terminal"
+    ],
+    "excluded": [
+      "Third-party GitHub and package-registry interfaces",
+      "Companion-assay interfaces, which are reviewed under RG-19",
+      "Generated consumer applications outside the included package and playground examples"
+    ]
+  },
+  "representativeSample": [
+    {
+      "view": "playground/index.html",
+      "states": [
+        "initial",
+        "safe specimen selected",
+        "unsafe specimen selected",
+        "analysis result announced"
+      ]
+    },
+    {
+      "view": "browser-harness/qualification.html",
+      "states": ["default", "dialog open", "popover open", "persisted state restored"]
+    },
+    {
+      "view": "packaged CLI",
+      "states": ["help", "Pass", "Fail", "Inconclusive", "ToolFailure"]
+    }
+  ],
+  "requiredReviewers": {
+    "accessibilityLead": {
+      "identity": null,
+      "requiredExpertise": [
+        "WCAG 2.2",
+        "WCAG-EM 2.0",
+        "accessible web design",
+        "assistive technology"
+      ]
+    },
+    "assistiveTechnologyParticipants": []
+  },
+  "minimumConfigurations": [
+    {
+      "platform": "Windows",
+      "assistiveTechnology": "NVDA",
+      "userAgent": "Firefox",
+      "versions": "record exact versions in the completed report"
+    },
+    {
+      "platform": "macOS",
+      "assistiveTechnology": "VoiceOver",
+      "userAgent": "Safari",
+      "versions": "record exact versions in the completed report"
+    },
+    {
+      "platform": "reviewer-selected additional configuration",
+      "assistiveTechnology": "record exact product and version",
+      "userAgent": "record exact product and version",
+      "versions": "record operating-system version"
+    }
+  ],
+  "requiredReportFields": [
+    "evaluation scope, goal, conformance target, and baseline",
+    "evaluator identities, roles, expertise, dates, and any conflicts",
+    "exact candidate commit, archive filename, and archive SHA-256",
+    "explored views, functionality, technologies, and accessibility features",
+    "structured sample, any random sample, and selection rationale",
+    "exact operating system, browser, assistive technology, terminal, and versions",
+    "test procedure and result for every applicable WCAG 2.2 Level A and AA success criterion",
+    "keyboard, focus, zoom, reflow, forced-colors, reduced-motion, live-region, dialog, popover, and recovery observations",
+    "issue location, reproducible steps, impact, affected users, severity, and evidence",
+    "conformance finding, limitations, exceptions, and unresolved questions",
+    "reviewer decision, reviewer identity, and UTC completion timestamp"
+  ],
+  "completionRule": "RG-21 remains pending until qualified humans execute this plan against the bound candidate and an accessibility lead accepts the completed report.",
+  "invalidationRule": "Invalidate the completed review if the candidate Git commit or archive SHA-256 changes, or if an evidence-only change alters this plan or the reviewed report."
+}

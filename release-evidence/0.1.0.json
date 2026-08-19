@@ -2,8 +2,8 @@
   "schemaVersion": "html5assay.release-evidence.v1",
   "releaseVersion": "0.1.0",
   "candidate": {
-    "gitCommit": null,
-    "archiveSha256": null
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
   },
   "invalidationPolicy": "A candidate Git commit or archive digest change invalidates every affected candidate-bound item; evidence and reviewer acceptance must be collected again for the new identity.",
   "items": [
@@ -15,7 +15,7 @@
         {
           "kind": "candidate-identity",
           "locator": "release-evidence/0.1.0.json#/candidate",
-          "state": "pending",
+          "state": "available",
           "candidateBound": true
         }
       ],
@@ -48,153 +48,201 @@
     {
       "id": "RG-03",
       "requirement": "Complete dependency and lockfile security review.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "security-review",
           "locator": "release-evidence/artifacts/0.1.0/pre-candidate-security-review.json",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "security reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
       }
     },
     {
       "id": "RG-04",
       "requirement": "Complete workflow-action security review with immutable action pins.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "action-identity-review",
           "locator": "release-evidence/workflow-actions.json",
           "state": "available",
           "candidateBound": true
-        }
-      ],
-      "reviewer": {
-        "requiredRole": "security reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
-      }
-    },
-    {
-      "id": "RG-05",
-      "requirement": "Complete candidate package security review.",
-      "status": "pending",
-      "evidence": [
+        },
         {
-          "kind": "security-review",
-          "locator": "pending:candidate-package-review",
-          "state": "pending",
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
           "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "security reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
+      }
+    },
+    {
+      "id": "RG-05",
+      "requirement": "Complete candidate package security review.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
       }
     },
     {
       "id": "RG-06",
       "requirement": "Install and run the packed package offline.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "ci-test",
           "locator": "package.json#scripts.test:package",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "independent tester",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
       }
     },
     {
       "id": "RG-07",
       "requirement": "Prove API and CLI canonical-result parity.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "test/independent-api.test.ts",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "independent tester",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
       }
     },
     {
       "id": "RG-08",
       "requirement": "Prove cross-operating-system determinism.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "ci-matrix",
-          "locator": ".github/workflows/ci.yml",
-          "state": "pending",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291756601",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "ci-matrix",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291762682",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
           "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "independent tester",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
       }
     },
     {
       "id": "RG-09",
       "requirement": "Execute three determinate examples for every rule.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "test/catalog-examples.test.ts",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "llm-judge-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "LLM judge",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "OpenAI Codex LLM judge (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:30:29Z"
       }
     },
     {
       "id": "RG-10",
       "requirement": "Execute cantTell examples wherever evidence can be unavailable.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "test/catalog-examples.test.ts",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "llm-judge-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "LLM judge",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "OpenAI Codex LLM judge (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:30:29Z"
       }
     },
     {
@@ -219,39 +267,51 @@
     {
       "id": "RG-12",
       "requirement": "Pass canonical artifact goldens.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "fixtures/golden/basic",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "independent tester",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
       }
     },
     {
       "id": "RG-13",
       "requirement": "Pass adversarial and resource-bound tests.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "test/adversarial-fixtures.test.ts",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "security reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
       }
     },
     {
@@ -279,9 +339,27 @@
       "status": "pending",
       "evidence": [
         {
+          "kind": "qualification-record",
+          "locator": "release-evidence/artifacts/0.1.0/browser-qualification-32292015489.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "workflow-run",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
           "kind": "workflow-artifact",
-          "locator": ".github/workflows/browser-qualification.yml",
-          "state": "pending",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489/artifacts/9379867515",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "browser-evidence",
+          "locator": "github-actions-artifact:9379867515/html5assay-browser-evidence/browser-evidence.json",
+          "state": "available",
           "candidateBound": true
         }
       ],
@@ -295,20 +373,26 @@
     {
       "id": "RG-16",
       "requirement": "Prove strict-policy remote and telemetry rejection.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "test/independent-api.test.ts",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "security reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
       }
     },
     {
@@ -333,20 +417,26 @@
     {
       "id": "RG-18",
       "requirement": "Audit public package boundaries.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "scripts/test-package.mjs",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "security reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
       }
     },
     {
@@ -354,6 +444,12 @@
       "requirement": "Obtain companion-assay and CFF-host acceptance.",
       "status": "pending",
       "evidence": [
+        {
+          "kind": "mechanical-compatibility-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json#/companionCompatibility",
+          "state": "available",
+          "candidateBound": true
+        },
         {
           "kind": "external-acceptance",
           "locator": "pending:companion-assay-acceptance",
@@ -374,9 +470,15 @@
       "status": "pending",
       "evidence": [
         {
-          "kind": "review",
-          "locator": "pending:candidate-independent-review",
-          "state": "pending",
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "judge-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json",
+          "state": "available",
           "candidateBound": true
         }
       ],
@@ -392,6 +494,12 @@
       "requirement": "Complete scoped WCAG-EM 2.0 human and assistive-technology review.",
       "status": "pending",
       "evidence": [
+        {
+          "kind": "review-plan",
+          "locator": "release-evidence/artifacts/0.1.0/wcag-em-2.0-review-plan.json",
+          "state": "available",
+          "candidateBound": true
+        },
         {
           "kind": "human-review",
           "locator": "pending:wcag-em-2.0-report",

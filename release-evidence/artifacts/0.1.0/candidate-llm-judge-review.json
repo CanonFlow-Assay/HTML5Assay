@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "html5assay.candidate-llm-judge-review.v1",
+  "reviewer": {
+    "identity": "OpenAI Codex LLM judge (/root/llm_judge)",
+    "role": "LLM judge",
+    "reviewedAt": "2026-08-19T19:30:29Z"
+  },
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveFilename": "canonflow-html5-assay-0.1.0.tgz",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+    "workflowRun": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489",
+    "artifactId": 9379867515
+  },
+  "findings": {
+    "exactCandidateBinding": "passed",
+    "singleArtifactWithThreeRegularFiles": "passed",
+    "archiveAndPostBrowserDigestIntegrity": "passed",
+    "browserMatrixCardinalityAndUniqueness": "passed",
+    "hostAndBrowserNetworkDenial": "passed",
+    "browserEvidenceIntegrity": "passed",
+    "publicPackageScope": "passed",
+    "offlineApiAndCliSmoke": "passed",
+    "releaseEvidenceTruthfulness": "passed"
+  },
+  "browserEvidence": {
+    "results": 51,
+    "resultsPerBrowser": 17,
+    "failures": 0,
+    "serviceWorkers": "block",
+    "hostNetworkDenial": "docker-network-none",
+    "hostNetworkProbe": "ENETUNREACH",
+    "canonicalEvidenceSha256": "b1f2c49f93d9edb201088fcec37f18b222e1529e8c703dea791b2d11e26c34c7",
+    "evidenceFileSha256": "f1d016d8230d13fc4e23afbc4d2776a1433f3de458fc2dd26b8c1d87e5a2d277"
+  },
+  "catalogueEvidence": {
+    "rules": 58,
+    "determinateExamples": 193,
+    "cantTellExamples": 19,
+    "determinateExamplesPassed": true,
+    "cantTellCoverageComplete": true
+  },
+  "gateDecisions": [
+    { "id": "RG-09", "decision": "accepted" },
+    { "id": "RG-10", "decision": "accepted" },
+    { "id": "RG-20-llm-judge", "decision": "accepted" },
+    { "id": "RG-20", "decision": "pending-release-manager" }
+  ],
+  "remainingExternalGates": [
+    "companion-maintainer and CFF-host acceptance",
+    "accessibility-reviewer acceptance of browser evidence",
+    "completed WCAG-EM 2.0 human and assistive-technology review",
+    "authorized human approval of the final commit",
+    "trusted-main CI after an approved merge",
+    "authorized publication from the retained candidate digest"
+  ],
+  "result": "accepted-with-external-gates-pending"
+}
