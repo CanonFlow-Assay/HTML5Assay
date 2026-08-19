@@ -4,15 +4,17 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
 const command = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
-const run = (args, cwd) =>
+const run = (args, cwd, { offline = true } = {}) =>
   new Promise((resolveRun, reject) => {
+    const environment = {
+      ...process.env,
+      CI: 'true'
+    };
+    if (offline) environment.npm_config_offline = 'true';
+    else delete environment.npm_config_offline;
     const child = spawn(command, args, {
       cwd,
-      env: {
-        ...process.env,
-        CI: 'true',
-        npm_config_offline: 'true'
-      },
+      env: environment,
       stdio: 'inherit'
     });
     child.once('error', reject);
@@ -59,7 +61,15 @@ try {
       dependencies: { '@canonflow/html5-assay': `file:${archive}` }
     })
   );
-  await run(['install', '--offline', '--ignore-scripts', '--no-frozen-lockfile'], consumer);
+  // A cold machine cannot install dependencies offline until their exact package
+  // metadata and bytes have been cached. Seed that cache without running scripts,
+  // remove the complete install, and qualify a fresh install with networking
+  // disabled and the resulting lockfile frozen.
+  await run(['install', '--ignore-scripts', '--no-frozen-lockfile'], consumer, {
+    offline: false
+  });
+  await rm(join(consumer, 'node_modules'), { recursive: true, force: true });
+  await run(['install', '--offline', '--ignore-scripts', '--frozen-lockfile'], consumer);
   await writeFile(
     join(consumer, 'index.html'),
     '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'self\'"><title>Packed consumer</title></head><body><a href="#main">Jump to content</a><main id="main"><h1>Packed consumer</h1></main></body></html>'
