@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "cff.page-manifest.v1",
+  "root": ".",
+  "entries": ["playground/index.html"],
+  "pages": {
+    "playground/index.html": "playground"
+  },
+  "localAssetRoots": ["playground", "theme"],
+  "generatedExclusions": [],
+  "requiredShellVersion": "1.0.0",
+  "requiredTheme": "cff-evidence/1.0.0",
+  "html5AssayPolicy": "cff-web-strict",
+  "typescriptAssayProfile": "cff-browser",
+  "steAssayPolicy": "cff-interface",
+  "deploymentHeaders": "playground/deployment-headers.json",
+  "approvedSuppressions": []
+}

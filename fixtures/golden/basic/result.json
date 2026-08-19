@@ -1,0 +1,704 @@
+{
+  "assay": {
+    "id": "html5assay",
+    "version": "0.1.0"
+  },
+  "counts": {
+    "advisory": 0,
+    "blocking": 1,
+    "inconclusive": 3
+  },
+  "evaluations": [
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-DOC-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-DOC-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-DOC-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-DOC-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 1,
+      "level": "blocking",
+      "outcome": "cantTell",
+      "path": "index.html",
+      "ruleId": "H5A-DOC-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-DOC-006",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-DOC-007",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-SEM-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-SEM-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-SEM-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-SEM-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-SEM-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-SEM-006",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-SEM-007",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-006",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-007",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-008",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-A11Y-009",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 1,
+      "level": "blocking",
+      "outcome": "cantTell",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-006",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-007",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-008",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-009",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CSS-010",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-SAFE-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 1,
+      "level": "blocking",
+      "outcome": "failed",
+      "path": "index.html",
+      "ruleId": "H5A-SAFE-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-SAFE-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-SAFE-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-SAFE-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 1,
+      "level": "advisory",
+      "outcome": "cantTell",
+      "path": "index.html",
+      "ruleId": "H5A-SAFE-006",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CFF-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CFF-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CFF-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CFF-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CFF-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CFF-006",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-CFF-007",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "passed",
+      "path": "index.html",
+      "ruleId": "H5A-PERF-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-PERF-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-PERF-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-PERF-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-PERF-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-PERF-006",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-THEME-001",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-THEME-002",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-THEME-003",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "advisory",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-THEME-004",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-THEME-005",
+      "ruleVersion": "1.0.0"
+    },
+    {
+      "findingCount": 0,
+      "level": "blocking",
+      "outcome": "inapplicable",
+      "path": "index.html",
+      "ruleId": "H5A-THEME-006",
+      "ruleVersion": "1.0.0"
+    }
+  ],
+  "findings": [
+    {
+      "authority": "cff-policy",
+      "certainty": "contextual",
+      "evidenceDigest": {
+        "algorithm": "sha-256",
+        "value": "eca645ae65be14a107c86df1c83b7dd0b21ce3989b29c2157d30eddb50e3e0ef"
+      },
+      "expected": "A supplied deployment manifest declares a restrictive Content-Security-Policy.",
+      "level": "advisory",
+      "message": "No deployment-header evidence was supplied.",
+      "observed": "deploymentHeaders missing",
+      "outcome": "cantTell",
+      "path": "index.html",
+      "range": {
+        "end": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0
+        }
+      },
+      "remediation": "Change the source to meet H5A-SAFE-006; then rerun HTML5Assay.",
+      "ruleId": "H5A-SAFE-006",
+      "ruleVersion": "1.0.0",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: A supplied deployment manifest declares a restrictive Content-Security-Policy. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.5"
+        }
+      ]
+    },
+    {
+      "authority": "standard",
+      "certainty": "contextual",
+      "evidenceDigest": {
+        "algorithm": "sha-256",
+        "value": "9f1af9c42adeb98af9d064c268133d39f58ec18b63df60a57a65fe3d5bc1d246"
+      },
+      "expected": "Essential controls meet 24 by 24 CSS pixels or a defined spacing exception.",
+      "level": "blocking",
+      "message": "Rendered 24 CSS-pixel target size and spacing cannot be proven for every target.",
+      "observed": "1 control(s) without a per-target size or spacing exception",
+      "outcome": "cantTell",
+      "path": "index.html",
+      "range": {
+        "end": {
+          "column": 57,
+          "line": 10,
+          "offset": 264
+        },
+        "start": {
+          "column": 7,
+          "line": 10,
+          "offset": 214
+        }
+      },
+      "remediation": "Change the source to meet H5A-CSS-005; then rerun HTML5Assay.",
+      "ruleId": "H5A-CSS-005",
+      "ruleVersion": "1.0.0",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Essential controls meet 24 by 24 CSS pixels or a defined spacing exception. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "2.5.8 Target Size (Minimum)"
+        }
+      ]
+    },
+    {
+      "authority": "standard",
+      "certainty": "contextual",
+      "evidenceDigest": {
+        "algorithm": "sha-256",
+        "value": "0ac684da1ff4560f61ac9ce0bbe8065516dc2bf58a001f537d4eb5868daab597"
+      },
+      "expected": "Parsed elements and attributes have no statically provable conformance error.",
+      "level": "blocking",
+      "message": "The element content model is not fully decidable by this source-only table.",
+      "observed": "<button>",
+      "outcome": "cantTell",
+      "path": "index.html",
+      "range": {
+        "end": {
+          "column": 57,
+          "line": 10,
+          "offset": 264
+        },
+        "start": {
+          "column": 7,
+          "line": 10,
+          "offset": 214
+        }
+      },
+      "remediation": "Change the source to meet H5A-DOC-005; then rerun HTML5Assay.",
+      "ruleId": "H5A-DOC-005",
+      "ruleVersion": "1.0.0",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Parsed elements and attributes have no statically provable conformance error. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Elements, attributes, and content models"
+        }
+      ]
+    },
+    {
+      "authority": "standard",
+      "certainty": "exact",
+      "evidenceDigest": {
+        "algorithm": "sha-256",
+        "value": "fd8c96e4ec70e88dc16fc9ec68019365e0272c8bad5b55132528394e1b7b161b"
+      },
+      "expected": "Inline event-handler attributes are absent.",
+      "level": "blocking",
+      "message": "Inline event-handler attributes are forbidden.",
+      "observed": "onclick",
+      "outcome": "failed",
+      "path": "index.html",
+      "range": {
+        "end": {
+          "column": 44,
+          "line": 10,
+          "offset": 251
+        },
+        "start": {
+          "column": 29,
+          "line": 10,
+          "offset": 236
+        }
+      },
+      "remediation": "Change the source to meet H5A-SAFE-002; then rerun HTML5Assay.",
+      "ruleId": "H5A-SAFE-002",
+      "ruleVersion": "1.0.0",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Inline event-handler attributes are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Event handler content attributes"
+        }
+      ]
+    }
+  ],
+  "limits": [],
+  "policy": {
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "a86a0b66af62032a6532aa2a9860755f95ffca27617b689e4c16d41475f43e4c"
+    },
+    "id": "cff-web-strict",
+    "version": "1.0.0"
+  },
+  "receipt": {
+    "assay": {
+      "id": "html5assay",
+      "version": "0.1.0"
+    },
+    "authorityLimitations": [
+      "Static source checks do not prove complete WCAG conformance, runtime behavior, rendering, interaction, or content quality.",
+      "No page script is executed and no network resource is fetched.",
+      "A Pass applies only to the supplied bytes, manifest, pinned policy, and implemented static expectations.",
+      "Human review is required before release, signature, waiver, or promotion."
+    ],
+    "findingsDigest": {
+      "algorithm": "sha-256",
+      "value": "2b73ca11177c129b2ff3d181d8fb389bb97b3dbbf0948ddd8954f4c91b1f2f06"
+    },
+    "humanApprovalRequired": true,
+    "limits": [],
+    "manifestDigest": null,
+    "policy": {
+      "digest": {
+        "algorithm": "sha-256",
+        "value": "a86a0b66af62032a6532aa2a9860755f95ffca27617b689e4c16d41475f43e4c"
+      },
+      "id": "cff-web-strict",
+      "version": "1.0.0"
+    },
+    "resultDigest": {
+      "algorithm": "sha-256",
+      "value": "f08337165115d402e6b47760133a891bb88b0cc5b64f63a989e00a686ca2137e"
+    },
+    "ruleset": {
+      "digest": {
+        "algorithm": "sha-256",
+        "value": "50804eb9239746d2f991eee27e8c2eb7b3bfc7661765df94e14a6329803cb690"
+      },
+      "id": "html5assay-core",
+      "version": "1.0.0"
+    },
+    "schemaVersion": "cff.assay.receipt.v1",
+    "subject": {
+      "digest": {
+        "algorithm": "sha-256",
+        "value": "a5d05a6c46d21ab1fb5b366b5548ce0c1cedeed95b0f53f3a7973190c43eb99f"
+      },
+      "root": "."
+    },
+    "toolFailures": [],
+    "toolchain": {
+      "cssParser": "postcss/8.5.6",
+      "htmlParser": "parse5/7.2.1",
+      "node": "20.20.2"
+    },
+    "verdict": "Fail"
+  },
+  "ruleset": {
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "50804eb9239746d2f991eee27e8c2eb7b3bfc7661765df94e14a6329803cb690"
+    },
+    "id": "html5assay-core",
+    "version": "1.0.0"
+  },
+  "schemaVersion": "cff.assay.result.v1",
+  "subject": {
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "a5d05a6c46d21ab1fb5b366b5548ce0c1cedeed95b0f53f3a7973190c43eb99f"
+    },
+    "root": "."
+  },
+  "toolFailures": [],
+  "verdict": "Fail"
+}

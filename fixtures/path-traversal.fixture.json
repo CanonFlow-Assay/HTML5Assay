@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "html5assay.adversarial-fixture.v1",
+  "id": "path-traversal",
+  "description": "A stylesheet reference cannot escape the declared analysis root.",
+  "entries": ["index.html"],
+  "files": {
+    "index.html": "<!doctype html><html lang=\"en\"><title>Traversal</title><body><link rel=\"stylesheet\" href=\"../outside.css\"><main>Traversal</main></body></html>"
+  },
+  "policy": { "base": "cff-web-strict" },
+  "expected": { "verdict": "Fail", "findingRuleIds": ["H5A-DOC-007"] }
+}

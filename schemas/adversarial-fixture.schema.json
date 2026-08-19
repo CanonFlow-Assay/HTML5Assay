@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canonflow.dev/schemas/html5assay.adversarial-fixture.v1.json",
+  "title": "HTML5Assay adversarial fixture v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "description", "entries", "files", "policy", "expected"],
+  "properties": {
+    "schemaVersion": { "const": "html5assay.adversarial-fixture.v1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "description": { "type": "string", "minLength": 1 },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "files": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+      },
+      "additionalProperties": { "type": "string" }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base"],
+      "properties": {
+        "base": { "enum": ["cff-web-strict", "cff-web-balanced"] },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "inputFiles": { "type": "integer", "minimum": 1 },
+            "bytesPerTextFile": { "type": "integer", "minimum": 1 },
+            "totalAnalyzedBytes": { "type": "integer", "minimum": 1 },
+            "htmlNodesPerDocument": { "type": "integer", "minimum": 1 },
+            "cssRulesPerGraph": { "type": "integer", "minimum": 1 },
+            "localReferenceDepth": { "type": "integer", "minimum": 1 },
+            "findings": { "type": "integer", "minimum": 1 }
+          }
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict"],
+      "properties": {
+        "verdict": { "enum": ["Pass", "Fail", "Inconclusive", "ToolFailure"] },
+        "findingRuleIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^H5A-(DOC|SEM|A11Y|CSS|SAFE|CFF|PERF|THEME)-[0-9]{3}$"
+          }
+        },
+        "limitIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "toolFailureCodes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^H5A-[A-Z0-9-]+$" }
+        }
+      }
+    }
+  }
+}

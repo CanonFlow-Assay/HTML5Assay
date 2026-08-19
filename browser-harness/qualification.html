@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>HTML5Assay browser qualification flows</title>
+    <link rel="stylesheet" href="../theme/cff-evidence.css" />
+    <link rel="stylesheet" href="./qualification.css" />
+    <script type="module" src="./qualification.mjs"></script>
+  </head>
+  <body>
+    <a href="#main">Jump to qualification controls</a>
+    <main id="main">
+      <h1>HTML5Assay browser qualification flows</h1>
+      <p>These local controls exercise the product shell’s native interaction contracts.</p>
+
+      <button id="open-dialog" type="button">Open review dialog</button>
+      <dialog id="review-dialog" aria-labelledby="dialog-title">
+        <h2 id="dialog-title">Review evidence</h2>
+        <p>Native modal focus and dismissal evidence.</p>
+        <button id="close-dialog" type="button">Close review dialog</button>
+      </dialog>
+
+      <button id="open-popover" type="button" popovertarget="review-popover">
+        Show evidence note
+      </button>
+      <div id="review-popover" popover>Native popover state evidence.</div>
+
+      <label for="recovery-value">Recovery marker</label>
+      <input id="recovery-value" autocomplete="off" />
+      <output id="recovery-status" for="recovery-value">No restored state</output>
+    </main>
+  </body>
+</html>

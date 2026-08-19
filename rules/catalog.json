@@ -1,0 +1,2509 @@
+{
+  "rules": [
+    {
+      "applicability": "Applies when source evidence relevant to short html doctype is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<!doctype html><html lang=\"en\"><title>Page</title></html>",
+          "note": "Meets H5A-DOC-001.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<html lang=\"en\"><title>Page</title></html>",
+          "note": "Violates H5A-DOC-001.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<p>Manifest-declared fragment</p>",
+          "note": "H5A-DOC-001 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["A full document starts with <!doctype html>."],
+      "family": "DOC",
+      "id": "H5A-DOC-001",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: A full document starts with <!doctype html>. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "The DOCTYPE"
+        }
+      ],
+      "title": "Short HTML doctype",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to document language is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<html lang=\"en-GB\"><title>Page</title></html>",
+          "note": "Meets H5A-DOC-002.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<html lang=\"not_a_tag\"><title>Page</title></html>",
+          "note": "Violates H5A-DOC-002.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<p>Fragment language comes from its host.</p>",
+          "note": "H5A-DOC-002 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["The root html element has a non-empty, structurally valid language tag."],
+      "family": "DOC",
+      "id": "H5A-DOC-002",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: The root html element has a non-empty, structurally valid language tag. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "3.1.1 Language of Page"
+        }
+      ],
+      "title": "Document language",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to page title is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<title>Rule catalogue — HTML5Assay</title>",
+          "note": "Meets H5A-DOC-003.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<title> </title>",
+          "note": "Violates H5A-DOC-003.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<p>A fragment does not own a document title.</p>",
+          "note": "H5A-DOC-003 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["A full document has exactly one non-empty title."],
+      "family": "DOC",
+      "id": "H5A-DOC-003",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: A full document has exactly one non-empty title. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "2.4.2 Page Titled"
+        }
+      ],
+      "title": "Page title",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to unique identifiers is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<p id=\"first\">A</p><p id=\"second\">B</p>",
+          "note": "Meets H5A-DOC-004.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<p id=\"same\">A</p><p id=\"same\">B</p>",
+          "note": "Violates H5A-DOC-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No identifiers.</p>",
+          "note": "H5A-DOC-004 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Every id value is unique in its document."],
+      "family": "DOC",
+      "id": "H5A-DOC-004",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Every id value is unique in its document. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "The id attribute"
+        }
+      ],
+      "title": "Unique identifiers",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to conforming syntax surface is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<!doctype html><html lang=\"en\"><title>Page</title><p class=\"note\">Text</p></html>",
+          "note": "Meets H5A-DOC-005.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<input type=\"wat\">",
+          "note": "Violates H5A-DOC-005.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<!-- empty fragment -->",
+          "note": "H5A-DOC-005 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<!doctype html><html lang=\"en\"><title>Page</title><body><table><tr><td>Conformance needs a broader content-model proof.</td></tr></table></body></html>",
+          "note": "The source cannot resolve all evidence required by H5A-DOC-005.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "Parsed elements and attributes have no statically provable conformance error."
+      ],
+      "family": "DOC",
+      "id": "H5A-DOC-005",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Parsed elements and attributes have no statically provable conformance error. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Elements, attributes, and content models"
+        }
+      ],
+      "title": "Conforming syntax surface",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to no obsolete features is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<strong>Important</strong>",
+          "note": "Meets H5A-DOC-006.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<center>Centred text</center>",
+          "note": "Violates H5A-DOC-006.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<!-- no elements -->",
+          "note": "H5A-DOC-006 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Obsolete-but-conforming elements and attributes are absent."],
+      "family": "DOC",
+      "id": "H5A-DOC-006",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Obsolete-but-conforming elements and attributes are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Obsolete features"
+        }
+      ],
+      "title": "No obsolete features",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to contained local references is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "assets": {
+              "styles/site.css": "body{}"
+            }
+          },
+          "html": "<link rel=\"stylesheet\" href=\"styles/site.css\">",
+          "note": "Meets H5A-DOC-007.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<link rel=\"stylesheet\" href=\"../outside.css\">",
+          "note": "Violates H5A-DOC-007.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No resource references.</p>",
+          "note": "H5A-DOC-007 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Every resolved local reference stays inside the declared root."],
+      "family": "DOC",
+      "id": "H5A-DOC-007",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Every resolved local reference stays inside the declared root. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §3.1 and §6.1"
+        }
+      ],
+      "title": "Contained local references",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to one primary main landmark is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<main>Primary content</main>",
+          "note": "Meets H5A-SEM-001.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<main>A</main><main>B</main>",
+          "note": "Violates H5A-SEM-001.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<p>Manifest-declared fragment</p>",
+          "note": "H5A-SEM-001 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>@media print{.aux{display:none}}</style><main>Primary</main><main class=\"aux\">Unresolved alternative</main>",
+          "note": "The source cannot resolve all evidence required by H5A-SEM-001.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["Each full page exposes exactly one visible main landmark."],
+      "family": "SEM",
+      "id": "H5A-SEM-001",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Each full page exposes exactly one visible main landmark. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.3.1 Info and Relationships"
+        }
+      ],
+      "title": "One primary main landmark",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to skip link reaches main is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<a href=\"#content\">Skip to content</a><main id=\"content\">Content</main>",
+          "note": "Meets H5A-SEM-002.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<a href=\"#missing\">Skip</a><main id=\"content\">Content</main>",
+          "note": "Violates H5A-SEM-002.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<p>Manifest-declared fragment</p>",
+          "note": "H5A-SEM-002 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>@media print{main{display:none}}</style><a href=\"#main\">Jump to content</a><main id=\"main\">Primary</main>",
+          "note": "The source cannot resolve all evidence required by H5A-SEM-002.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["A same-page skip link targets the primary content."],
+      "family": "SEM",
+      "id": "H5A-SEM-002",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: A same-page skip link targets the primary content. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "2.4.1 Bypass Blocks"
+        }
+      ],
+      "title": "Skip link reaches main",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to clear heading hierarchy is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<h1>Page</h1><h2>Section</h2>",
+          "note": "Meets H5A-SEM-003.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<h1>Page</h1><h3>Section</h3>",
+          "note": "Violates H5A-SEM-003.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No headings.</p>",
+          "note": "H5A-SEM-003 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Heading levels do not skip levels in document order."],
+      "family": "SEM",
+      "id": "H5A-SEM-003",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Heading levels do not skip levels in document order. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.3.1 Info and Relationships"
+        }
+      ],
+      "title": "Clear heading hierarchy",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to native interactive elements is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<button type=\"button\">Copy</button>",
+          "note": "Meets H5A-SEM-004.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<div role=\"button\" tabindex=\"0\">Copy</div>",
+          "note": "Violates H5A-SEM-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No interactive behavior.</p>",
+          "note": "H5A-SEM-004 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Static button and link behavior uses native interactive elements."],
+      "family": "SEM",
+      "id": "H5A-SEM-004",
+      "standards": [
+        {
+          "authority": "ARIA in HTML",
+          "automationLimit": "This rule tests only this static expectation: Static button and link behavior uses native interactive elements. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Rules of ARIA use 1 and 2"
+        }
+      ],
+      "title": "Native interactive elements",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to link and button purpose is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<a href=\"docs.html\">Read docs</a><button>Copy</button>",
+          "note": "Meets H5A-SEM-005.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<a href=\"#\" role=\"button\">Submit</a>",
+          "note": "Violates H5A-SEM-005.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No links or buttons.</p>",
+          "note": "H5A-SEM-005 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Links have navigable href values and buttons represent actions."],
+      "family": "SEM",
+      "id": "H5A-SEM-005",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Links have navigable href values and buttons represent actions. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "The a and button elements"
+        }
+      ],
+      "title": "Link and button purpose",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to table structure is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<table><caption>Builds</caption><tr><th>State</th></tr><tr><td>Pass</td></tr></table>",
+          "note": "Meets H5A-SEM-006.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<table><tr><td>State</td></tr></table>",
+          "note": "Violates H5A-SEM-006.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No data table.</p>",
+          "note": "H5A-SEM-006 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": [
+        "Data tables identify headers and provide a caption when a title is declared necessary."
+      ],
+      "family": "SEM",
+      "id": "H5A-SEM-006",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Data tables identify headers and provide a caption when a title is declared necessary. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.3.1 Info and Relationships"
+        }
+      ],
+      "title": "Table structure",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to unique landmark names is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<nav aria-label=\"Primary\"></nav><nav aria-label=\"Rule\"></nav>",
+          "note": "Meets H5A-SEM-007.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<nav aria-label=\"Primary\"></nav><nav aria-label=\"Primary\"></nav>",
+          "note": "Violates H5A-SEM-007.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<nav aria-label=\"Primary\"></nav>",
+          "note": "H5A-SEM-007 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Repeated landmark types have distinct accessible names."],
+      "family": "SEM",
+      "id": "H5A-SEM-007",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Repeated landmark types have distinct accessible names. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.3.1 Info and Relationships"
+        }
+      ],
+      "title": "Unique landmark names",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to image text alternatives is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<img src=\"chart.png\" alt=\"Build failures by day\">",
+          "note": "Meets H5A-A11Y-001.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<img src=\"chart.png\">",
+          "note": "Violates H5A-A11Y-001.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No images.</p>",
+          "note": "H5A-A11Y-001 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Images explicitly declare alt text, including empty alt for decoration."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-001",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Images explicitly declare alt text, including empty alt for decoration. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.1.1 Non-text Content"
+        }
+      ],
+      "title": "Image text alternatives",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to named form controls is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<label for=\"query\">Search</label><input id=\"query\">",
+          "note": "Meets H5A-A11Y-002.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<input id=\"query\">",
+          "note": "Violates H5A-A11Y-002.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No form controls.</p>",
+          "note": "H5A-A11Y-002 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Every form control has a programmatically determinable name."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-002",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Every form control has a programmatically determinable name. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "4.1.2 Name, Role, Value"
+        }
+      ],
+      "title": "Named form controls",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to named buttons and links is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<button>Analyze</button><a href=\"docs.html\">Docs</a>",
+          "note": "Meets H5A-A11Y-003.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<button><svg></svg></button>",
+          "note": "Violates H5A-A11Y-003.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No buttons or links.</p>",
+          "note": "H5A-A11Y-003 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Buttons and links have a non-empty accessible name."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-003",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Buttons and links have a non-empty accessible name. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "4.1.2 Name, Role, Value"
+        }
+      ],
+      "title": "Named buttons and links",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to valid aria is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<button aria-expanded=\"false\">Rules</button>",
+          "note": "Meets H5A-A11Y-004.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<button aria-expanded=\"maybe\">Rules</button>",
+          "note": "Violates H5A-A11Y-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<button>Rules</button>",
+          "note": "H5A-A11Y-004 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<article aria-expanded=\"false\">State</article>",
+          "note": "The source cannot resolve all evidence required by H5A-A11Y-004.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "ARIA roles, states, properties, and ownership use supported names and values."
+      ],
+      "family": "A11Y",
+      "id": "H5A-A11Y-004",
+      "standards": [
+        {
+          "authority": "WAI-ARIA 1.2",
+          "automationLimit": "This rule tests only this static expectation: ARIA roles, states, properties, and ownership use supported names and values. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Roles, states, properties, and required owned elements"
+        }
+      ],
+      "title": "Valid ARIA",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to native semantics preserved is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<button type=\"button\" role=\"button\">Copy</button>",
+          "note": "Meets H5A-A11Y-005.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<button role=\"heading\">Copy</button>",
+          "note": "Violates H5A-A11Y-005.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<div>Static text</div>",
+          "note": "H5A-A11Y-005 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<section role=\"button\">Unsupported host-role proof</section>",
+          "note": "The source cannot resolve all evidence required by H5A-A11Y-005.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["ARIA does not conflict with strong native semantics."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-005",
+      "standards": [
+        {
+          "authority": "ARIA in HTML",
+          "automationLimit": "This rule tests only this static expectation: ARIA does not conflict with strong native semantics. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Rules of ARIA use 1 and 2"
+        }
+      ],
+      "title": "Native semantics preserved",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to no positive tabindex is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<button tabindex=\"0\">Copy</button>",
+          "note": "Meets H5A-A11Y-006.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<button tabindex=\"2\">Copy</button>",
+          "note": "Violates H5A-A11Y-006.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No tabindex.</p>",
+          "note": "H5A-A11Y-006 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Positive tabindex values are absent."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-006",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Positive tabindex values are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "2.4.3 Focus Order"
+        }
+      ],
+      "title": "No positive tabindex",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to no global focus shortcuts is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<input aria-label=\"Search\">",
+          "note": "Meets H5A-A11Y-007.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<input autofocus accesskey=\"s\" aria-label=\"Search\">",
+          "note": "Violates H5A-A11Y-007.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No controls.</p>",
+          "note": "H5A-A11Y-007 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["autofocus and accesskey are absent without a reviewed exception."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-007",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: autofocus and accesskey are absent without a reviewed exception. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.3"
+        }
+      ],
+      "title": "No global focus shortcuts",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to media text tracks is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "assets": {
+              "captions.vtt": "WEBVTT\n"
+            }
+          },
+          "html": "<video><track kind=\"captions\" src=\"captions.vtt\"></video>",
+          "note": "Meets H5A-A11Y-008.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<video src=\"talk.mp4\" controls></video>",
+          "note": "Violates H5A-A11Y-008.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No timed media.</p>",
+          "note": "H5A-A11Y-008 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Audio and video declare local caption or transcript evidence."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-008",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Audio and video declare local caption or transcript evidence. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.2.2 Captions (Prerecorded)"
+        }
+      ],
+      "title": "Media text tracks",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to status message pattern is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<output role=\"status\">Copied</output>",
+          "note": "Meets H5A-A11Y-009.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<div class=\"status\">Copied</div>",
+          "note": "Violates H5A-A11Y-009.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No status message marker.</p>",
+          "note": "H5A-A11Y-009 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Declared status messages use status or a suitable polite live region."],
+      "family": "A11Y",
+      "id": "H5A-A11Y-009",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Declared status messages use status or a suitable polite live region. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "4.1.3 Status Messages"
+        }
+      ],
+      "title": "Status message pattern",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to visible focus styles is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>:focus{outline:2px solid CanvasText}</style>",
+          "note": "Meets H5A-CSS-001.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>:focus{outline:none}</style>",
+          "note": "Violates H5A-CSS-001.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No authored focus CSS.</p>",
+          "note": "H5A-CSS-001 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>:focus{outline:none;border:2px solid var(--runtime-focus)}</style><button>Focus</button>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-001.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["CSS does not remove focus indicators without a provable replacement."],
+      "family": "CSS",
+      "id": "H5A-CSS-001",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: CSS does not remove focus indicators without a provable replacement. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "2.4.7 Focus Visible and 2.4.11 Focus Not Obscured (Minimum)"
+        }
+      ],
+      "title": "Visible focus styles",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to status beyond color is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<span class=\"pass-status\">✓ Pass</span>",
+          "note": "Meets H5A-CSS-002.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<i class=\"pass-status green-dot\" aria-label=\"Pass\"></i>",
+          "note": "Violates H5A-CSS-002.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No status marker.</p>",
+          "note": "H5A-CSS-002 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<span class=\"pass-status\">Ready</span>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-002.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "Status declarations have visible text or icon evidence in addition to color."
+      ],
+      "family": "CSS",
+      "id": "H5A-CSS-002",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Status declarations have visible text or icon evidence in addition to color. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.4.1 Use of Color"
+        }
+      ],
+      "title": "Status beyond color",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to text contrast is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>p{color:#17202a;background:#fff}</style><p>Text</p>",
+          "note": "Meets H5A-CSS-003.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>p{color:#aaa;background:#fff}</style><p>Text</p>",
+          "note": "Violates H5A-CSS-003.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No resolvable authored color pair.</p>",
+          "note": "H5A-CSS-003 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>p{color:var(--runtime-value);background:#fff}</style><p>Text</p>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-003.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["Statically resolvable foreground/background pairs reach WCAG AA contrast."],
+      "family": "CSS",
+      "id": "H5A-CSS-003",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Statically resolvable foreground/background pairs reach WCAG AA contrast. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.4.3 Contrast (Minimum)"
+        }
+      ],
+      "title": "Text contrast",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to non-text contrast is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>button{border:2px solid #333;background:#fff}</style><button>Go</button>",
+          "note": "Meets H5A-CSS-004.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>button{border:1px solid #ddd;background:#fff}</style><button>Go</button>",
+          "note": "Violates H5A-CSS-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No resolvable control pair.</p>",
+          "note": "H5A-CSS-004 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>button{border-color:var(--runtime-value);background:#fff}</style><button>Go</button>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-004.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "Resolvable controls and focus indicators reach 3:1 against adjacent colors."
+      ],
+      "family": "CSS",
+      "id": "H5A-CSS-004",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Resolvable controls and focus indicators reach 3:1 against adjacent colors. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.4.11 Non-text Contrast"
+        }
+      ],
+      "title": "Non-text contrast",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to target size is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>button{min-width:24px;min-height:24px}</style><button>Go</button>",
+          "note": "Meets H5A-CSS-005.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>button{width:16px;height:16px}</style><button>Go</button>",
+          "note": "Violates H5A-CSS-005.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No essential controls.</p>",
+          "note": "H5A-CSS-005 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<nav><a href=\"a.html\">One</a><a href=\"b.html\">Two</a></nav>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-005.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "Essential controls meet 24 by 24 CSS pixels or a defined spacing exception."
+      ],
+      "family": "CSS",
+      "id": "H5A-CSS-005",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Essential controls meet 24 by 24 CSS pixels or a defined spacing exception. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "2.5.8 Target Size (Minimum)"
+        }
+      ],
+      "title": "Target size",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to reduced motion is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>.x{animation:pulse 1s}@media (prefers-reduced-motion:reduce){.x{animation:none}}</style>",
+          "note": "Meets H5A-CSS-006.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>.x{animation:pulse 1s infinite}</style>",
+          "note": "Violates H5A-CSS-006.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No animation or transition.</p>",
+          "note": "H5A-CSS-006 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Non-essential animations have a prefers-reduced-motion alternative."],
+      "family": "CSS",
+      "id": "H5A-CSS-006",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Non-essential animations have a prefers-reduced-motion alternative. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §10.12"
+        }
+      ],
+      "title": "Reduced motion",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to forced-colors resilience is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>@media (forced-colors:active){button{border:1px solid ButtonText}}</style>",
+          "note": "Meets H5A-CSS-007.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>button{forced-color-adjust:none}</style>",
+          "note": "Violates H5A-CSS-007.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No custom control or status styling.</p>",
+          "note": "H5A-CSS-007 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>button{color:#000;background:#fff;border:1px solid #000}</style><button>Go</button>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-007.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "Authored focus, boundary, and status styles include forced-colors support."
+      ],
+      "family": "CSS",
+      "id": "H5A-CSS-007",
+      "standards": [
+        {
+          "authority": "CSS Color Adjustment Module Level 1",
+          "automationLimit": "This rule tests only this static expectation: Authored focus, boundary, and status styles include forced-colors support. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Forced color palettes"
+        }
+      ],
+      "title": "Forced-colors resilience",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to reflow is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>main{max-width:100%;overflow-wrap:anywhere}</style>",
+          "note": "Meets H5A-CSS-008.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>main{min-width:1200px}</style>",
+          "note": "Violates H5A-CSS-008.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No authored layout dimensions.</p>",
+          "note": "H5A-CSS-008 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>main{width:var(--runtime-width)}</style><main>Text</main>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-008.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "Source evidence does not force two-dimensional scrolling at 320 CSS pixels."
+      ],
+      "family": "CSS",
+      "id": "H5A-CSS-008",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Source evidence does not force two-dimensional scrolling at 320 CSS pixels. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.4.10 Reflow"
+        }
+      ],
+      "title": "Reflow",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to logical properties is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<style>.card{margin-inline-start:1rem}</style>",
+          "note": "Meets H5A-CSS-009.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<style>.card{margin-left:1rem}</style>",
+          "note": "Violates H5A-CSS-009.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No direction-sensitive CSS.</p>",
+          "note": "H5A-CSS-009 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Direction-sensitive component layout uses logical properties."],
+      "family": "CSS",
+      "id": "H5A-CSS-009",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Direction-sensitive component layout uses logical properties. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §10.11"
+        }
+      ],
+      "title": "Logical properties",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to container-aware components is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<style>.list{container-type:inline-size}@container (min-width:30rem){.item{display:grid}}</style>",
+          "note": "Meets H5A-CSS-010.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<section data-container-adaptive><style>@media (min-width:30rem){.item{display:grid}}</style></section>",
+          "note": "Violates H5A-CSS-010.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No marked adaptive component.</p>",
+          "note": "H5A-CSS-010 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>@media(min-width:30rem){.item{display:grid}}</style>",
+          "note": "The source cannot resolve all evidence required by H5A-CSS-010.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "Components whose layout depends on their container use container-query evidence."
+      ],
+      "family": "CSS",
+      "id": "H5A-CSS-010",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Components whose layout depends on their container use container-query evidence. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §10.11"
+        }
+      ],
+      "title": "Container-aware components",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to no remote runtime dependency is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "assets": {
+              "assets/app.js": ""
+            }
+          },
+          "html": "<script src=\"assets/app.js\" defer></script>",
+          "note": "Meets H5A-SAFE-001.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<script src=\"https://cdn.example/app.js\"></script>",
+          "note": "Violates H5A-SAFE-001.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No runtime assets.</p>",
+          "note": "H5A-SAFE-001 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<iframe srcdoc=\"&lt;p&gt;Nested local markup&lt;/p&gt;\"></iframe>",
+          "note": "The source cannot resolve all evidence required by H5A-SAFE-001.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["Production CFF pages reference no remote runtime asset."],
+      "family": "SAFE",
+      "id": "H5A-SAFE-001",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Production CFF pages reference no remote runtime asset. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §3.1 and §9.5"
+        }
+      ],
+      "title": "No remote runtime dependency",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to no inline event handlers is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<button id=\"copy\">Copy</button>",
+          "note": "Meets H5A-SAFE-002.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<button onclick=\"copy()\">Copy</button>",
+          "note": "Violates H5A-SAFE-002.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No event-capable elements.</p>",
+          "note": "H5A-SAFE-002 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Inline event-handler attributes are absent."],
+      "family": "SAFE",
+      "id": "H5A-SAFE-002",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Inline event-handler attributes are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Event handler content attributes"
+        }
+      ],
+      "title": "No inline event handlers",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to safe new browsing contexts is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<a href=\"docs.html\" target=\"_blank\" rel=\"noopener\">Docs</a>",
+          "note": "Meets H5A-SAFE-003.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<a href=\"docs.html\" target=\"_blank\">Docs</a>",
+          "note": "Violates H5A-SAFE-003.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<a href=\"docs.html\">Docs</a>",
+          "note": "H5A-SAFE-003 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["target=_blank links include noopener or noreferrer."],
+      "family": "SAFE",
+      "id": "H5A-SAFE-003",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: target=_blank links include noopener or noreferrer. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "Links created by a and area elements"
+        }
+      ],
+      "title": "Safe new browsing contexts",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to declared local form actions is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<form action=\"/search\"><button>Search</button></form>",
+          "note": "Meets H5A-SAFE-004.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<form action=\"https://collector.example\"><button>Send</button></form>",
+          "note": "Violates H5A-SAFE-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No forms.</p>",
+          "note": "H5A-SAFE-004 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Form actions are local and permitted by policy."],
+      "family": "SAFE",
+      "id": "H5A-SAFE-004",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Form actions are local and permitted by policy. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.5"
+        }
+      ],
+      "title": "Declared local form actions",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to no tracking references is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<script src=\"assets/app.js\" defer></script>",
+          "note": "Meets H5A-SAFE-005.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<script src=\"analytics.js\"></script>",
+          "note": "Violates H5A-SAFE-005.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No scripts or tracking pixels.</p>",
+          "note": "H5A-SAFE-005 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": [
+        "Analytics, telemetry, fingerprinting, and advertising references are absent."
+      ],
+      "family": "SAFE",
+      "id": "H5A-SAFE-005",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Analytics, telemetry, fingerprinting, and advertising references are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.5"
+        }
+      ],
+      "title": "No tracking references",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to restrictive csp evidence is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'self'\">",
+          "note": "Meets H5A-SAFE-006.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src *\">",
+          "note": "Violates H5A-SAFE-006.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<p>Fragment does not declare deployment headers.</p>",
+          "note": "H5A-SAFE-006 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<!doctype html><html lang=\"en\"><title>Page</title></html>",
+          "note": "The source cannot resolve all evidence required by H5A-SAFE-006.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": [
+        "A supplied deployment manifest declares a restrictive Content-Security-Policy."
+      ],
+      "family": "SAFE",
+      "id": "H5A-SAFE-006",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: A supplied deployment manifest declares a restrictive Content-Security-Policy. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.5"
+        }
+      ],
+      "title": "Restrictive CSP evidence",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to shared page shell is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<header></header><nav aria-label=\"Primary\"></nav><main></main><footer></footer>",
+          "note": "Meets H5A-CFF-001.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<main>Only content</main>",
+          "note": "Violates H5A-CFF-001.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>Non-CFF fragment.</p>",
+          "note": "H5A-CFF-001 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["A CFF page has header, primary navigation, main, and footer."],
+      "family": "CFF",
+      "id": "H5A-CFF-001",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: A CFF page has header, primary navigation, main, and footer. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §11"
+        }
+      ],
+      "title": "Shared page shell",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to product identity terms is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<header>HTML5Assay · Version 0.1.0 · Specified · Static source evidence authority</header>",
+          "note": "Meets H5A-CFF-002.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<header>HTML5Assay</header>",
+          "note": "Violates H5A-CFF-002.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>Non-CFF fragment.</p>",
+          "note": "H5A-CFF-002 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["CFF identity exposes product name, version, status, and authority label."],
+      "family": "CFF",
+      "id": "H5A-CFF-002",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: CFF identity exposes product name, version, status, and authority label. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §11"
+        }
+      ],
+      "title": "Product identity terms",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to playground trust label is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "playground"
+          },
+          "html": "<main data-page-kind=\"playground\"><output>Pass</output><p>Preview only — non-authoritative</p></main>",
+          "note": "Meets H5A-CFF-003.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "playground"
+          },
+          "html": "<main data-page-kind=\"playground\"><output>Pass</output></main>",
+          "note": "Violates H5A-CFF-003.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<main data-page-kind=\"documentation\"></main>",
+          "note": "H5A-CFF-003 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": [
+        "A playground states Preview only — non-authoritative next to result status."
+      ],
+      "family": "CFF",
+      "id": "H5A-CFF-003",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: A playground states Preview only — non-authoritative next to result status. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §11.3"
+        }
+      ],
+      "title": "Playground trust label",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to result identity and counts is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "results"
+          },
+          "html": "<main><h1>Pass</h1><p>0 blocking · 0 advisory · 0 inconclusive</p><p>Policy: cff-web-strict</p><p>Evidence digest: sha-256</p></main>",
+          "note": "Meets H5A-CFF-004.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "results"
+          },
+          "html": "<main><h1>Pass</h1></main>",
+          "note": "Violates H5A-CFF-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<main>Overview</main>",
+          "note": "H5A-CFF-004 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": [
+        "A result page exposes verdict, three counts, policy, and evidence identity."
+      ],
+      "family": "CFF",
+      "id": "H5A-CFF-004",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: A result page exposes verdict, three counts, policy, and evidence identity. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §11.2"
+        }
+      ],
+      "title": "Result identity and counts",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to finding identity is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<article data-finding data-assay=\"html5assay\" data-rule-id=\"H5A-DOC-001\"></article>",
+          "note": "Meets H5A-CFF-005.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<article data-finding>Missing identity</article>",
+          "note": "Violates H5A-CFF-005.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No displayed findings.</p>",
+          "note": "H5A-CFF-005 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Every displayed finding identifies its assay and rule."],
+      "family": "CFF",
+      "id": "H5A-CFF-005",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Every displayed finding identifies its assay and rule. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §11.2"
+        }
+      ],
+      "title": "Finding identity",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to shared page states is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<section data-cff-state=\"empty\"><h2>No findings</h2></section>",
+          "note": "Meets H5A-CFF-006.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<div class=\"error\">Oops</div>",
+          "note": "Violates H5A-CFF-006.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>Content is available.</p>",
+          "note": "H5A-CFF-006 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Empty, loading, error, and unavailable content uses shared state markup."],
+      "family": "CFF",
+      "id": "H5A-CFF-006",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: Empty, loading, error, and unavailable content uses shared state markup. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.6 and §11.1"
+        }
+      ],
+      "title": "Shared page states",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to non-color status is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<strong data-status=\"Fail\"><span aria-hidden=\"true\">×</span> Fail</strong>",
+          "note": "Meets H5A-CFF-007.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<span class=\"fail-status red-dot\" aria-label=\"Fail\"></span>",
+          "note": "Violates H5A-CFF-007.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No status.</p>",
+          "note": "H5A-CFF-007 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["CFF status exposes exact status text and an icon or equivalent shape."],
+      "family": "CFF",
+      "id": "H5A-CFF-007",
+      "standards": [
+        {
+          "authority": "CFF web design contract",
+          "automationLimit": "This rule tests only this static expectation: CFF status exposes exact status text and an icon or equivalent shape. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §10.5 and §11.2"
+        }
+      ],
+      "title": "Non-color status",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to initial graph byte budget is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "context": {
+            "assets": {
+              "small.css": ""
+            }
+          },
+          "html": "<link rel=\"stylesheet\" href=\"small.css\">",
+          "note": "Meets H5A-PERF-001.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "assetSizes": {
+              "oversize.js": 800000
+            }
+          },
+          "html": "<script src=\"oversize.js\" defer></script>",
+          "note": "Violates H5A-PERF-001.",
+          "outcome": "failed"
+        },
+        {
+          "context": {
+            "fragment": {
+              "contextElement": "div"
+            }
+          },
+          "html": "<p>Fragment budget belongs to its host.</p>",
+          "note": "H5A-PERF-001 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Raw local initial graph bytes stay within the page-kind budget."],
+      "family": "PERF",
+      "id": "H5A-PERF-001",
+      "standards": [
+        {
+          "authority": "CFF web performance policy",
+          "automationLimit": "This rule tests only this static expectation: Raw local initial graph bytes stay within the page-kind budget. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.7"
+        }
+      ],
+      "title": "Initial graph byte budget",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to intrinsic image dimensions is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<img src=\"mark.png\" alt=\"\" width=\"40\" height=\"40\">",
+          "note": "Meets H5A-PERF-002.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<img src=\"mark.png\" alt=\"\">",
+          "note": "Violates H5A-PERF-002.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No images.</p>",
+          "note": "H5A-PERF-002 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": [
+        "Images declare intrinsic dimensions or have a provable stable aspect ratio."
+      ],
+      "family": "PERF",
+      "id": "H5A-PERF-002",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Images declare intrinsic dimensions or have a provable stable aspect ratio. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "The img element width and height attributes"
+        }
+      ],
+      "title": "Intrinsic image dimensions",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to appropriate lazy loading is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<img src=\"hero.png\" alt=\"Evidence overview\" fetchpriority=\"high\"><img src=\"detail.png\" alt=\"Detail\" loading=\"lazy\">",
+          "note": "Meets H5A-PERF-003.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<img src=\"hero.png\" alt=\"Evidence overview\" loading=\"lazy\">",
+          "note": "Violates H5A-PERF-003.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No images.</p>",
+          "note": "H5A-PERF-003 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<img src=\"hero.png\" alt=\"Hero\">",
+          "note": "The source cannot resolve all evidence required by H5A-PERF-003.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["Below-fold images may be lazy while likely principal images are eager."],
+      "family": "PERF",
+      "id": "H5A-PERF-003",
+      "standards": [
+        {
+          "authority": "CFF web performance policy",
+          "automationLimit": "This rule tests only this static expectation: Below-fold images may be lazy while likely principal images are eager. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.7"
+        }
+      ],
+      "title": "Appropriate lazy loading",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to local resilient fonts is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<style>body{font-family:system-ui,sans-serif}</style>",
+          "note": "Meets H5A-PERF-004.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<link rel=\"stylesheet\" href=\"https://fonts.example/font.css\">",
+          "note": "Violates H5A-PERF-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No custom font declaration.</p>",
+          "note": "H5A-PERF-004 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "html": "<style>body{font-family:Inter,system-ui,sans-serif}</style>",
+          "note": "The source cannot resolve all evidence required by H5A-PERF-004.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["Required fonts are local and include a system fallback."],
+      "family": "PERF",
+      "id": "H5A-PERF-004",
+      "standards": [
+        {
+          "authority": "CFF web performance policy",
+          "automationLimit": "This rule tests only this static expectation: Required fonts are local and include a system fallback. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "HTML5Assay 1.0 §9.7 and §10.15"
+        }
+      ],
+      "title": "Local resilient fonts",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to no audible autoplay is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "html": "<video autoplay muted src=\"demo.mp4\"></video>",
+          "note": "Meets H5A-PERF-005.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<audio autoplay src=\"intro.mp3\"></audio>",
+          "note": "Violates H5A-PERF-005.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No media.</p>",
+          "note": "H5A-PERF-005 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Audio and video do not autoplay with sound."],
+      "family": "PERF",
+      "id": "H5A-PERF-005",
+      "standards": [
+        {
+          "authority": "WCAG 2.2",
+          "automationLimit": "This rule tests only this static expectation: Audio and video do not autoplay with sound. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "1.4.2 Audio Control"
+        }
+      ],
+      "title": "No audible autoplay",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to non-blocking scripts is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "standard",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "html": "<script type=\"module\" src=\"app.js\"></script>",
+          "note": "Meets H5A-PERF-006.",
+          "outcome": "passed"
+        },
+        {
+          "html": "<script src=\"app.js\"></script>",
+          "note": "Violates H5A-PERF-006.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No scripts.</p>",
+          "note": "H5A-PERF-006 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Non-critical scripts use module or defer."],
+      "family": "PERF",
+      "id": "H5A-PERF-006",
+      "standards": [
+        {
+          "authority": "WHATWG HTML Living Standard",
+          "automationLimit": "This rule tests only this static expectation: Non-critical scripts use module or defer. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "The script element processing model"
+        }
+      ],
+      "title": "Non-blocking scripts",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to semantic theme tokens is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.card{color:var(--cf-text);background:var(--cf-surface)}</style>",
+          "note": "Meets H5A-THEME-001.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.card{color:#17202a;background:#fff}</style>",
+          "note": "Violates H5A-THEME-001.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>Non-CFF content without authored component CSS.</p>",
+          "note": "H5A-THEME-001 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["CFF component CSS uses semantic theme tokens instead of raw colors."],
+      "family": "THEME",
+      "id": "H5A-THEME-001",
+      "standards": [
+        {
+          "authority": "CFF Evidence theme contract",
+          "automationLimit": "This rule tests only this static expectation: CFF component CSS uses semantic theme tokens instead of raw colors. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "cff-evidence/1.0.0 semantic tokens"
+        }
+      ],
+      "title": "Semantic theme tokens",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to complete light and dark roles is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "assets": {
+              "theme.css": ":root{color-scheme:light dark;--cf-bg:#f7f9fb;--cf-surface:#ffffff;--cf-surface-raised:#eef3f8;--cf-glass:rgba(255, 255, 255, 0.86);--cf-text:#17202a;--cf-text-muted:#4f5d6b;--cf-outline:#667487;--cf-scrim:rgba(23, 32, 42, 0.36);--cf-primary:#005ea8;--cf-on-primary:#ffffff;--cf-primary-container:#d6eaff;--cf-on-primary-container:#002f52;--cf-secondary:#00696f;--cf-on-secondary:#ffffff;--cf-secondary-container:#c8f2f3;--cf-on-secondary-container:#003638;--cf-tertiary:#6546a3;--cf-on-tertiary:#ffffff;--cf-tertiary-container:#e9dfff;--cf-on-tertiary-container:#271451;--cf-pass:#176b3a;--cf-check:#7a4d00;--cf-fail:#b4232c;--cf-focus:#005fcc}@media(prefers-color-scheme:dark){:root{--cf-bg:#0b0f14;--cf-surface:#121922;--cf-surface-raised:#182231;--cf-glass:rgba(18, 25, 34, 0.84);--cf-text:#f2f6fa;--cf-text-muted:#b7c1cc;--cf-outline:#748398;--cf-scrim:rgba(0, 0, 0, 0.64);--cf-primary:#8fc7ff;--cf-on-primary:#002f52;--cf-primary-container:#0b3d68;--cf-on-primary-container:#d6ebff;--cf-secondary:#68d5d8;--cf-on-secondary:#003738;--cf-secondary-container:#114b4e;--cf-on-secondary-container:#c4f4f4;--cf-tertiary:#c8b7ff;--cf-on-tertiary:#30205f;--cf-tertiary-container:#45377a;--cf-on-tertiary-container:#e9e1ff;--cf-pass:#71d79c;--cf-check:#ffd166;--cf-fail:#ff8a95;--cf-focus:#ffbf47}}"
+            },
+            "pageKind": "overview"
+          },
+          "html": "<link rel=\"stylesheet\" href=\"theme.css\">",
+          "note": "Meets H5A-THEME-002.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>:root{--cf-bg:#fff}</style>",
+          "note": "Violates H5A-THEME-002.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>Non-CFF content.</p>",
+          "note": "H5A-THEME-002 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Light and dark themes declare all required semantic color roles."],
+      "family": "THEME",
+      "id": "H5A-THEME-002",
+      "standards": [
+        {
+          "authority": "CFF Evidence theme contract",
+          "automationLimit": "This rule tests only this static expectation: Light and dark themes declare all required semantic color roles. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "cff-evidence/1.0.0 light and dark roles"
+        }
+      ],
+      "title": "Complete light and dark roles",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to brand role responsibilities is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.policy{color:var(--cf-tertiary)}</style><aside class=\"policy\">Policy</aside>",
+          "note": "Meets H5A-THEME-003.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.fail-status{color:var(--cf-primary)}</style><strong class=\"fail-status\">Fail</strong>",
+          "note": "Violates H5A-THEME-003.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No brand-role styling.</p>",
+          "note": "H5A-THEME-003 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.unknown{color:var(--cf-primary)}</style>",
+          "note": "The source cannot resolve all evidence required by H5A-THEME-003.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["Primary, secondary, and tertiary colors remain in their platform roles."],
+      "family": "THEME",
+      "id": "H5A-THEME-003",
+      "standards": [
+        {
+          "authority": "CFF Evidence theme contract",
+          "automationLimit": "This rule tests only this static expectation: Primary, secondary, and tertiary colors remain in their platform roles. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "cff-evidence/1.0.0 brand roles"
+        }
+      ],
+      "title": "Brand role responsibilities",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to one primary action is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "advisory",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<section data-task-region><button data-action=\"primary\">Analyze</button><button>Clear</button></section>",
+          "note": "Meets H5A-THEME-004.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<section data-task-region><button data-action=\"primary\">Analyze</button><button data-action=\"primary\">Save</button></section>",
+          "note": "Violates H5A-THEME-004.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No task region.</p>",
+          "note": "H5A-THEME-004 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["One marked task region has no more than one filled primary action."],
+      "family": "THEME",
+      "id": "H5A-THEME-004",
+      "standards": [
+        {
+          "authority": "CFF Evidence theme contract",
+          "automationLimit": "This rule tests only this static expectation: One marked task region has no more than one filled primary action. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "cff-evidence/1.0.0 action hierarchy"
+        }
+      ],
+      "title": "One primary action",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to status colors reserved is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.pass{color:var(--cf-pass)}</style><strong class=\"pass\">Pass</strong>",
+          "note": "Meets H5A-THEME-005.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>header{border-color:var(--cf-pass)}</style><header>Brand</header>",
+          "note": "Violates H5A-THEME-005.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No status-token use.</p>",
+          "note": "H5A-THEME-005 does not apply.",
+          "outcome": "inapplicable"
+        }
+      ],
+      "expectations": ["Pass, check, and fail tokens are not used for brand decoration."],
+      "family": "THEME",
+      "id": "H5A-THEME-005",
+      "standards": [
+        {
+          "authority": "CFF Evidence theme contract",
+          "automationLimit": "This rule tests only this static expectation: Pass, check, and fail tokens are not used for brand decoration. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "cff-evidence/1.0.0 status palette"
+        }
+      ],
+      "title": "Status colors reserved",
+      "version": "1.0.0"
+    },
+    {
+      "applicability": "Applies when source evidence relevant to decorative brand gradient is present.",
+      "assumptions": [
+        "Only supplied bytes and local files inside the declared root are evidence.",
+        "No script, browser, network request, or computed layout is evaluated."
+      ],
+      "authority": "cff-policy",
+      "defaultLevel": "blocking",
+      "examples": [
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.cff-mark{background:var(--cf-brand-gradient)}</style><span class=\"cff-mark\" aria-hidden=\"true\"></span>",
+          "note": "Meets H5A-THEME-006.",
+          "outcome": "passed"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>button{background:var(--cf-brand-gradient)}</style><button>Analyze</button>",
+          "note": "Violates H5A-THEME-006.",
+          "outcome": "failed"
+        },
+        {
+          "html": "<p>No brand gradient.</p>",
+          "note": "H5A-THEME-006 does not apply.",
+          "outcome": "inapplicable"
+        },
+        {
+          "context": {
+            "pageKind": "overview"
+          },
+          "html": "<style>.banner{background:var(--cf-brand-gradient)}</style>",
+          "note": "The source cannot resolve all evidence required by H5A-THEME-006.",
+          "outcome": "cantTell"
+        }
+      ],
+      "expectations": ["The brand gradient never carries text, focus, control, or status meaning."],
+      "family": "THEME",
+      "id": "H5A-THEME-006",
+      "standards": [
+        {
+          "authority": "CFF Evidence theme contract",
+          "automationLimit": "This rule tests only this static expectation: The brand gradient never carries text, focus, control, or status meaning. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+          "reference": "cff-evidence/1.0.0 brand gradient"
+        }
+      ],
+      "title": "Decorative brand gradient",
+      "version": "1.0.0"
+    }
+  ],
+  "ruleset": {
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "50804eb9239746d2f991eee27e8c2eb7b3bfc7661765df94e14a6329803cb690"
+    },
+    "id": "html5assay-core",
+    "version": "1.0.0"
+  },
+  "standards": {
+    "authoritySetDigest": {
+      "algorithm": "sha-256",
+      "value": "a451a8cd888142bc32075b40bb27f2057f0143f1ff51dc5a3dad7165c4c92bff"
+    },
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "983a2c85c1ac96343d53beb5134064ec89501724fa650bb0acd9ebdae0b2234a"
+    },
+    "id": "html5assay-standards",
+    "reviewDate": "2026-08-19",
+    "version": "1.0.0"
+  }
+}

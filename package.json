@@ -1,0 +1,62 @@
+{
+  "name": "@canonflow/html5-assay",
+  "version": "0.1.0",
+  "description": "Offline-first deterministic HTML, CSS, and CFF web-contract assay",
+  "license": "Apache-2.0",
+  "private": false,
+  "type": "module",
+  "files": [
+    "dist/src",
+    "rules",
+    "policies",
+    "schemas",
+    "standards",
+    "theme",
+    "fixtures",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/src/api/index.d.ts",
+      "import": "./dist/src/api/index.js"
+    }
+  },
+  "bin": {
+    "html5assay": "dist/src/cli/index.js"
+  },
+  "engines": {
+    "node": "20.20.2",
+    "npm": "10.8.2"
+  },
+  "packageManager": "pnpm@10.34.5",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint src test",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
+    "generate:data": "pnpm run build && node scripts/generate-data.mjs",
+    "generate:goldens": "pnpm run build && node scripts/generate-goldens.mjs",
+    "generate:check": "node scripts/generate-data.mjs --check",
+    "goldens:check": "node scripts/generate-goldens.mjs --check",
+    "test": "pnpm run build && node --test dist/test/*.test.js",
+    "test:browser-harness": "node browser-harness/runner.mjs",
+    "test:package": "pnpm run build && node scripts/test-package.mjs",
+    "verify": "pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm test && pnpm run generate:check && pnpm run goldens:check && pnpm run test:package"
+  },
+  "dependencies": {
+    "parse5": "7.2.1",
+    "postcss": "8.5.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.17.0",
+    "@types/node": "22.10.5",
+    "ajv": "8.17.1",
+    "eslint": "9.17.0",
+    "prettier": "3.4.2",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.18.0"
+  }
+}

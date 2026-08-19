@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canonflow.dev/schemas/cff.assay.result.v1.json",
+  "title": "CFF assay result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assay",
+    "subject",
+    "policy",
+    "ruleset",
+    "verdict",
+    "counts",
+    "findings",
+    "evaluations",
+    "limits",
+    "toolFailures",
+    "receipt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "cff.assay.result.v1" },
+    "assay": { "$ref": "#/$defs/identity" },
+    "subject": { "$ref": "#/$defs/subject" },
+    "policy": { "$ref": "#/$defs/digestedIdentity" },
+    "ruleset": { "$ref": "#/$defs/digestedIdentity" },
+    "verdict": { "$ref": "#/$defs/verdict" },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blocking", "advisory", "inconclusive"],
+      "properties": {
+        "blocking": { "type": "integer", "minimum": 0 },
+        "advisory": { "type": "integer", "minimum": 0 },
+        "inconclusive": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "https://canonflow.dev/schemas/cff.assay.finding.v1.json" }
+    },
+    "evaluations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ruleId", "ruleVersion", "path", "outcome", "level", "findingCount"],
+        "properties": {
+          "ruleId": { "type": "string" },
+          "ruleVersion": { "type": "string" },
+          "path": { "type": "string" },
+          "outcome": { "enum": ["passed", "failed", "inapplicable", "cantTell", "untested"] },
+          "level": { "enum": ["blocking", "advisory"] },
+          "findingCount": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "limits": { "type": "array", "items": { "$ref": "#/$defs/limit" } },
+    "toolFailures": { "type": "array", "items": { "$ref": "#/$defs/toolFailure" } },
+    "receipt": { "$ref": "https://canonflow.dev/schemas/cff.assay.receipt.v1.json" }
+  },
+  "$defs": {
+    "verdict": { "enum": ["Pass", "Fail", "Inconclusive", "ToolFailure"] },
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": { "const": "sha-256" },
+        "value": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": { "id": { "type": "string" }, "version": { "type": "string" } }
+    },
+    "digestedIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "digest"],
+      "properties": {
+        "id": { "type": "string" },
+        "version": { "type": "string" },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root", "digest"],
+      "properties": { "root": { "const": "." }, "digest": { "$ref": "#/$defs/digest" } }
+    },
+    "limit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "limit", "observed"],
+      "properties": {
+        "id": { "type": "string" },
+        "limit": { "type": "integer", "minimum": 0 },
+        "observed": { "type": "integer", "minimum": 0 },
+        "path": { "type": "string" }
+      }
+    },
+    "toolFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "evidenceDigest"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^H5A-[A-Z0-9-]+$" },
+        "evidenceDigest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}
