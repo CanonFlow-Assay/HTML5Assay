@@ -1,5 +1,7 @@
 import { strict as assert } from 'node:assert';
 import { readdir, readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 
 interface ActionReview {
@@ -18,14 +20,25 @@ interface ReleaseRecord {
     readonly evidence: ReadonlyArray<{
       readonly locator: string;
       readonly candidateBound: boolean;
+      readonly state: 'available' | 'pending' | 'invalidated';
     }>;
-    readonly reviewer: { readonly requiredRole: string; readonly decision: string };
+    readonly reviewer: {
+      readonly requiredRole: string;
+      readonly identity: string | null;
+      readonly decision: 'pending' | 'accepted' | 'rejected';
+      readonly reviewedAt: string | null;
+    };
   }>;
 }
 
 const json = async <T>(path: string): Promise<T> => JSON.parse(await readFile(path, 'utf8')) as T;
 
 void test('release evidence maps every stable checklist gate to evidence and a reviewer', async () => {
+  const { releaseEvidenceConsistencyIssues } = (await import(
+    pathToFileURL(resolve('release-evidence/consistency.mjs')).href
+  )) as {
+    readonly releaseEvidenceConsistencyIssues: (record: unknown) => ReadonlyArray<string>;
+  };
   const checklist = await readFile('docs/release-checklist.md', 'utf8');
   const checklistIds = [...checklist.matchAll(/\*\*(RG-[0-9]{2})\*\*/gu)].map((match) => match[1]);
   const record = await json<ReleaseRecord>('release-evidence/0.1.0.json');
@@ -49,6 +62,76 @@ void test('release evidence maps every stable checklist gate to evidence and a r
       false
     );
   }
+  assert.deepEqual(releaseEvidenceConsistencyIssues(record), []);
+
+  const gate = record.items.at(0);
+  assert.ok(gate !== undefined);
+  const candidate = { gitCommit: 'a'.repeat(40), archiveSha256: 'b'.repeat(64) };
+  const availableEvidence = gate.evidence.map((entry) => ({
+    ...entry,
+    state: 'available' as const
+  }));
+  const invalidAccepted = {
+    ...record,
+    candidate,
+    items: [
+      {
+        ...gate,
+        status: 'accepted',
+        evidence: availableEvidence,
+        reviewer: { ...gate.reviewer, decision: 'accepted', identity: null, reviewedAt: null }
+      },
+      ...record.items.slice(1)
+    ]
+  };
+  const acceptedIssues = releaseEvidenceConsistencyIssues(invalidAccepted).join('; ');
+  assert.match(acceptedIssues, /reviewer identity/iu);
+  assert.match(acceptedIssues, /reviewedAt timestamp/iu);
+
+  const invalidRejected = {
+    ...record,
+    candidate,
+    items: [
+      {
+        ...gate,
+        status: 'rejected',
+        evidence: availableEvidence,
+        reviewer: {
+          ...gate.reviewer,
+          decision: 'accepted',
+          identity: 'reviewer@example.test',
+          reviewedAt: '2026-08-19T18:00:00.000Z'
+        }
+      },
+      ...record.items.slice(1)
+    ]
+  };
+  assert.match(
+    releaseEvidenceConsistencyIssues(invalidRejected).join('; '),
+    /requires rejected review/iu
+  );
+
+  const invalidInvalidated = {
+    ...record,
+    candidate,
+    items: [
+      { ...gate, status: 'invalidated', evidence: availableEvidence },
+      ...record.items.slice(1)
+    ]
+  };
+  assert.match(
+    releaseEvidenceConsistencyIssues(invalidInvalidated).join('; '),
+    /candidate-bound evidence to be invalidated/iu
+  );
+
+  const partialCandidate = {
+    ...record,
+    candidate: { gitCommit: 'a'.repeat(40), archiveSha256: null }
+  };
+  assert.match(
+    releaseEvidenceConsistencyIssues(partialCandidate).join('; '),
+    /must both be null or both be set/iu
+  );
 });
 
 void test('every GitHub Action is pinned to its reviewed full commit SHA', async () => {

@@ -25,7 +25,10 @@ The runner exercises Chromium, Firefox, and WebKit at 320, 768, 1024, and 1440
 CSS pixels in isolated default, 200%-text/half-width, reduced-motion, and
 forced-colors contexts. It also verifies complete keyboard traversal, visible
 focus, overflow, native dialog and popover behavior, and persisted-state
-recovery.
+recovery. Qualification evidence must contain exactly 51 unique matrix results:
+48 browser/viewport/mode results and one native-flow result for each browser.
+Both the runner and the independent evidence verifier reject missing,
+duplicated, or unexpected entries.
 
 ## Evidence
 

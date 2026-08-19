@@ -44,9 +44,10 @@
     "test": "pnpm run build && node --test dist/test",
     "browser:lock:check": "node browser-harness/runner.mjs --validate",
     "browser:evidence:verify": "node browser-harness/verify-evidence.mjs",
+    "release:evidence:check": "node release-evidence/verify.mjs release-evidence/0.1.0.json",
     "test:browser-harness": "node browser-harness/runner.mjs",
     "test:package": "pnpm run build && node scripts/test-package.mjs",
-    "verify": "pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm test && pnpm run generate:check && pnpm run goldens:check && pnpm run test:package"
+    "verify": "pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm test && pnpm run generate:check && pnpm run goldens:check && pnpm run release:evidence:check && pnpm run test:package"
   },
   "dependencies": {
     "parse5": "7.2.1",

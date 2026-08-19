@@ -2,10 +2,14 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import { digestEvidence } from './evidence.mjs';
+import { browserMatrixIssues } from './matrix.mjs';
 
 const input = process.argv[2];
 if (input === undefined) throw new Error('Usage: verify-evidence.mjs <browser-evidence.json>');
 const evidence = JSON.parse(await readFile(resolve(input), 'utf8'));
+const matrixIssues = browserMatrixIssues(evidence.results);
+if (matrixIssues.length > 0)
+  throw new Error(`Browser evidence matrix validation failed: ${matrixIssues.join('; ')}`);
 const schema = JSON.parse(
   await readFile(new URL('../schemas/browser-evidence.schema.json', import.meta.url), 'utf8')
 );

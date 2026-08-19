@@ -31,7 +31,7 @@
               "browserExecutables": { "type": "array", "minItems": 3, "maxItems": 3 }
             }
           },
-          "results": { "type": "array", "minItems": 1 },
+          "results": { "type": "array", "minItems": 51, "maxItems": 51 },
           "failures": { "type": "array", "maxItems": 0 }
         }
       },
@@ -135,7 +135,12 @@
     },
     "target": { "type": "string", "pattern": "^/" },
     "flowTarget": { "type": "string", "pattern": "^/" },
-    "results": { "type": "array", "items": { "type": "object" } },
+    "results": {
+      "type": "array",
+      "minItems": 51,
+      "maxItems": 51,
+      "items": { "type": "object" }
+    },
     "failures": {
       "type": "array",
       "items": {

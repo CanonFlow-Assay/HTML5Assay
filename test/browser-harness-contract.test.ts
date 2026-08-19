@@ -89,6 +89,15 @@ void test('browser evidence schema and digest bind the full qualification enviro
       readonly value: string;
     };
   };
+  const { expectedBrowserResults } = (await import(
+    pathToFileURL(resolve('browser-harness/matrix.mjs')).href
+  )) as {
+    readonly expectedBrowserResults: () => ReadonlyArray<{
+      readonly browser: string;
+      readonly width: number;
+      readonly mode: string;
+    }>;
+  };
   const lock = JSON.parse(await readFile('browser-harness/environment-lock.json', 'utf8')) as {
     readonly playwright: { readonly version: string };
     readonly browsers: ReadonlyArray<{
@@ -132,7 +141,7 @@ void test('browser evidence schema and digest bind the full qualification enviro
     },
     target: '/playground/index.html',
     flowTarget: '/browser-harness/qualification.html',
-    results: [{ browser: 'chromium', width: 320, mode: 'default' }],
+    results: expectedBrowserResults(),
     failures: [],
     result: 'Pass',
     humanApprovalRequired: true
@@ -162,6 +171,37 @@ void test('browser evidence schema and digest bind the full qualification enviro
       evidencePath
     ]);
     assert.match(verified.stdout, /browser evidence digest verified/u);
+
+    const completeResults = expectedBrowserResults();
+    const firstResult = completeResults.at(0);
+    assert.ok(firstResult !== undefined);
+    const invalidMatrices = [
+      { name: 'missing', results: completeResults.slice(1) },
+      {
+        name: 'duplicate',
+        results: [...completeResults.slice(0, -1), firstResult]
+      },
+      {
+        name: 'unexpected',
+        results: [
+          ...completeResults.slice(0, -1),
+          { browser: 'chromium', width: 999, mode: 'default' }
+        ]
+      }
+    ];
+    for (const invalid of invalidMatrices) {
+      const invalidPayload = { ...payload, results: invalid.results };
+      const invalidEvidence = {
+        ...invalidPayload,
+        evidenceDigest: digestEvidence(invalidPayload)
+      };
+      const invalidPath = join(root, `${invalid.name}.json`);
+      await writeFile(invalidPath, `${JSON.stringify(invalidEvidence)}\n`);
+      await assert.rejects(
+        execute(process.execPath, ['browser-harness/verify-evidence.mjs', invalidPath]),
+        /Browser evidence matrix validation failed/u
+      );
+    }
   } finally {
     await rm(root, { recursive: true, force: true });
   }

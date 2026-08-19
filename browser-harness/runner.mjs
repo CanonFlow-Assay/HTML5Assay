@@ -5,6 +5,7 @@ import { arch, platform, release } from 'node:os';
 import { extname, relative, resolve, sep } from 'node:path';
 import { digestEvidence } from './evidence.mjs';
 import { loadLockedBrowserEnvironment } from './environment.mjs';
+import { browserMatrixIssues } from './matrix.mjs';
 
 const repositoryRoot = resolve(import.meta.dirname, '..');
 const config = JSON.parse(await readFile(new URL('./config.json', import.meta.url), 'utf8'));
@@ -468,6 +469,8 @@ try {
     message: error instanceof Error ? error.message : String(error)
   });
 } finally {
+  for (const issue of browserMatrixIssues(evidence.results))
+    assertion(false, 'harness/matrix', issue);
   evidence.executionTime.finishedAt = new Date().toISOString();
   evidence.executionTime.durationMilliseconds = Date.now() - startedMilliseconds;
   evidence.result = evidence.failures.length === 0 ? 'Pass' : 'Fail';

@@ -12,6 +12,20 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["gitCommit", "archiveSha256"],
+      "oneOf": [
+        {
+          "properties": {
+            "gitCommit": { "type": "null" },
+            "archiveSha256": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "gitCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            "archiveSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      ],
       "properties": {
         "gitCommit": {
           "anyOf": [{ "type": "null" }, { "type": "string", "pattern": "^[0-9a-f]{40}$" }]
@@ -56,7 +70,9 @@
             "required": ["requiredRole", "identity", "decision", "reviewedAt"],
             "properties": {
               "requiredRole": { "type": "string", "minLength": 1 },
-              "identity": { "type": ["string", "null"] },
+              "identity": {
+                "anyOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }]
+              },
               "decision": { "enum": ["pending", "accepted", "rejected"] },
               "reviewedAt": {
                 "anyOf": [{ "type": "null" }, { "type": "string", "format": "date-time" }]
