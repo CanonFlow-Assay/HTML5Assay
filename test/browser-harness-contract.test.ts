@@ -48,6 +48,8 @@ void test('separate browser harness declares the complete network-blocked qualif
   assert.equal(config.humanApprovalRequired, true);
   const runner = await readFile('browser-harness/runner.mjs', 'utf8');
   const qualification = await readFile('browser-harness/qualification.html', 'utf8');
+  const zoomStyles = await readFile('browser-harness/zoom-200.css', 'utf8');
+  const playgroundStyles = await readFile('playground/playground.css', 'utf8');
   for (const mode of ['default', 'zoom-200', 'reduced-motion', 'forced-colors', 'native-flows'])
     assert.match(runner, new RegExp(`mode: ["']${mode}["']`, 'u'));
   assert.match(runner, /process\.exitCode\s*=\s*1/u);
@@ -55,6 +57,14 @@ void test('separate browser harness declares the complete network-blocked qualif
   assert.equal(runner.match(/browser\.newContext\(/gu)?.length, 1);
   assert.match(runner, /serviceWorkers:\s*['"]block['"]/u);
   assert.match(runner, /probeHostNetworkDenial/u);
+  assert.equal(runner.includes('page.addStyleTag'), false);
+  assert.match(runner, /browser-harness\/zoom-200\.css/u);
+  assert.match(runner, /focusable\.indexOf\(active\)/u);
+  assert.match(runner, /overflowingElements/u);
+  assert.match(zoomStyles, /html\s*\{\s*font-size:\s*200%\s*!important;/u);
+  assert.match(playgroundStyles, /grid-template-columns:\s*minmax\(0, 1fr\)/u);
+  assert.match(playgroundStyles, /overflow-x:\s*clip/u);
+  assert.doesNotMatch(playgroundStyles, /min-width:\s*20rem/u);
   for (const field of [
     'gitCommit',
     'archiveSha256',

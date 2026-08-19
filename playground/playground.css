@@ -16,7 +16,8 @@ html {
 
 body {
   margin: 0;
-  min-width: 20rem;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -50,7 +51,7 @@ a:hover {
 .shell {
   margin-inline: auto;
   max-width: 80rem;
-  padding-inline: clamp(var(--cf-space-4), 4vw, var(--cf-space-8));
+  padding-inline: clamp(var(--cf-space-1), 4vw, var(--cf-space-8));
 }
 
 .product-header {
@@ -73,6 +74,13 @@ a:hover {
   justify-content: space-between;
 }
 
+.header-content > *,
+.footer-content > *,
+.panel-heading > *,
+.result-heading > * {
+  min-inline-size: 0;
+}
+
 .header-content {
   min-height: 5rem;
 }
@@ -81,6 +89,7 @@ a:hover {
   color: var(--cf-text);
   font-size: 1.1rem;
   font-weight: 750;
+  overflow-wrap: anywhere;
   text-decoration: none;
 }
 
@@ -152,7 +161,7 @@ main.shell {
   border: var(--cf-border-width) solid var(--cf-outline);
   border-radius: var(--cf-radius-large);
   min-width: 0;
-  padding: clamp(var(--cf-space-4), 3vw, var(--cf-space-6));
+  padding: clamp(var(--cf-space-2), 3vw, var(--cf-space-6));
 }
 
 .panel h2,
@@ -181,13 +190,29 @@ main.shell {
 .control-grid {
   display: grid;
   gap: var(--cf-space-2);
+  grid-template-columns: minmax(0, 1fr);
   margin-block: var(--cf-space-4);
+  min-inline-size: 0;
+  overflow-x: clip;
+  overflow-clip-margin: var(--cf-space-2);
 }
 
 .control-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: var(--cf-space-3);
+  grid-template-columns: minmax(0, 1fr);
+  min-inline-size: 0;
+  overflow-x: clip;
+  overflow-clip-margin: var(--cf-space-2);
+}
+
+.control-row > * {
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.control-row :where(button, select) {
+  inline-size: 100%;
 }
 
 label {
@@ -202,16 +227,27 @@ textarea {
   border-radius: var(--cf-radius-small);
   color: var(--cf-text);
   font: inherit;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
 }
 
 button,
 select {
+  max-inline-size: 100%;
   min-height: 2.75rem;
   padding: var(--cf-space-2) var(--cf-space-4);
 }
 
 select {
+  contain: inline-size;
+  inline-size: 100%;
   max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+button {
+  white-space: normal;
 }
 
 textarea {
@@ -259,9 +295,14 @@ code {
   border: var(--cf-border-width) solid var(--cf-outline);
   border-radius: var(--cf-radius-medium);
   display: flex;
+  flex-wrap: wrap;
   gap: var(--cf-space-4);
   margin-block: var(--cf-space-4);
   padding: var(--cf-space-4);
+}
+
+.verdict-card > * {
+  min-inline-size: 0;
 }
 
 .verdict-icon {

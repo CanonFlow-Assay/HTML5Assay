@@ -184,9 +184,18 @@ const keyboardEvidence = async (page) => {
   for (let index = 0; index < expected; index += 1) {
     await page.keyboard.press('Tab');
     sequence.push(
-      await page.evaluate(() => {
+      await page.evaluate((focusableSelector) => {
         const active = document.activeElement;
         const style = active === null ? null : getComputedStyle(active);
+        const focusable = [...document.querySelectorAll(focusableSelector)].filter((candidate) => {
+          const candidateStyle = getComputedStyle(candidate);
+          return (
+            candidateStyle.display !== 'none' &&
+            candidateStyle.visibility !== 'hidden' &&
+            !candidate.hidden
+          );
+        });
+        const focusIndex = active === null ? -1 : focusable.indexOf(active);
         const outline =
           style !== null &&
           style.outlineStyle !== 'none' &&
@@ -195,22 +204,51 @@ const keyboardEvidence = async (page) => {
           key:
             active === null
               ? '(none)'
-              : `${active.tagName.toLowerCase()}#${active.id || active.getAttribute('href') || active.getAttribute('name') || ''}`,
+              : `${String(focusIndex)}:${active.tagName.toLowerCase()}#${active.id || active.getAttribute('href') || active.getAttribute('name') || ''}`,
           focusVisible: active?.matches(':focus-visible') === true,
           indicator: outline || (style !== null && style.boxShadow !== 'none')
         };
-      })
+      }, selector)
     );
   }
   return { expected, sequence };
 };
 
 const overflowEvidence = (page) =>
-  page.evaluate(() => ({
-    fits: document.documentElement.scrollWidth <= document.documentElement.clientWidth,
-    scrollWidth: document.documentElement.scrollWidth,
-    clientWidth: document.documentElement.clientWidth
-  }));
+  page.evaluate(() => {
+    const clientWidth = document.documentElement.clientWidth;
+    const overflowingElements = [...document.querySelectorAll('body *')]
+      .map((element) => {
+        const bounds = element.getBoundingClientRect();
+        return {
+          element: `${element.tagName.toLowerCase()}${element.id === '' ? '' : `#${element.id}`}${
+            element.classList.length === 0 ? '' : `.${[...element.classList].join('.')}`
+          }`,
+          left: bounds.left,
+          right: bounds.right,
+          width: bounds.width
+        };
+      })
+      .filter((item) => item.left < -0.5 || item.right > clientWidth + 0.5)
+      .slice(0, 20);
+    const internallyOverflowingElements = [document.body, ...document.querySelectorAll('body *')]
+      .filter((element) => element.scrollWidth > element.clientWidth + 0.5)
+      .map((element) => ({
+        element: `${element.tagName.toLowerCase()}${element.id === '' ? '' : `#${element.id}`}${
+          element.classList.length === 0 ? '' : `.${[...element.classList].join('.')}`
+        }`,
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth
+      }))
+      .slice(0, 20);
+    return {
+      fits: document.documentElement.scrollWidth <= clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth,
+      overflowingElements,
+      internallyOverflowingElements
+    };
+  });
 
 const runDefaultMode = async (browser, browserName, width) => {
   const scope = `${browserName}/${width}/default`;
@@ -255,7 +293,20 @@ const runZoomMode = async (browser, browserName, width) => {
     const before = await page.evaluate(() =>
       Number.parseFloat(getComputedStyle(document.body).fontSize)
     );
-    await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
+    await page.evaluate(
+      (href) =>
+        new Promise((resolveLink, rejectLink) => {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          link.addEventListener('load', resolveLink, { once: true });
+          link.addEventListener('error', () => rejectLink(new Error('zoom stylesheet failed')), {
+            once: true
+          });
+          document.head.append(link);
+        }),
+      `${origin}/browser-harness/zoom-200.css`
+    );
     const after = await page.evaluate(() =>
       Number.parseFloat(getComputedStyle(document.body).fontSize)
     );
