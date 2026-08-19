@@ -41,7 +41,7 @@
     "generate:goldens": "pnpm run build && node scripts/generate-goldens.mjs",
     "generate:check": "node scripts/generate-data.mjs --check",
     "goldens:check": "node scripts/generate-goldens.mjs --check",
-    "test": "pnpm run build && node --test dist/test/*.test.js",
+    "test": "pnpm run build && node --test dist/test",
     "test:browser-harness": "node browser-harness/runner.mjs",
     "test:package": "pnpm run build && node scripts/test-package.mjs",
     "verify": "pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm test && pnpm run generate:check && pnpm run goldens:check && pnpm run test:package"
