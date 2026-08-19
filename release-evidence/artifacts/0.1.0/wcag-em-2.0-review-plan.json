@@ -1,6 +1,7 @@
 {
   "schemaVersion": "html5assay.wcag-em-2.0-review-plan.v1",
   "createdAt": "2026-08-19T19:24:10Z",
+  "clarifiedAt": "2026-08-19T19:43:40Z",
   "status": "pending-human-execution",
   "candidate": {
     "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
@@ -21,7 +22,8 @@
   },
   "scope": {
     "target": "HTML5Assay 0.1.0 candidate web and terminal interfaces",
-    "conformanceTarget": "WCAG 2.2 Level AA",
+    "webConformanceTarget": "WCAG 2.2 Level AA",
+    "cliEvaluationRequirement": "CLI accessibility is an additional evaluation requirement and is not included in the WCAG conformance statement for the web interfaces.",
     "included": [
       "Bundled playground initial state and safe/unsafe specimen analysis flows",
       "Keyboard-only traversal, visible focus, status communication, errors, and state recovery",
@@ -54,6 +56,12 @@
       "states": ["help", "Pass", "Fail", "Inconclusive", "ToolFailure"]
     }
   ],
+  "samplingDecision": {
+    "approach": "complete-enumeration",
+    "rationale": "The product has a small, fully enumerated web scope. The evaluator must inspect every in-scope web view and every listed state, so random sampling is unnecessary.",
+    "randomSampleRequired": false,
+    "changeControl": "If the in-scope web views or states expand before execution, revise and review this plan to define the additional complete scope or a required random sample before human testing begins."
+  },
   "requiredReviewers": {
     "accessibilityLead": {
       "identity": null,
@@ -93,7 +101,8 @@
     "explored views, functionality, technologies, and accessibility features",
     "structured sample, any random sample, and selection rationale",
     "exact operating system, browser, assistive technology, terminal, and versions",
-    "test procedure and result for every applicable WCAG 2.2 Level A and AA success criterion",
+    "test procedure and result for every applicable WCAG 2.2 Level A and AA success criterion for the web interfaces",
+    "separate CLI accessibility observations that are not used in the web WCAG conformance statement",
     "keyboard, focus, zoom, reflow, forced-colors, reduced-motion, live-region, dialog, popover, and recovery observations",
     "issue location, reproducible steps, impact, affected users, severity, and evidence",
     "conformance finding, limitations, exceptions, and unresolved questions",

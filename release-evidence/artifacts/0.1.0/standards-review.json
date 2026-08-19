@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "html5assay.standards-review.v1",
+  "reviewer": {
+    "identity": "Hume — independent standards reviewer (LLM judge)",
+    "role": "standards reviewer",
+    "reviewedAt": "2026-08-19T19:48:16Z"
+  },
+  "reviewedEvidenceHead": "0c265057baaa8871e756cce62b42e26655223816",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+    "archiveRehashUnchanged": true
+  },
+  "gate": {
+    "id": "RG-11",
+    "decision": "accepted",
+    "evidence": [
+      "standards/standards-snapshot.json",
+      "standards/README.md",
+      "rules/catalog.json",
+      "src/rules/catalog.ts",
+      "docs/standards-and-limits.md",
+      "schemas/result.schema.json",
+      "test/standards-binding.test.ts",
+      "test/independent-api.test.ts",
+      "source-design:HTML5ASSAY_DESIGN-1.md"
+    ]
+  },
+  "checks": {
+    "authorityRecords": 9,
+    "projectNormativeAuthorities": 8,
+    "nonNormativeResearchAuthorities": 1,
+    "rules": 58,
+    "uniqueRuleIds": 58,
+    "standardsMappings": 58,
+    "standardMappings": 32,
+    "cffPolicyMappings": 26,
+    "nonemptyAuthorityReferenceAndLimit": 58,
+    "uniqueAutomationLimits": 58,
+    "rulesWithDeterminateExamples": 58,
+    "rulesWithCantTellExamples": 19,
+    "generatedDataDriftCheckPassed": true,
+    "focusedStandardsTestsPassed": true,
+    "candidateAndEvidenceHeadStandardsBytesIdentical": true
+  },
+  "mappingDistribution": {
+    "WCAG 2.2": 20,
+    "WHATWG HTML": 9,
+    "ARIA in HTML": 2,
+    "WAI-ARIA 1.2": 1,
+    "CSS Color Adjustment Level 1": 1,
+    "CFF web design": 16,
+    "CFF Evidence theme": 6,
+    "CFF performance": 3
+  },
+  "digests": {
+    "authoritySetSha256": "a451a8cd888142bc32075b40bb27f2057f0143f1ff51dc5a3dad7165c4c92bff",
+    "standardsSnapshotSha256": "983a2c85c1ac96343d53beb5134064ec89501724fa650bb0acd9ebdae0b2234a",
+    "rulesetSha256": "50804eb9239746d2f991eee27e8c2eb7b3bfc7661765df94e14a6329803cb690"
+  },
+  "limitations": [
+    "WHATWG HTML, ARIA in HTML, and some W3C TR locators are moving publication URLs; runtime behavior remains pinned to the digest-bound local rule metadata and performs no standards fetch.",
+    "CSS Color Adjustment Level 1 is a Candidate Recommendation Snapshot, not a W3C Recommendation.",
+    "The SARIF snapshot does not separately identify OASIS approved Errata 01.",
+    "Mappings establish relevance and explicit static limits, not full success-criterion conformance; WCAG and assistive-technology judgments remain human-review gates.",
+    "This review grants only RG-11 and does not approve merge, publication, accessibility, waiver, signing, or promotion."
+  ],
+  "result": "accepted"
+}

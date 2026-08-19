@@ -35,8 +35,9 @@
   },
   "catalogueEvidence": {
     "rules": 58,
-    "determinateExamples": 193,
+    "determinateExamples": 174,
     "cantTellExamples": 19,
+    "catalogueExamplesTotal": 193,
     "determinateExamplesPassed": true,
     "cantTellCoverageComplete": true
   },

@@ -10,39 +10,57 @@
     {
       "id": "RG-01",
       "requirement": "Bind exact candidate commit and archive digest.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "candidate-identity",
           "locator": "release-evidence/0.1.0.json#/candidate",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "candidate-retention-record",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-retention.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "release-manager-review",
+          "locator": "release-evidence/artifacts/0.1.0/release-manager-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "release manager",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "OpenAI Codex release manager (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:10Z"
       }
     },
     {
       "id": "RG-02",
       "requirement": "Invalidate affected evidence after candidate changes.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "policy",
           "locator": "release-evidence/README.md",
           "state": "available",
           "candidateBound": false
+        },
+        {
+          "kind": "release-manager-review",
+          "locator": "release-evidence/artifacts/0.1.0/release-manager-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "release manager",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "OpenAI Codex release manager (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:10Z"
       }
     },
     {
@@ -248,20 +266,26 @@
     {
       "id": "RG-11",
       "requirement": "Review standards automation limits.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "standards-record",
           "locator": "standards/standards-snapshot.json",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "standards-review",
+          "locator": "release-evidence/artifacts/0.1.0/standards-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "standards reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Hume — independent standards reviewer (LLM judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:48:16Z"
       }
     },
     {
@@ -317,26 +341,32 @@
     {
       "id": "RG-14",
       "requirement": "Pass theme token and contrast checks.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "test/independent-playground.test.ts",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "accessibility-review",
+          "locator": "release-evidence/artifacts/0.1.0/accessibility-automated-evidence-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "accessibility reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Tesla (Codex accessibility reviewer, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:27Z"
       }
     },
     {
       "id": "RG-15",
       "requirement": "Pass the network-denied locked browser matrix.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "qualification-record",
@@ -361,13 +391,19 @@
           "locator": "github-actions-artifact:9379867515/html5assay-browser-evidence/browser-evidence.json",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "accessibility-review",
+          "locator": "release-evidence/artifacts/0.1.0/accessibility-automated-evidence-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "accessibility reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "Tesla (Codex accessibility reviewer, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:27Z"
       }
     },
     {
@@ -398,20 +434,26 @@
     {
       "id": "RG-17",
       "requirement": "Review playground specimens and trust label.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "automated-test",
           "locator": "test/independent-playground.test.ts",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "product-review",
+          "locator": "release-evidence/artifacts/0.1.0/product-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "product reviewer",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "OpenAI Codex product reviewer (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:47:20Z"
       }
     },
     {
@@ -467,7 +509,7 @@
     {
       "id": "RG-20",
       "requirement": "Obtain independent tester and judge review.",
-      "status": "pending",
+      "status": "accepted",
       "evidence": [
         {
           "kind": "independent-review",
@@ -480,13 +522,19 @@
           "locator": "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json",
           "state": "available",
           "candidateBound": true
+        },
+        {
+          "kind": "release-manager-review",
+          "locator": "release-evidence/artifacts/0.1.0/release-manager-review.json",
+          "state": "available",
+          "candidateBound": true
         }
       ],
       "reviewer": {
         "requiredRole": "release manager",
-        "identity": null,
-        "decision": "pending",
-        "reviewedAt": null
+        "identity": "OpenAI Codex release manager (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:10Z"
       }
     },
     {

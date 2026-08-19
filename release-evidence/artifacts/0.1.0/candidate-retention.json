@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "html5assay.candidate-retention.v1",
+  "recordedAt": "2026-08-19T19:44:33Z",
+  "status": "pending-approved-restricted-store",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveFilename": "canonflow-html5-assay-0.1.0.tgz",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "githubArtifact": {
+    "id": 9379867515,
+    "name": "accepted-candidate-browser-evidence-865f8fca014637eaea3527b5d2c89f27626316c1",
+    "url": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489/artifacts/9379867515",
+    "zipSha256": "0c0adef915c93852d94930872dc53dfcc5f5ce2aa940823595e66f84f1288160",
+    "expiresAt": "2026-11-17T19:15:29Z",
+    "expired": false
+  },
+  "browserEvidence": {
+    "fileSha256": "f1d016d8230d13fc4e23afbc4d2776a1433f3de458fc2dd26b8c1d87e5a2d277",
+    "canonicalDigest": "b1f2c49f93d9edb201088fcec37f18b222e1529e8c703dea791b2d11e26c34c7"
+  },
+  "localProtection": {
+    "archiveCopyPresent": true,
+    "archiveMode": "0444",
+    "containingDirectoriesMode": "0555",
+    "archiveRehashAtRecordTime": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+    "durableRestrictedStore": false
+  },
+  "rehashes": [
+    {
+      "stage": "before-record-review-gates",
+      "recordedAt": "2026-08-19T19:44:33Z",
+      "candidateArchiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+      "browserEvidenceFileSha256": "f1d016d8230d13fc4e23afbc4d2776a1433f3de458fc2dd26b8c1d87e5a2d277"
+    },
+    {
+      "stage": "after-record-review-gates",
+      "recordedAt": "2026-08-19T19:49:46Z",
+      "candidateArchiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+      "browserEvidenceFileSha256": "f1d016d8230d13fc4e23afbc4d2776a1433f3de458fc2dd26b8c1d87e5a2d277"
+    }
+  ],
+  "approvedRestrictedStore": {
+    "locator": null,
+    "storedAt": null,
+    "artifactZipSha256AfterStorage": null,
+    "candidateArchiveSha256AfterStorage": null,
+    "verifiedBy": null
+  },
+  "handlingRules": [
+    "Store the unchanged GitHub artifact ZIP and its contained candidate archive in the approved restricted release store before GitHub artifact expiry.",
+    "Do not repack, rebuild, rename internally, or replace either retained object.",
+    "Rehash the candidate archive before and after every external review.",
+    "Do not treat the current local read-only copy as the approved durable restricted store."
+  ],
+  "blocker": "No approved restricted release-store locator or credential is defined in the repository or current environment."
+}
