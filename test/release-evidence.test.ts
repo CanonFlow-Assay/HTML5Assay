@@ -229,7 +229,11 @@ void test('browser workflow uses the reviewed immutable container with host netw
   assert.match(workflow, /pnpm pack --pack-destination "\$candidate_dir"/gu);
   assert.match(workflow, /package\/dist\/src\/api\/index\.js/gu);
   assert.match(workflow, /package\/dist\/src\/cli\/index\.js/gu);
-  assert.match(workflow, /pnpm install --offline --ignore-scripts/gu);
+  assert.match(workflow, /pnpm install --ignore-scripts --no-frozen-lockfile/gu);
+  assert.match(
+    workflow,
+    /rm -rf node_modules\n\s+npm_config_offline=true pnpm install --offline --ignore-scripts --frozen-lockfile/gu
+  );
   assert.match(workflow, /--read-only/gu);
   assert.match(workflow, /target=\/work,readonly/gu);
   assert.match(workflow, /target=\/candidate,readonly/gu);

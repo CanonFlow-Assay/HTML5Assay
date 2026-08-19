@@ -125,7 +125,9 @@ jobs:
           '
           (
             cd "$consumer_dir"
-            npm_config_offline=true pnpm install --offline --ignore-scripts --no-frozen-lockfile
+            pnpm install --ignore-scripts --no-frozen-lockfile
+            rm -rf node_modules
+            npm_config_offline=true pnpm install --offline --ignore-scripts --frozen-lockfile
             node --input-type=module -e '
               import { analyze, ruleCatalog } from "@canonflow/html5-assay";
               const result = await analyze({ root: ".", entries: ["index.html"], policy: { id: "cff-web-strict" } });
