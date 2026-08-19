@@ -3,7 +3,10 @@ import { access, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:f
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
-const command = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
+const packageManagerEntrypoint = process.env.npm_execpath;
+if (packageManagerEntrypoint === undefined || !/pnpm(?:\.c?js)?$/u.test(packageManagerEntrypoint)) {
+  throw new Error('Package qualification must run through the repository-pinned pnpm toolchain');
+}
 const run = (args, cwd, { offline = true } = {}) =>
   new Promise((resolveRun, reject) => {
     const environment = {
@@ -12,16 +15,14 @@ const run = (args, cwd, { offline = true } = {}) =>
     };
     if (offline) environment.npm_config_offline = 'true';
     else delete environment.npm_config_offline;
-    const child = spawn(command, args, {
+    const child = spawn(process.execPath, [packageManagerEntrypoint, ...args], {
       cwd,
       env: environment,
       stdio: 'inherit'
     });
     child.once('error', reject);
     child.once('exit', (code) =>
-      code === 0
-        ? resolveRun()
-        : reject(new Error(`${command} ${args.join(' ')} exited ${String(code)}`))
+      code === 0 ? resolveRun() : reject(new Error(`pnpm ${args.join(' ')} exited ${String(code)}`))
     );
   });
 
