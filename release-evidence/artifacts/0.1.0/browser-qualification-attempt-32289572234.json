@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "html5assay.browser-qualification-attempt.v1",
+  "recordedAt": "2026-08-19T18:50:56Z",
+  "candidateCommit": "b6b47dacfc38dcc5439603a875539084cdb38f0b",
+  "workflowRun": {
+    "id": 32289572234,
+    "url": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32289572234",
+    "conclusion": "failure"
+  },
+  "failedStage": "disposable-offline-package-install",
+  "finding": "The disposable consumer attempted its frozen offline installation before its exact lockfile and package metadata had been seeded.",
+  "diagnosticsArtifact": {
+    "id": 9378942951,
+    "name": "browser-qualification-diagnostics-b6b47dacfc38dcc5439603a875539084cdb38f0b"
+  },
+  "acceptedCandidateArtifactUploaded": false,
+  "candidateArchiveRetained": false,
+  "browserMatrixExecuted": false,
+  "automaticRetryPermitted": false,
+  "requiredRecovery": "Correct the dispatcher, pass fresh three-operating-system CI, and repeat exact-head pre-candidate security review before generating another archive."
+}

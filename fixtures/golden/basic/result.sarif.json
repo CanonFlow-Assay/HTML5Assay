@@ -1,0 +1,1297 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "charLength": 0,
+                  "charOffset": 0,
+                  "endColumn": 1,
+                  "endLine": 1,
+                  "startColumn": 1,
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "No deployment-header evidence was supplied."
+          },
+          "partialFingerprints": {
+            "evidenceDigest": "eca645ae65be14a107c86df1c83b7dd0b21ce3989b29c2157d30eddb50e3e0ef"
+          },
+          "properties": {
+            "authority": "cff-policy",
+            "certainty": "contextual",
+            "expected": "A supplied deployment manifest declares a restrictive Content-Security-Policy.",
+            "observed": "deploymentHeaders missing",
+            "outcome": "cantTell",
+            "remediation": "Change the source to meet H5A-SAFE-006; then rerun HTML5Assay.",
+            "ruleVersion": "1.0.0",
+            "standards": [
+              {
+                "authority": "CFF web design contract",
+                "automationLimit": "This rule tests only this static expectation: A supplied deployment manifest declares a restrictive Content-Security-Policy. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                "reference": "HTML5Assay 1.0 §9.5"
+              }
+            ]
+          },
+          "ruleId": "H5A-SAFE-006"
+        },
+        {
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "charLength": 50,
+                  "charOffset": 214,
+                  "endColumn": 57,
+                  "endLine": 10,
+                  "startColumn": 7,
+                  "startLine": 10
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Rendered 24 CSS-pixel target size and spacing cannot be proven for every target."
+          },
+          "partialFingerprints": {
+            "evidenceDigest": "9f1af9c42adeb98af9d064c268133d39f58ec18b63df60a57a65fe3d5bc1d246"
+          },
+          "properties": {
+            "authority": "standard",
+            "certainty": "contextual",
+            "expected": "Essential controls meet 24 by 24 CSS pixels or a defined spacing exception.",
+            "observed": "1 control(s) without a per-target size or spacing exception",
+            "outcome": "cantTell",
+            "remediation": "Change the source to meet H5A-CSS-005; then rerun HTML5Assay.",
+            "ruleVersion": "1.0.0",
+            "standards": [
+              {
+                "authority": "WCAG 2.2",
+                "automationLimit": "This rule tests only this static expectation: Essential controls meet 24 by 24 CSS pixels or a defined spacing exception. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                "reference": "2.5.8 Target Size (Minimum)"
+              }
+            ]
+          },
+          "ruleId": "H5A-CSS-005"
+        },
+        {
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "charLength": 50,
+                  "charOffset": 214,
+                  "endColumn": 57,
+                  "endLine": 10,
+                  "startColumn": 7,
+                  "startLine": 10
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "The element content model is not fully decidable by this source-only table."
+          },
+          "partialFingerprints": {
+            "evidenceDigest": "0ac684da1ff4560f61ac9ce0bbe8065516dc2bf58a001f537d4eb5868daab597"
+          },
+          "properties": {
+            "authority": "standard",
+            "certainty": "contextual",
+            "expected": "Parsed elements and attributes have no statically provable conformance error.",
+            "observed": "<button>",
+            "outcome": "cantTell",
+            "remediation": "Change the source to meet H5A-DOC-005; then rerun HTML5Assay.",
+            "ruleVersion": "1.0.0",
+            "standards": [
+              {
+                "authority": "WHATWG HTML Living Standard",
+                "automationLimit": "This rule tests only this static expectation: Parsed elements and attributes have no statically provable conformance error. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                "reference": "Elements, attributes, and content models"
+              }
+            ]
+          },
+          "ruleId": "H5A-DOC-005"
+        },
+        {
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "charLength": 15,
+                  "charOffset": 236,
+                  "endColumn": 44,
+                  "endLine": 10,
+                  "startColumn": 29,
+                  "startLine": 10
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Inline event-handler attributes are forbidden."
+          },
+          "partialFingerprints": {
+            "evidenceDigest": "fd8c96e4ec70e88dc16fc9ec68019365e0272c8bad5b55132528394e1b7b161b"
+          },
+          "properties": {
+            "authority": "standard",
+            "certainty": "exact",
+            "expected": "Inline event-handler attributes are absent.",
+            "observed": "onclick",
+            "outcome": "failed",
+            "remediation": "Change the source to meet H5A-SAFE-002; then rerun HTML5Assay.",
+            "ruleVersion": "1.0.0",
+            "standards": [
+              {
+                "authority": "WHATWG HTML Living Standard",
+                "automationLimit": "This rule tests only this static expectation: Inline event-handler attributes are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                "reference": "Event handler content attributes"
+              }
+            ]
+          },
+          "ruleId": "H5A-SAFE-002"
+        }
+      ],
+      "tool": {
+        "driver": {
+          "informationUri": "https://github.com/CanonFlow-Assay/HTML5Assay",
+          "name": "HTML5Assay",
+          "rules": [
+            {
+              "id": "H5A-DOC-001",
+              "name": "Short HTML doctype",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: A full document starts with <!doctype html>. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "The DOCTYPE"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "A full document starts with <!doctype html>."
+              }
+            },
+            {
+              "id": "H5A-DOC-002",
+              "name": "Document language",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: The root html element has a non-empty, structurally valid language tag. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "3.1.1 Language of Page"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "The root html element has a non-empty, structurally valid language tag."
+              }
+            },
+            {
+              "id": "H5A-DOC-003",
+              "name": "Page title",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: A full document has exactly one non-empty title. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "2.4.2 Page Titled"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "A full document has exactly one non-empty title."
+              }
+            },
+            {
+              "id": "H5A-DOC-004",
+              "name": "Unique identifiers",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: Every id value is unique in its document. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "The id attribute"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Every id value is unique in its document."
+              }
+            },
+            {
+              "id": "H5A-DOC-005",
+              "name": "Conforming syntax surface",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: Parsed elements and attributes have no statically provable conformance error. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Elements, attributes, and content models"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Parsed elements and attributes have no statically provable conformance error."
+              }
+            },
+            {
+              "id": "H5A-DOC-006",
+              "name": "No obsolete features",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: Obsolete-but-conforming elements and attributes are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Obsolete features"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Obsolete-but-conforming elements and attributes are absent."
+              }
+            },
+            {
+              "id": "H5A-DOC-007",
+              "name": "Contained local references",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Every resolved local reference stays inside the declared root. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §3.1 and §6.1"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Every resolved local reference stays inside the declared root."
+              }
+            },
+            {
+              "id": "H5A-SEM-001",
+              "name": "One primary main landmark",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Each full page exposes exactly one visible main landmark. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.3.1 Info and Relationships"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Each full page exposes exactly one visible main landmark."
+              }
+            },
+            {
+              "id": "H5A-SEM-002",
+              "name": "Skip link reaches main",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: A same-page skip link targets the primary content. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "2.4.1 Bypass Blocks"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "A same-page skip link targets the primary content."
+              }
+            },
+            {
+              "id": "H5A-SEM-003",
+              "name": "Clear heading hierarchy",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Heading levels do not skip levels in document order. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.3.1 Info and Relationships"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Heading levels do not skip levels in document order."
+              }
+            },
+            {
+              "id": "H5A-SEM-004",
+              "name": "Native interactive elements",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "ARIA in HTML",
+                    "automationLimit": "This rule tests only this static expectation: Static button and link behavior uses native interactive elements. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Rules of ARIA use 1 and 2"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Static button and link behavior uses native interactive elements."
+              }
+            },
+            {
+              "id": "H5A-SEM-005",
+              "name": "Link and button purpose",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: Links have navigable href values and buttons represent actions. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "The a and button elements"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Links have navigable href values and buttons represent actions."
+              }
+            },
+            {
+              "id": "H5A-SEM-006",
+              "name": "Table structure",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Data tables identify headers and provide a caption when a title is declared necessary. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.3.1 Info and Relationships"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Data tables identify headers and provide a caption when a title is declared necessary."
+              }
+            },
+            {
+              "id": "H5A-SEM-007",
+              "name": "Unique landmark names",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Repeated landmark types have distinct accessible names. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.3.1 Info and Relationships"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Repeated landmark types have distinct accessible names."
+              }
+            },
+            {
+              "id": "H5A-A11Y-001",
+              "name": "Image text alternatives",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Images explicitly declare alt text, including empty alt for decoration. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.1.1 Non-text Content"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Images explicitly declare alt text, including empty alt for decoration."
+              }
+            },
+            {
+              "id": "H5A-A11Y-002",
+              "name": "Named form controls",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Every form control has a programmatically determinable name. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "4.1.2 Name, Role, Value"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Every form control has a programmatically determinable name."
+              }
+            },
+            {
+              "id": "H5A-A11Y-003",
+              "name": "Named buttons and links",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Buttons and links have a non-empty accessible name. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "4.1.2 Name, Role, Value"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Buttons and links have a non-empty accessible name."
+              }
+            },
+            {
+              "id": "H5A-A11Y-004",
+              "name": "Valid ARIA",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WAI-ARIA 1.2",
+                    "automationLimit": "This rule tests only this static expectation: ARIA roles, states, properties, and ownership use supported names and values. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Roles, states, properties, and required owned elements"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "ARIA roles, states, properties, and ownership use supported names and values."
+              }
+            },
+            {
+              "id": "H5A-A11Y-005",
+              "name": "Native semantics preserved",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "ARIA in HTML",
+                    "automationLimit": "This rule tests only this static expectation: ARIA does not conflict with strong native semantics. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Rules of ARIA use 1 and 2"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "ARIA does not conflict with strong native semantics."
+              }
+            },
+            {
+              "id": "H5A-A11Y-006",
+              "name": "No positive tabindex",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Positive tabindex values are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "2.4.3 Focus Order"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Positive tabindex values are absent."
+              }
+            },
+            {
+              "id": "H5A-A11Y-007",
+              "name": "No global focus shortcuts",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: autofocus and accesskey are absent without a reviewed exception. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.3"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "autofocus and accesskey are absent without a reviewed exception."
+              }
+            },
+            {
+              "id": "H5A-A11Y-008",
+              "name": "Media text tracks",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Audio and video declare local caption or transcript evidence. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.2.2 Captions (Prerecorded)"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Audio and video declare local caption or transcript evidence."
+              }
+            },
+            {
+              "id": "H5A-A11Y-009",
+              "name": "Status message pattern",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Declared status messages use status or a suitable polite live region. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "4.1.3 Status Messages"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Declared status messages use status or a suitable polite live region."
+              }
+            },
+            {
+              "id": "H5A-CSS-001",
+              "name": "Visible focus styles",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: CSS does not remove focus indicators without a provable replacement. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "2.4.7 Focus Visible and 2.4.11 Focus Not Obscured (Minimum)"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "CSS does not remove focus indicators without a provable replacement."
+              }
+            },
+            {
+              "id": "H5A-CSS-002",
+              "name": "Status beyond color",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Status declarations have visible text or icon evidence in addition to color. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.4.1 Use of Color"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Status declarations have visible text or icon evidence in addition to color."
+              }
+            },
+            {
+              "id": "H5A-CSS-003",
+              "name": "Text contrast",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Statically resolvable foreground/background pairs reach WCAG AA contrast. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.4.3 Contrast (Minimum)"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Statically resolvable foreground/background pairs reach WCAG AA contrast."
+              }
+            },
+            {
+              "id": "H5A-CSS-004",
+              "name": "Non-text contrast",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Resolvable controls and focus indicators reach 3:1 against adjacent colors. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.4.11 Non-text Contrast"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Resolvable controls and focus indicators reach 3:1 against adjacent colors."
+              }
+            },
+            {
+              "id": "H5A-CSS-005",
+              "name": "Target size",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Essential controls meet 24 by 24 CSS pixels or a defined spacing exception. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "2.5.8 Target Size (Minimum)"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Essential controls meet 24 by 24 CSS pixels or a defined spacing exception."
+              }
+            },
+            {
+              "id": "H5A-CSS-006",
+              "name": "Reduced motion",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Non-essential animations have a prefers-reduced-motion alternative. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §10.12"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Non-essential animations have a prefers-reduced-motion alternative."
+              }
+            },
+            {
+              "id": "H5A-CSS-007",
+              "name": "Forced-colors resilience",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CSS Color Adjustment Module Level 1",
+                    "automationLimit": "This rule tests only this static expectation: Authored focus, boundary, and status styles include forced-colors support. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Forced color palettes"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Authored focus, boundary, and status styles include forced-colors support."
+              }
+            },
+            {
+              "id": "H5A-CSS-008",
+              "name": "Reflow",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Source evidence does not force two-dimensional scrolling at 320 CSS pixels. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.4.10 Reflow"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Source evidence does not force two-dimensional scrolling at 320 CSS pixels."
+              }
+            },
+            {
+              "id": "H5A-CSS-009",
+              "name": "Logical properties",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Direction-sensitive component layout uses logical properties. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §10.11"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Direction-sensitive component layout uses logical properties."
+              }
+            },
+            {
+              "id": "H5A-CSS-010",
+              "name": "Container-aware components",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Components whose layout depends on their container use container-query evidence. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §10.11"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Components whose layout depends on their container use container-query evidence."
+              }
+            },
+            {
+              "id": "H5A-SAFE-001",
+              "name": "No remote runtime dependency",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Production CFF pages reference no remote runtime asset. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §3.1 and §9.5"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Production CFF pages reference no remote runtime asset."
+              }
+            },
+            {
+              "id": "H5A-SAFE-002",
+              "name": "No inline event handlers",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: Inline event-handler attributes are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Event handler content attributes"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Inline event-handler attributes are absent."
+              }
+            },
+            {
+              "id": "H5A-SAFE-003",
+              "name": "Safe new browsing contexts",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: target=_blank links include noopener or noreferrer. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "Links created by a and area elements"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "target=_blank links include noopener or noreferrer."
+              }
+            },
+            {
+              "id": "H5A-SAFE-004",
+              "name": "Declared local form actions",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Form actions are local and permitted by policy. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.5"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Form actions are local and permitted by policy."
+              }
+            },
+            {
+              "id": "H5A-SAFE-005",
+              "name": "No tracking references",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Analytics, telemetry, fingerprinting, and advertising references are absent. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.5"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Analytics, telemetry, fingerprinting, and advertising references are absent."
+              }
+            },
+            {
+              "id": "H5A-SAFE-006",
+              "name": "Restrictive CSP evidence",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: A supplied deployment manifest declares a restrictive Content-Security-Policy. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.5"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "A supplied deployment manifest declares a restrictive Content-Security-Policy."
+              }
+            },
+            {
+              "id": "H5A-CFF-001",
+              "name": "Shared page shell",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: A CFF page has header, primary navigation, main, and footer. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §11"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "A CFF page has header, primary navigation, main, and footer."
+              }
+            },
+            {
+              "id": "H5A-CFF-002",
+              "name": "Product identity terms",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: CFF identity exposes product name, version, status, and authority label. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §11"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "CFF identity exposes product name, version, status, and authority label."
+              }
+            },
+            {
+              "id": "H5A-CFF-003",
+              "name": "Playground trust label",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: A playground states Preview only — non-authoritative next to result status. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §11.3"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "A playground states Preview only — non-authoritative next to result status."
+              }
+            },
+            {
+              "id": "H5A-CFF-004",
+              "name": "Result identity and counts",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: A result page exposes verdict, three counts, policy, and evidence identity. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §11.2"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "A result page exposes verdict, three counts, policy, and evidence identity."
+              }
+            },
+            {
+              "id": "H5A-CFF-005",
+              "name": "Finding identity",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Every displayed finding identifies its assay and rule. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §11.2"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Every displayed finding identifies its assay and rule."
+              }
+            },
+            {
+              "id": "H5A-CFF-006",
+              "name": "Shared page states",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: Empty, loading, error, and unavailable content uses shared state markup. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.6 and §11.1"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Empty, loading, error, and unavailable content uses shared state markup."
+              }
+            },
+            {
+              "id": "H5A-CFF-007",
+              "name": "Non-color status",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web design contract",
+                    "automationLimit": "This rule tests only this static expectation: CFF status exposes exact status text and an icon or equivalent shape. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §10.5 and §11.2"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "CFF status exposes exact status text and an icon or equivalent shape."
+              }
+            },
+            {
+              "id": "H5A-PERF-001",
+              "name": "Initial graph byte budget",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF web performance policy",
+                    "automationLimit": "This rule tests only this static expectation: Raw local initial graph bytes stay within the page-kind budget. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.7"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Raw local initial graph bytes stay within the page-kind budget."
+              }
+            },
+            {
+              "id": "H5A-PERF-002",
+              "name": "Intrinsic image dimensions",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: Images declare intrinsic dimensions or have a provable stable aspect ratio. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "The img element width and height attributes"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Images declare intrinsic dimensions or have a provable stable aspect ratio."
+              }
+            },
+            {
+              "id": "H5A-PERF-003",
+              "name": "Appropriate lazy loading",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF web performance policy",
+                    "automationLimit": "This rule tests only this static expectation: Below-fold images may be lazy while likely principal images are eager. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.7"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Below-fold images may be lazy while likely principal images are eager."
+              }
+            },
+            {
+              "id": "H5A-PERF-004",
+              "name": "Local resilient fonts",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF web performance policy",
+                    "automationLimit": "This rule tests only this static expectation: Required fonts are local and include a system fallback. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "HTML5Assay 1.0 §9.7 and §10.15"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Required fonts are local and include a system fallback."
+              }
+            },
+            {
+              "id": "H5A-PERF-005",
+              "name": "No audible autoplay",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "WCAG 2.2",
+                    "automationLimit": "This rule tests only this static expectation: Audio and video do not autoplay with sound. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "1.4.2 Audio Control"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Audio and video do not autoplay with sound."
+              }
+            },
+            {
+              "id": "H5A-PERF-006",
+              "name": "Non-blocking scripts",
+              "properties": {
+                "authority": "standard",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "WHATWG HTML Living Standard",
+                    "automationLimit": "This rule tests only this static expectation: Non-critical scripts use module or defer. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "The script element processing model"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Non-critical scripts use module or defer."
+              }
+            },
+            {
+              "id": "H5A-THEME-001",
+              "name": "Semantic theme tokens",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF Evidence theme contract",
+                    "automationLimit": "This rule tests only this static expectation: CFF component CSS uses semantic theme tokens instead of raw colors. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "cff-evidence/1.0.0 semantic tokens"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "CFF component CSS uses semantic theme tokens instead of raw colors."
+              }
+            },
+            {
+              "id": "H5A-THEME-002",
+              "name": "Complete light and dark roles",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF Evidence theme contract",
+                    "automationLimit": "This rule tests only this static expectation: Light and dark themes declare all required semantic color roles. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "cff-evidence/1.0.0 light and dark roles"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Light and dark themes declare all required semantic color roles."
+              }
+            },
+            {
+              "id": "H5A-THEME-003",
+              "name": "Brand role responsibilities",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF Evidence theme contract",
+                    "automationLimit": "This rule tests only this static expectation: Primary, secondary, and tertiary colors remain in their platform roles. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "cff-evidence/1.0.0 brand roles"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Primary, secondary, and tertiary colors remain in their platform roles."
+              }
+            },
+            {
+              "id": "H5A-THEME-004",
+              "name": "One primary action",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "advisory",
+                "standards": [
+                  {
+                    "authority": "CFF Evidence theme contract",
+                    "automationLimit": "This rule tests only this static expectation: One marked task region has no more than one filled primary action. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "cff-evidence/1.0.0 action hierarchy"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "One marked task region has no more than one filled primary action."
+              }
+            },
+            {
+              "id": "H5A-THEME-005",
+              "name": "Status colors reserved",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF Evidence theme contract",
+                    "automationLimit": "This rule tests only this static expectation: Pass, check, and fail tokens are not used for brand decoration. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "cff-evidence/1.0.0 status palette"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "Pass, check, and fail tokens are not used for brand decoration."
+              }
+            },
+            {
+              "id": "H5A-THEME-006",
+              "name": "Decorative brand gradient",
+              "properties": {
+                "authority": "cff-policy",
+                "defaultLevel": "blocking",
+                "standards": [
+                  {
+                    "authority": "CFF Evidence theme contract",
+                    "automationLimit": "This rule tests only this static expectation: The brand gradient never carries text, focus, control, or status meaning. It does not prove complete conformance, runtime behavior, rendering, or content quality.",
+                    "reference": "cff-evidence/1.0.0 brand gradient"
+                  }
+                ],
+                "version": "1.0.0"
+              },
+              "shortDescription": {
+                "text": "The brand gradient never carries text, focus, control, or status meaning."
+              }
+            }
+          ],
+          "semanticVersion": "0.1.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}

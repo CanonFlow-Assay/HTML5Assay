@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "html5assay.adversarial-fixture.v1",
+  "id": "text-byte-limit",
+  "description": "A per-text-file limit stops parsing and produces explicit incomplete evidence.",
+  "entries": ["index.html"],
+  "files": {
+    "index.html": "<!doctype html><html lang=\"en\"><title>Deliberately larger than sixty-four bytes</title><body><main>Limit evidence must be retained.</main></body></html>"
+  },
+  "policy": { "base": "cff-web-strict", "limits": { "bytesPerTextFile": 64 } },
+  "expected": { "verdict": "Inconclusive", "limitIds": ["bytesPerTextFile"] }
+}

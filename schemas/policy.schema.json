@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canonflow.dev/schemas/cff.html5assay.policy.v1.json",
+  "title": "HTML5Assay policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "profile",
+    "reviewDate",
+    "levels",
+    "limits",
+    "pageBudgets",
+    "allowedFormActions",
+    "suppressions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "cff.html5assay.policy.v1" },
+    "id": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "profile": { "enum": ["strict", "balanced"] },
+    "reviewDate": { "type": "string", "format": "date" },
+    "levels": {
+      "type": "object",
+      "propertyNames": { "pattern": "^H5A-(DOC|SEM|A11Y|CSS|SAFE|CFF|PERF|THEME)-[0-9]{3}$" },
+      "additionalProperties": { "enum": ["blocking", "advisory", "off"] }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputFiles",
+        "bytesPerTextFile",
+        "totalAnalyzedBytes",
+        "htmlNodesPerDocument",
+        "cssRulesPerGraph",
+        "localReferenceDepth",
+        "findings"
+      ],
+      "properties": {
+        "inputFiles": { "$ref": "#/$defs/positiveInteger" },
+        "bytesPerTextFile": { "$ref": "#/$defs/positiveInteger" },
+        "totalAnalyzedBytes": { "$ref": "#/$defs/positiveInteger" },
+        "htmlNodesPerDocument": { "$ref": "#/$defs/positiveInteger" },
+        "cssRulesPerGraph": { "$ref": "#/$defs/positiveInteger" },
+        "localReferenceDepth": { "$ref": "#/$defs/positiveInteger" },
+        "findings": { "$ref": "#/$defs/positiveInteger" }
+      }
+    },
+    "pageBudgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default", "playground"],
+      "properties": {
+        "default": { "$ref": "#/$defs/positiveInteger" },
+        "playground": { "$ref": "#/$defs/positiveInteger" }
+      }
+    },
+    "allowedFormActions": {
+      "type": "array",
+      "items": { "type": "string", "not": { "pattern": "^(https?:)?//" } },
+      "uniqueItems": true
+    },
+    "suppressions": { "type": "array", "items": { "$ref": "#/$defs/suppression" } },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "keyId", "value"],
+      "properties": {
+        "algorithm": { "type": "string" },
+        "keyId": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "positiveInteger": { "type": "integer", "minimum": 1 },
+    "suppression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ruleId", "owner", "reason", "expires"],
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "pattern": "^H5A-(DOC|SEM|A11Y|CSS|SAFE|CFF|PERF|THEME)-[0-9]{3}$"
+        },
+        "path": { "type": "string" },
+        "owner": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "expires": { "type": "string", "format": "date" }
+      }
+    }
+  }
+}

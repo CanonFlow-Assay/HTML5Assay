@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "html5assay.candidate-security-review.v1",
+  "reviewer": {
+    "identity": "Hume — independent candidate-bound security/LLM judge",
+    "role": "security reviewer",
+    "reviewedAt": "2026-08-19T19:29:23Z"
+  },
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveFilename": "canonflow-html5-assay-0.1.0.tgz",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2",
+    "workflowRunId": 32292015489,
+    "artifactId": 9379867515
+  },
+  "dependencies": {
+    "productionAuditVulnerabilities": 0,
+    "fullDevelopmentAuditVulnerabilities": 0,
+    "postcss": "8.5.26",
+    "ajv": "8.20.0",
+    "eslintPluginKit": "0.4.1",
+    "lockfilePackageRecords": 124,
+    "sha512IntegrityRecords": 124,
+    "nonRegistryPackageSources": 0,
+    "buildScriptRecords": 0
+  },
+  "workflows": {
+    "allActionsPinnedToReviewedFullCommitSha": true,
+    "tagsResolveToReviewedShas": true,
+    "githubVerifiedCommits": true,
+    "node24ActionRuntimes": true,
+    "publishedActionAdvisories": 0,
+    "checkoutCredentialsPersisted": false,
+    "permissions": "read-only",
+    "candidateUploadedOnlyAfterQualificationAndFinalRehash": true,
+    "failureUploadExcludesArchive": true
+  },
+  "package": {
+    "archiveMembers": 87,
+    "regularFilesOnly": true,
+    "links": 0,
+    "unsafePaths": 0,
+    "sensitiveFilenames": 0,
+    "detectedCredentialMaterial": 0,
+    "lifecycleScripts": 0,
+    "requiredApiDeclarationsAndCliPresent": true,
+    "nodeVersion": "24.19.0",
+    "pnpmVersion": "10.34.5",
+    "offlineInstallPassed": true,
+    "apiRuleCount": 58,
+    "apiSmokePassed": true,
+    "cliSmokePassed": true,
+    "archiveRehashUnchanged": true
+  },
+  "securityTests": {
+    "adversarialFixturesPassed": [
+      "malformed CSS",
+      "path traversal",
+      "remote runtime",
+      "text byte limits"
+    ],
+    "sourceMapReadHardeningPassed": true,
+    "strictRemoteAndTelemetryRejectionPassed": true,
+    "crossOperatingSystemRuns": [32291756601, 32291762682],
+    "testsPerJob": 99
+  },
+  "browserEvidence": {
+    "result": "Pass",
+    "failures": 0,
+    "results": 51,
+    "resultsPerBrowser": 17,
+    "serviceWorkers": "block",
+    "hostNetworkDenial": "docker-network-none",
+    "hostNetworkProbe": "ENETUNREACH",
+    "canonicalEvidenceSha256": "b1f2c49f93d9edb201088fcec37f18b222e1529e8c703dea791b2d11e26c34c7",
+    "evidenceFileSha256": "f1d016d8230d13fc4e23afbc4d2776a1433f3de458fc2dd26b8c1d87e5a2d277",
+    "artifactZipSha256": "0c0adef915c93852d94930872dc53dfcc5f5ce2aa940823595e66f84f1288160"
+  },
+  "gateDecisions": [
+    { "id": "RG-03", "decision": "accepted" },
+    { "id": "RG-04", "decision": "accepted" },
+    { "id": "RG-05", "decision": "accepted" },
+    { "id": "RG-13", "decision": "accepted" },
+    { "id": "RG-16", "decision": "accepted" },
+    { "id": "RG-18", "decision": "accepted" }
+  ],
+  "limitations": [
+    "Browser evidence remains non-authoritative until the required human review accepts it.",
+    "The immutable Playwright container records Node v24.18.1; archive construction and package qualification used Node 24.19.0.",
+    "Audit and advisory findings are point-in-time, and secret scanning was heuristic.",
+    "This review does not approve companion acceptance, accessibility or assistive-technology review, merge, signing, tagging, publishing, or a human-approval gate.",
+    "Evidence-only worktree changes were excluded; all candidate-impacting paths match the reviewed commit."
+  ],
+  "result": "accepted"
+}

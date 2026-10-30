@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "cff.html5assay.policy.v1",
+  "id": "cff-web-strict",
+  "version": "1.0.0",
+  "profile": "strict",
+  "reviewDate": "2026-08-19",
+  "levels": {},
+  "limits": {
+    "inputFiles": 10000,
+    "bytesPerTextFile": 4194304,
+    "totalAnalyzedBytes": 67108864,
+    "htmlNodesPerDocument": 250000,
+    "cssRulesPerGraph": 100000,
+    "localReferenceDepth": 32,
+    "findings": 20000
+  },
+  "pageBudgets": { "default": 768000, "playground": 2097152 },
+  "allowedFormActions": ["", "/search"],
+  "suppressions": []
+}

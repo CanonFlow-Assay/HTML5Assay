@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "html5assay.accessibility-automated-evidence-review.v1",
+  "reviewer": {
+    "identity": "Tesla (Codex accessibility reviewer, /root/candidate_independent_test)",
+    "role": "accessibility reviewer",
+    "reviewedAt": "2026-08-19T19:45:27Z"
+  },
+  "reviewedEvidenceHead": "0c265057baaa8871e756cce62b42e26655223816",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "decisions": [
+    {
+      "id": "RG-14",
+      "decision": "accepted",
+      "evidence": [
+        "git:865f8fca014637eaea3527b5d2c89f27626316c1:theme/cff-evidence.css",
+        "github-actions-artifact:9379867515/html5assay-candidate/canonflow-html5-assay-0.1.0.tgz!/package/theme/cff-evidence.css",
+        "git:865f8fca014637eaea3527b5d2c89f27626316c1:test/independent-playground.test.ts",
+        "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291756601",
+        "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291762682"
+      ],
+      "checks": {
+        "archiveThemeSha256": "e7ea330137d8f54599130411d6e269fd4621199a940f03b3fb370be1d6f137ad",
+        "archiveMatchesCandidateGit": true,
+        "requiredTokensPerScheme": 24,
+        "contrastPairsPerScheme": 13,
+        "contrastChecksPassed": 26,
+        "contrastChecksTotal": 26,
+        "lowestLightOutlineRatio": 4.758704,
+        "lowestDarkOutlineRatio": 4.581745,
+        "lowestLightTextRatio": 6.18445,
+        "lowestDarkTextRatio": 7.544297
+      }
+    },
+    {
+      "id": "RG-15",
+      "decision": "accepted",
+      "evidence": [
+        "release-evidence/artifacts/0.1.0/browser-qualification-32292015489.json",
+        "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489",
+        "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489/artifacts/9379867515",
+        "github-actions-artifact:9379867515/html5assay-browser-evidence/browser-evidence.json"
+      ],
+      "checks": {
+        "browserEvidenceFileSha256": "f1d016d8230d13fc4e23afbc4d2776a1433f3de458fc2dd26b8c1d87e5a2d277",
+        "canonicalBrowserEvidenceSha256": "b1f2c49f93d9edb201088fcec37f18b222e1529e8c703dea791b2d11e26c34c7",
+        "results": 51,
+        "resultsPerBrowser": 17,
+        "missing": 0,
+        "duplicates": 0,
+        "unexpected": 0,
+        "failures": 0,
+        "serviceWorkers": "block",
+        "hostNetworkDenial": "docker-network-none",
+        "hostNetworkProbe": "ENETUNREACH",
+        "archiveRehashUnchanged": true
+      }
+    }
+  ],
+  "limitation": "These decisions accept RG-14 and RG-15 automated evidence only. They do not perform or satisfy RG-21 human and assistive-technology review, establish WCAG conformance, or replace authorized human approval.",
+  "result": "accepted"
+}

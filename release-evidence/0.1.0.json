@@ -1,0 +1,623 @@
+{
+  "schemaVersion": "html5assay.release-evidence.v1",
+  "releaseVersion": "0.1.0",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "invalidationPolicy": "A candidate Git commit or archive digest change invalidates every affected candidate-bound item; evidence and reviewer acceptance must be collected again for the new identity.",
+  "items": [
+    {
+      "id": "RG-01",
+      "requirement": "Bind exact candidate commit and archive digest.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "candidate-identity",
+          "locator": "release-evidence/0.1.0.json#/candidate",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "candidate-retention-record",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-retention.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "release-manager-review",
+          "locator": "release-evidence/artifacts/0.1.0/release-manager-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": "OpenAI Codex release manager (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:10Z"
+      }
+    },
+    {
+      "id": "RG-02",
+      "requirement": "Invalidate affected evidence after candidate changes.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "policy",
+          "locator": "release-evidence/README.md",
+          "state": "available",
+          "candidateBound": false
+        },
+        {
+          "kind": "release-manager-review",
+          "locator": "release-evidence/artifacts/0.1.0/release-manager-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": "OpenAI Codex release manager (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:10Z"
+      }
+    },
+    {
+      "id": "RG-03",
+      "requirement": "Complete dependency and lockfile security review.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "security-review",
+          "locator": "release-evidence/artifacts/0.1.0/pre-candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
+      }
+    },
+    {
+      "id": "RG-04",
+      "requirement": "Complete workflow-action security review with immutable action pins.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "action-identity-review",
+          "locator": "release-evidence/workflow-actions.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
+      }
+    },
+    {
+      "id": "RG-05",
+      "requirement": "Complete candidate package security review.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
+      }
+    },
+    {
+      "id": "RG-06",
+      "requirement": "Install and run the packed package offline.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "ci-test",
+          "locator": "package.json#scripts.test:package",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
+      }
+    },
+    {
+      "id": "RG-07",
+      "requirement": "Prove API and CLI canonical-result parity.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-api.test.ts",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
+      }
+    },
+    {
+      "id": "RG-08",
+      "requirement": "Prove cross-operating-system determinism.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "ci-matrix",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291756601",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "ci-matrix",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32291762682",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
+      }
+    },
+    {
+      "id": "RG-09",
+      "requirement": "Execute three determinate examples for every rule.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/catalog-examples.test.ts",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "llm-judge-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "LLM judge",
+        "identity": "OpenAI Codex LLM judge (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:30:29Z"
+      }
+    },
+    {
+      "id": "RG-10",
+      "requirement": "Execute cantTell examples wherever evidence can be unavailable.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/catalog-examples.test.ts",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "llm-judge-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "LLM judge",
+        "identity": "OpenAI Codex LLM judge (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:30:29Z"
+      }
+    },
+    {
+      "id": "RG-11",
+      "requirement": "Review standards automation limits.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "standards-record",
+          "locator": "standards/standards-snapshot.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "standards-review",
+          "locator": "release-evidence/artifacts/0.1.0/standards-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "standards reviewer",
+        "identity": "Hume — independent standards reviewer (LLM judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:48:16Z"
+      }
+    },
+    {
+      "id": "RG-12",
+      "requirement": "Pass canonical artifact goldens.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "fixtures/golden/basic",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "independent tester",
+        "identity": "Tesla (Codex independent tester, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:28:20Z"
+      }
+    },
+    {
+      "id": "RG-13",
+      "requirement": "Pass adversarial and resource-bound tests.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/adversarial-fixtures.test.ts",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
+      }
+    },
+    {
+      "id": "RG-14",
+      "requirement": "Pass theme token and contrast checks.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-playground.test.ts",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "accessibility-review",
+          "locator": "release-evidence/artifacts/0.1.0/accessibility-automated-evidence-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "accessibility reviewer",
+        "identity": "Tesla (Codex accessibility reviewer, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:27Z"
+      }
+    },
+    {
+      "id": "RG-15",
+      "requirement": "Pass the network-denied locked browser matrix.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "qualification-record",
+          "locator": "release-evidence/artifacts/0.1.0/browser-qualification-32292015489.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "workflow-run",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "workflow-artifact",
+          "locator": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489/artifacts/9379867515",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "browser-evidence",
+          "locator": "github-actions-artifact:9379867515/html5assay-browser-evidence/browser-evidence.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "accessibility-review",
+          "locator": "release-evidence/artifacts/0.1.0/accessibility-automated-evidence-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "accessibility reviewer",
+        "identity": "Tesla (Codex accessibility reviewer, /root/candidate_independent_test)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:27Z"
+      }
+    },
+    {
+      "id": "RG-16",
+      "requirement": "Prove strict-policy remote and telemetry rejection.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-api.test.ts",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
+      }
+    },
+    {
+      "id": "RG-17",
+      "requirement": "Review playground specimens and trust label.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "test/independent-playground.test.ts",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "product-review",
+          "locator": "release-evidence/artifacts/0.1.0/product-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "product reviewer",
+        "identity": "OpenAI Codex product reviewer (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:47:20Z"
+      }
+    },
+    {
+      "id": "RG-18",
+      "requirement": "Audit public package boundaries.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "automated-test",
+          "locator": "scripts/test-package.mjs",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "candidate-security-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-security-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "security reviewer",
+        "identity": "Hume — independent candidate-bound security/LLM judge",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:29:23Z"
+      }
+    },
+    {
+      "id": "RG-19",
+      "requirement": "Obtain companion-assay and CFF-host acceptance.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "mechanical-compatibility-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json#/companionCompatibility",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "external-acceptance",
+          "locator": "pending:companion-assay-acceptance",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "companion maintainers",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-20",
+      "requirement": "Obtain independent tester and judge review.",
+      "status": "accepted",
+      "evidence": [
+        {
+          "kind": "independent-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "judge-review",
+          "locator": "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "release-manager-review",
+          "locator": "release-evidence/artifacts/0.1.0/release-manager-review.json",
+          "state": "available",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": "OpenAI Codex release manager (/root/llm_judge)",
+        "decision": "accepted",
+        "reviewedAt": "2026-08-19T19:45:10Z"
+      }
+    },
+    {
+      "id": "RG-21",
+      "requirement": "Complete scoped WCAG-EM 2.0 human and assistive-technology review.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "review-plan",
+          "locator": "release-evidence/artifacts/0.1.0/wcag-em-2.0-review-plan.json",
+          "state": "available",
+          "candidateBound": true
+        },
+        {
+          "kind": "human-review",
+          "locator": "pending:wcag-em-2.0-report",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "human accessibility lead",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-22",
+      "requirement": "Obtain authorized human approval of the final commit.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "human-approval",
+          "locator": "pending:final-commit-approval",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "authorized human release approver",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-23",
+      "requirement": "Verify trusted-main CI after approved merge.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "ci-run",
+          "locator": "pending:trusted-main-ci",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "release manager",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    },
+    {
+      "id": "RG-24",
+      "requirement": "Publish only through the approved release procedure.",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "release-record",
+          "locator": "pending:approved-publish-procedure",
+          "state": "pending",
+          "candidateBound": true
+        }
+      ],
+      "reviewer": {
+        "requiredRole": "authorized human release approver",
+        "identity": null,
+        "decision": "pending",
+        "reviewedAt": null
+      }
+    }
+  ]
+}

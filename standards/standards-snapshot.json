@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "cff.html5assay.standards-snapshot.v1",
+  "id": "html5assay-standards",
+  "version": "1.0.0",
+  "reviewDate": "2026-08-19",
+  "authoritySetDigest": {
+    "algorithm": "sha-256",
+    "value": "a451a8cd888142bc32075b40bb27f2057f0143f1ff51dc5a3dad7165c4c92bff"
+  },
+  "authorities": [
+    {
+      "id": "whatwg-html",
+      "title": "WHATWG HTML Living Standard",
+      "version": "Living Standard snapshot reviewed 2026-08-19",
+      "url": "https://html.spec.whatwg.org/",
+      "normative": true,
+      "scope": "Document syntax, elements, attributes, content models, and author requirements"
+    },
+    {
+      "id": "wcag",
+      "title": "Web Content Accessibility Guidelines",
+      "version": "2.2 Recommendation",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "normative": true,
+      "scope": "Level AA target; only success criteria mapped by individual static rules"
+    },
+    {
+      "id": "wai-aria",
+      "title": "Accessible Rich Internet Applications",
+      "version": "WAI-ARIA 1.2",
+      "url": "https://www.w3.org/TR/wai-aria-1.2/",
+      "normative": true,
+      "scope": "Roles, states, properties, host use, and required ownership"
+    },
+    {
+      "id": "aria-in-html",
+      "title": "ARIA in HTML",
+      "version": "Snapshot reviewed 2026-08-19",
+      "url": "https://www.w3.org/TR/html-aria/",
+      "normative": true,
+      "scope": "Native HTML priority and permitted ARIA semantics"
+    },
+    {
+      "id": "act-rules-format",
+      "title": "Accessibility Conformance Testing Rules Format",
+      "version": "1.1",
+      "url": "https://www.w3.org/TR/act-rules-format/",
+      "normative": true,
+      "scope": "Atomic applicability, expectations, assumptions, examples, and outcomes"
+    },
+    {
+      "id": "css-color-adjust",
+      "title": "CSS Color Adjustment Module",
+      "version": "Level 1",
+      "url": "https://www.w3.org/TR/css-color-adjust-1/",
+      "normative": true,
+      "scope": "Color-scheme and forced-colors behavior"
+    },
+    {
+      "id": "sarif",
+      "title": "Static Analysis Results Interchange Format",
+      "version": "2.1.0",
+      "url": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html",
+      "normative": true,
+      "scope": "Stable result, rule, location, evidence, and fingerprint projection"
+    },
+    {
+      "id": "cff-result",
+      "title": "CanonFlow Foundation assay result schema",
+      "version": "cff.assay.result.v1",
+      "url": "../schemas/result.schema.json",
+      "normative": true,
+      "scope": "Canonical result and cross-assay evidence identity"
+    },
+    {
+      "id": "wcag-3-research",
+      "title": "Web Content Accessibility Guidelines 3.0",
+      "version": "Working Draft reviewed 2026-08-19",
+      "url": "https://www.w3.org/TR/wcag-3.0/",
+      "normative": false,
+      "scope": "Research metadata only; never a release gate"
+    }
+  ]
+}

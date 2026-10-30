@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "html5assay.product-review.v1",
+  "reviewer": {
+    "identity": "OpenAI Codex product reviewer (/root/llm_judge)",
+    "role": "product reviewer",
+    "reviewedAt": "2026-08-19T19:47:20Z"
+  },
+  "reviewedEvidenceHead": "0c265057baaa8871e756cce62b42e26655223816",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "gate": {
+    "id": "RG-17",
+    "decision": "accepted",
+    "evidence": [
+      "git:865f8fca014637eaea3527b5d2c89f27626316c1:playground/specimens.mjs",
+      "git:865f8fca014637eaea3527b5d2c89f27626316c1:playground/index.html",
+      "git:865f8fca014637eaea3527b5d2c89f27626316c1:playground/playground.mjs",
+      "git:865f8fca014637eaea3527b5d2c89f27626316c1:test/independent-playground.test.ts",
+      "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32293685256",
+      "github-actions-artifact:9379867515/html5assay-browser-evidence/browser-evidence.json"
+    ],
+    "checks": {
+      "specimenCount": 2,
+      "specimenDigestsVerified": true,
+      "clearSpecimenVerdict": "Inconclusive",
+      "unsafeSpecimenVerdict": "Fail",
+      "unsafeSpecimenRules": ["H5A-SAFE-001", "H5A-SAFE-002"],
+      "trustLabel": "Preview only — non-authoritative",
+      "trustLabelExact": true,
+      "localOnlyCsp": true,
+      "separateAnalyzeAction": true,
+      "untestedRuleCountReported": 48,
+      "fetchUsed": false,
+      "sessionRecoveryPassedForThreeBrowsers": true
+    }
+  },
+  "limitations": [
+    "The recovery probe covers the dedicated qualification flow, not persistence of playground editor or result state.",
+    "The playground is a ten-rule preview and cannot establish conformance.",
+    "RG-21, RG-22, and overall release readiness remain pending."
+  ],
+  "result": "accepted"
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canonflow.dev/schemas/html5assay.release-evidence.v1.json",
+  "title": "HTML5Assay release evidence record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "releaseVersion", "candidate", "invalidationPolicy", "items"],
+  "properties": {
+    "schemaVersion": { "const": "html5assay.release-evidence.v1" },
+    "releaseVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gitCommit", "archiveSha256"],
+      "oneOf": [
+        {
+          "properties": {
+            "gitCommit": { "type": "null" },
+            "archiveSha256": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "gitCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            "archiveSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      ],
+      "properties": {
+        "gitCommit": {
+          "anyOf": [{ "type": "null" }, { "type": "string", "pattern": "^[0-9a-f]{40}$" }]
+        },
+        "archiveSha256": {
+          "anyOf": [{ "type": "null" }, { "type": "string", "pattern": "^[0-9a-f]{64}$" }]
+        }
+      }
+    },
+    "invalidationPolicy": { "type": "string", "minLength": 1 },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "requirement", "status", "evidence", "reviewer"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^RG-[0-9]{2}$" },
+          "requirement": { "type": "string", "minLength": 1 },
+          "status": {
+            "enum": ["pending", "provisional", "accepted", "rejected", "invalidated"]
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "locator", "state", "candidateBound"],
+              "properties": {
+                "kind": { "type": "string", "minLength": 1 },
+                "locator": { "type": "string", "minLength": 1 },
+                "state": { "enum": ["available", "pending", "invalidated"] },
+                "candidateBound": { "type": "boolean" }
+              }
+            }
+          },
+          "reviewer": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["requiredRole", "identity", "decision", "reviewedAt"],
+            "properties": {
+              "requiredRole": { "type": "string", "minLength": 1 },
+              "identity": {
+                "anyOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }]
+              },
+              "decision": { "enum": ["pending", "accepted", "rejected"] },
+              "reviewedAt": {
+                "anyOf": [{ "type": "null" }, { "type": "string", "format": "date-time" }]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "assay": {
+    "id": "html5assay",
+    "version": "0.1.0"
+  },
+  "authorityLimitations": [
+    "Static source checks do not prove complete WCAG conformance, runtime behavior, rendering, interaction, or content quality.",
+    "No page script is executed and no network resource is fetched.",
+    "A Pass applies only to the supplied bytes, manifest, pinned policy, and implemented static expectations.",
+    "Human review is required before release, signature, waiver, or promotion."
+  ],
+  "findingsDigest": {
+    "algorithm": "sha-256",
+    "value": "2b73ca11177c129b2ff3d181d8fb389bb97b3dbbf0948ddd8954f4c91b1f2f06"
+  },
+  "humanApprovalRequired": true,
+  "limits": [],
+  "manifestDigest": null,
+  "policy": {
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "a86a0b66af62032a6532aa2a9860755f95ffca27617b689e4c16d41475f43e4c"
+    },
+    "id": "cff-web-strict",
+    "version": "1.0.0"
+  },
+  "resultDigest": {
+    "algorithm": "sha-256",
+    "value": "f08337165115d402e6b47760133a891bb88b0cc5b64f63a989e00a686ca2137e"
+  },
+  "ruleset": {
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "50804eb9239746d2f991eee27e8c2eb7b3bfc7661765df94e14a6329803cb690"
+    },
+    "id": "html5assay-core",
+    "version": "1.0.0"
+  },
+  "schemaVersion": "cff.assay.receipt.v1",
+  "subject": {
+    "digest": {
+      "algorithm": "sha-256",
+      "value": "a5d05a6c46d21ab1fb5b366b5548ce0c1cedeed95b0f53f3a7973190c43eb99f"
+    },
+    "root": "."
+  },
+  "toolFailures": [],
+  "toolchain": {
+    "cssParser": "postcss/8.5.26",
+    "htmlParser": "parse5/7.2.1",
+    "node": "24.19.0"
+  },
+  "verdict": "Fail"
+}

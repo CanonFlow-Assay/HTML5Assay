@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "html5assay.browser-qualification-record.v1",
+  "recordedAt": "2026-08-19T19:17:04Z",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveFilename": "canonflow-html5-assay-0.1.0.tgz",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "workflow": {
+    "runId": 32292015489,
+    "url": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489",
+    "conclusion": "success",
+    "checkedOutCommitConfirmed": true,
+    "postBrowserArchiveDigestConfirmed": true,
+    "finalArchiveDigestConfirmed": true
+  },
+  "artifact": {
+    "id": 9379867515,
+    "name": "accepted-candidate-browser-evidence-865f8fca014637eaea3527b5d2c89f27626316c1",
+    "url": "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489/artifacts/9379867515",
+    "fileCount": 3,
+    "archiveCount": 1,
+    "checksumFile": "html5assay-candidate/SHA256SUMS",
+    "browserEvidenceFile": "html5assay-browser-evidence/browser-evidence.json"
+  },
+  "browserEvidence": {
+    "result": "Pass",
+    "failures": 0,
+    "results": 51,
+    "uniqueExpectedResults": 51,
+    "playwrightVersion": "1.62.1",
+    "browserRevisions": {
+      "chromium": "1234",
+      "firefox": "1538",
+      "webkit": "2336"
+    },
+    "nodeVersion": "v24.18.1",
+    "operatingSystem": "linux/x64 6.17.0-1022-azure",
+    "startedAt": "2026-08-19T19:16:17.072Z",
+    "finishedAt": "2026-08-19T19:17:02.685Z",
+    "durationMilliseconds": 45613,
+    "serviceWorkers": "block",
+    "hostNetworkDenial": "docker-network-none",
+    "hostNetworkProbe": "ENETUNREACH",
+    "evidenceSha256": "b1f2c49f93d9edb201088fcec37f18b222e1529e8c703dea791b2d11e26c34c7"
+  },
+  "independentVerification": {
+    "artifactFileCountsConfirmed": true,
+    "archivePathSafetyConfirmed": true,
+    "requiredPublicApiAndCliConfirmed": true,
+    "sha256SumsConfirmed": true,
+    "evidenceDigestConfirmed": true,
+    "candidateBindingConfirmed": true,
+    "archiveRehashUnchanged": true
+  },
+  "gateState": "evidence-available-review-pending"
+}

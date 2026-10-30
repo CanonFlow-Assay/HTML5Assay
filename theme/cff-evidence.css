@@ -1,0 +1,124 @@
+/* CFF Evidence 1.0.0 — semantic tokens for CanonFlow evidence surfaces. */
+:root {
+  color-scheme: light dark;
+
+  --cf-bg: #f7f9fb;
+  --cf-surface: #ffffff;
+  --cf-surface-raised: #eef3f8;
+  --cf-glass: rgba(255, 255, 255, 0.86);
+  --cf-text: #17202a;
+  --cf-text-muted: #4f5d6b;
+  --cf-outline: #667487;
+  --cf-scrim: rgba(23, 32, 42, 0.36);
+
+  --cf-primary: #005ea8;
+  --cf-on-primary: #ffffff;
+  --cf-primary-container: #d6eaff;
+  --cf-on-primary-container: #002f52;
+  --cf-secondary: #00696f;
+  --cf-on-secondary: #ffffff;
+  --cf-secondary-container: #c8f2f3;
+  --cf-on-secondary-container: #003638;
+  --cf-tertiary: #6546a3;
+  --cf-on-tertiary: #ffffff;
+  --cf-tertiary-container: #e9dfff;
+  --cf-on-tertiary-container: #271451;
+
+  --cf-pass: #176b3a;
+  --cf-check: #7a4d00;
+  --cf-fail: #b4232c;
+  --cf-focus: #005fcc;
+
+  --cf-brand-gradient-light: linear-gradient(135deg, #005ea8 0%, #00696f 58%, #6546a3 100%);
+  --cf-brand-gradient-dark: linear-gradient(135deg, #8fc7ff 0%, #68d5d8 58%, #c8b7ff 100%);
+  --cf-brand-gradient: var(--cf-brand-gradient-light);
+
+  --cf-space-1: 0.25rem;
+  --cf-space-2: 0.5rem;
+  --cf-space-3: 0.75rem;
+  --cf-space-4: 1rem;
+  --cf-space-6: 1.5rem;
+  --cf-space-8: 2rem;
+  --cf-radius-small: 0.5rem;
+  --cf-radius-medium: 0.75rem;
+  --cf-radius-large: 1rem;
+  --cf-border-width: 0.0625rem;
+  --cf-focus-width: 0.125rem;
+  --cf-motion-fast: 140ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cf-bg: #0b0f14;
+    --cf-surface: #121922;
+    --cf-surface-raised: #182231;
+    --cf-glass: rgba(18, 25, 34, 0.84);
+    --cf-text: #f2f6fa;
+    --cf-text-muted: #b7c1cc;
+    --cf-outline: #748398;
+    --cf-scrim: rgba(0, 0, 0, 0.64);
+
+    --cf-primary: #8fc7ff;
+    --cf-on-primary: #002f52;
+    --cf-primary-container: #0b3d68;
+    --cf-on-primary-container: #d6ebff;
+    --cf-secondary: #68d5d8;
+    --cf-on-secondary: #003738;
+    --cf-secondary-container: #114b4e;
+    --cf-on-secondary-container: #c4f4f4;
+    --cf-tertiary: #c8b7ff;
+    --cf-on-tertiary: #30205f;
+    --cf-tertiary-container: #45377a;
+    --cf-on-tertiary-container: #e9e1ff;
+
+    --cf-pass: #71d79c;
+    --cf-check: #ffd166;
+    --cf-fail: #ff8a95;
+    --cf-focus: #ffbf47;
+
+    --cf-brand-gradient: var(--cf-brand-gradient-dark);
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --cf-border-width: 0.125rem;
+    --cf-focus-width: 0.1875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --cf-motion-fast: 0ms;
+  }
+}
+
+@media (forced-colors: active) {
+  :root {
+    --cf-bg: Canvas;
+    --cf-surface: Canvas;
+    --cf-surface-raised: Canvas;
+    --cf-glass: Canvas;
+    --cf-text: CanvasText;
+    --cf-text-muted: CanvasText;
+    --cf-outline: CanvasText;
+    --cf-scrim: Canvas;
+    --cf-primary: LinkText;
+    --cf-on-primary: Canvas;
+    --cf-primary-container: Canvas;
+    --cf-on-primary-container: CanvasText;
+    --cf-secondary: Highlight;
+    --cf-on-secondary: HighlightText;
+    --cf-secondary-container: Canvas;
+    --cf-on-secondary-container: CanvasText;
+    --cf-tertiary: LinkText;
+    --cf-on-tertiary: Canvas;
+    --cf-tertiary-container: Canvas;
+    --cf-on-tertiary-container: CanvasText;
+    --cf-pass: CanvasText;
+    --cf-check: CanvasText;
+    --cf-fail: CanvasText;
+    --cf-focus: Highlight;
+    --cf-brand-gradient: none;
+  }
+}

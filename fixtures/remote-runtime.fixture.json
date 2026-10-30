@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "html5assay.adversarial-fixture.v1",
+  "id": "remote-runtime",
+  "description": "A remote runtime dependency remains inert evidence and fails strict policy.",
+  "entries": ["index.html"],
+  "files": {
+    "index.html": "<!doctype html><html lang=\"en\"><title>Remote</title><body><main><img src=\"https://evil.example/pixel.png\" alt=\"\"></main></body></html>"
+  },
+  "policy": { "base": "cff-web-strict" },
+  "expected": { "verdict": "Fail", "findingRuleIds": ["H5A-SAFE-001"] }
+}

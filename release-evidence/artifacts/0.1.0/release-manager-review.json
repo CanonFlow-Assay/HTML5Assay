@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "html5assay.release-manager-review.v1",
+  "reviewer": {
+    "identity": "OpenAI Codex release manager (/root/llm_judge)",
+    "role": "release manager",
+    "reviewedAt": "2026-08-19T19:45:10Z"
+  },
+  "reviewedEvidenceHead": "0c265057baaa8871e756cce62b42e26655223816",
+  "candidate": {
+    "gitCommit": "865f8fca014637eaea3527b5d2c89f27626316c1",
+    "archiveSha256": "3cf9cf2789d53232eefe1437ee483aded4953eb32e47b851f4e0bdfdc61c65e2"
+  },
+  "decisions": [
+    {
+      "id": "RG-01",
+      "decision": "accepted",
+      "evidence": [
+        "release-evidence/0.1.0.json#/candidate",
+        "release-evidence/artifacts/0.1.0/browser-qualification-32292015489.json",
+        "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489",
+        "https://github.com/CanonFlow-Assay/HTML5Assay/actions/runs/32292015489/artifacts/9379867515"
+      ],
+      "rationale": "The release record, workflow, artifact, checksum file, and independent rehash bind one exact candidate commit to one archive SHA-256."
+    },
+    {
+      "id": "RG-02",
+      "decision": "accepted",
+      "evidence": [
+        "release-evidence/README.md",
+        "git:865f8fca014637eaea3527b5d2c89f27626316c1..0c265057baaa8871e756cce62b42e26655223816"
+      ],
+      "rationale": "The invalidation policy is explicit. The reviewed head directly descends from the frozen candidate and changes only release-evidence/0.1.0.json and release-evidence/artifacts/0.1.0/**; follow-up worktree changes remain within those permitted evidence-only paths."
+    },
+    {
+      "id": "RG-20",
+      "decision": "accepted",
+      "evidence": [
+        "release-evidence/artifacts/0.1.0/candidate-independent-review.json",
+        "release-evidence/artifacts/0.1.0/candidate-llm-judge-review.json"
+      ],
+      "rationale": "Both required component reviews contain named, timestamped, candidate-bound acceptances. Corrected catalogue accounting is 174 determinate plus 19 cantTell examples, 193 total."
+    }
+  ],
+  "limitations": [
+    "Acceptance applies only if the corrected component records and follow-up evidence-only changes are committed unchanged within the permitted paths.",
+    "RG-22, readiness, merge, and publication remain pending."
+  ],
+  "result": "accepted"
+}
