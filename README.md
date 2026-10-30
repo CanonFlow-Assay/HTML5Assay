@@ -135,3 +135,5 @@ Apache-2.0. See [LICENSE](LICENSE).
 ## Playground investigations
 
 See [source-preview investigations](docs/playground-investigations.md) for the dependency-free review command, source freshness controls and remaining engine/release qualification. The ten-rule subset remains non-authoritative.
+The [phase-1 playground convergence note](docs/PLAYGROUND-CONVERGENCE.md) records
+the next browser-boundary candidate and the features deliberately excluded.
