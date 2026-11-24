@@ -2,7 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
 import { specimens } from './specimens.mjs';
-import { reviewHTML, selectHTMLInvestigation } from './investigation.mjs';
+import {
+  reviewHTML,
+  selectHTMLInvestigation,
+  validatePreviewManifest,
+  reviewPreviewManifest
+} from './investigation.mjs';
 
 const clean = specimens[0].input;
 test('bundled inputs retain exact digest and documented findings', () => {
@@ -82,4 +87,39 @@ test('preview is deterministic and supplied scripts remain inert text', () => {
     '<script>throw new Error("must never execute")</script></main>'
   );
   assert.deepEqual(reviewHTML(input), reviewHTML(input));
+});
+test('manifest schema validation rejects malformed, unknown-policy or getter-backed specimen envelopes before rendering', () => {
+  const accepted = validatePreviewManifest({
+    id: 'specimen-clean',
+    input: clean,
+    policy: 'cff-web-strict'
+  });
+  assert.equal(accepted.kind, 'ManifestAccepted');
+  assert.equal(reviewPreviewManifest({ id: 'specimen-clean', input: clean, policy: 'cff-web-strict' }).verdict, 'Inconclusive');
+
+  for (const bad of [
+    null,
+    [],
+    { id: '', input: clean, policy: 'cff-web-strict' },
+    { id: 's1', policy: 'cff-web-strict' },
+    { id: 's1', input: 42, policy: 'cff-web-strict' },
+    { id: 's1', input: clean, policy: 'unknown-policy' }
+  ]) {
+    const reviewed = reviewPreviewManifest(bad);
+    assert.equal(reviewed.verdict, 'Inconclusive');
+    assert.equal(reviewed.next.kind, 'ContextRequired');
+  }
+
+  let getterReads = 0;
+  const withGetter = { id: 's1', policy: 'cff-web-strict' };
+  Object.defineProperty(withGetter, 'input', {
+    get() {
+      getterReads += 1;
+      return clean;
+    },
+    enumerable: true
+  });
+  const getterReviewed = reviewPreviewManifest(withGetter);
+  assert.equal(getterReviewed.next.kind, 'ContextRequired');
+  assert.equal(getterReads, 0);
 });
