@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { analyze, canonicalJson } from '../src/api/index.js';
+import { analyze, analyzeChain, canonicalJson } from '../src/api/index.js';
 
 interface Projection {
   readonly assayId: string;
@@ -65,6 +65,48 @@ void test('a CFF host can preserve foreign receipts and five-part finding identi
     assert.deepEqual(roundTrip.receipts[2], result.receipt);
     const identities = roundTrip.findings.map(identity);
     assert.equal(new Set(identities).size, identities.length);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+void test('analyzeChain automatically hooks TypeScriptAssay, JavaScriptAssay, and STEAssay on HTML scope', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'html5assay-chain-'));
+  try {
+    await writeFile(
+      join(root, 'index.html'),
+      [
+        '<!doctype html>',
+        '<html lang="en">',
+        '<head><meta charset="utf-8"><title>Chained Assay Page</title></head>',
+        '<body>',
+        '<a href="#main">Skip to primary content</a>',
+        '<main id="main">',
+        '<h1>Chained Assay Page</h1>',
+        '<p>This short sentence uses controlled technical writing.</p>',
+        '<p>This extraordinarily long and Winding technical sentence contains way too many words so that the hooked controlled technical writing assay flags the twenty-five word sentence limit deterministically.</p>',
+        '<script type="module">var legacyCounter = 1; const raw = JSON.parse("{}");</script>',
+        '</main>',
+        '</body>',
+        '</html>'
+      ].join('\n')
+    );
+    const chain = await analyzeChain({
+      root,
+      entries: ['index.html'],
+      policy: { id: 'cff-web-strict' }
+    });
+    assert.equal(chain.schemaVersion, 'cff.assay.bundle.v1');
+    assert.deepEqual(chain.pipeline, [
+      'html5assay',
+      'typescriptassay',
+      'javascriptassay',
+      'steassay'
+    ]);
+    assert.equal(chain.receipts.length, 4);
+    assert.ok(chain.typescript.findings.some((finding) => finding.ruleId === 'TSA-BOUNDARY-001'));
+    assert.ok(chain.javascript.findings.some((finding) => finding.ruleId === 'JSA-I01'));
+    assert.ok(chain.ste.findings.some((finding) => finding.ruleId === 'STE-S01'));
   } finally {
     await rm(root, { recursive: true, force: true });
   }

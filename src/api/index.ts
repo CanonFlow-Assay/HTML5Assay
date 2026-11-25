@@ -1,4 +1,12 @@
 export { analyze } from './analyze.js';
+export {
+  analyzeChain,
+  combineChainVerdicts,
+  type CrossAssayChainResult,
+  type HookedAssayId,
+  type HookedStageFinding,
+  type HookedStageReport
+} from '../chain/chain.js';
 export type {
   AnalyzeRequest,
   AnalyzeResult,

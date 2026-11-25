@@ -1,4 +1,5 @@
 import type { AnalyzeResult } from '../api/model.js';
+import type { CrossAssayChainResult, HookedStageReport } from '../chain/chain.js';
 
 export const prettyResult = (result: AnalyzeResult): string => {
   const lines = [
@@ -22,5 +23,32 @@ export const prettyResult = (result: AnalyzeResult): string => {
       );
   }
   lines.push('authority: Static source evidence only; human release approval is required.');
+  return `${lines.join('\n')}\n`;
+};
+
+const formatHookedStage = (stage: HookedStageReport): readonly string[] => {
+  const lines = [
+    `--- Hooked ${stage.assayId} ${stage.version} (${stage.engine}) ---`,
+    `verdict: ${stage.verdict} (observed units: ${stage.observedUnits})`,
+    `findings: ${stage.counts.blocking} blocking, ${stage.counts.advisory} advisory, ${stage.counts.inconclusive} inconclusive`,
+    `receipt: sha-256:${stage.receiptDigest.value}`
+  ];
+  for (const finding of stage.findings) {
+    lines.push(
+      `${finding.path}:${finding.range.start.line}:${finding.range.start.column} ${finding.ruleId} ${finding.level} ${finding.message}`
+    );
+  }
+  return lines;
+};
+
+export const prettyChainResult = (chain: CrossAssayChainResult): string => {
+  const base = prettyResult(chain.html5).trimEnd();
+  const lines = [
+    base,
+    ...formatHookedStage(chain.typescript),
+    ...formatHookedStage(chain.javascript),
+    ...formatHookedStage(chain.ste),
+    `=== Chained Pipeline Verdict (html5assay -> typescriptassay -> javascriptassay -> steassay): ${chain.verdict} ===`
+  ];
   return `${lines.join('\n')}\n`;
 };

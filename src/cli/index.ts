@@ -2,19 +2,21 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { dirname, extname, join, resolve } from 'node:path';
 import { analyze } from '../api/analyze.js';
-import type { AnalyzeResult, PolicyReference } from '../api/model.js';
+import type { AnalyzeResult, PolicyReference, RunVerdict } from '../api/model.js';
+import { analyzeChain } from '../chain/chain.js';
 import { canonicalJson } from '../result/canonical.js';
 import { toSarif } from '../result/sarif.js';
 import { findRule, ruleCatalog, rulesetIdentity } from '../rules/catalog.js';
 import { verifyReceipt } from '../receipt/receipt.js';
-import { prettyResult } from './pretty.js';
+import { prettyChainResult, prettyResult } from './pretty.js';
 
-type OutputFormat = 'pretty' | 'json' | 'sarif';
+type OutputFormat = 'pretty' | 'json' | 'sarif' | 'bundle';
 
 const usage = `html5assay 0.1.0
 
 Usage:
-  html5assay check <path> [--manifest <path>] [--policy cff-web-strict|cff-web-balanced|<id>:<file>] [--format pretty|json|sarif]
+  html5assay check <path> [--manifest <path>] [--policy cff-web-strict|cff-web-balanced|<id>:<file>] [--format pretty|json|sarif|bundle]
+  html5assay chain <path> [--manifest <path>] [--policy cff-web-strict|cff-web-balanced|<id>:<file>] [--format pretty|json]
   html5assay catalog [rule-id] [--format pretty|json]
   html5assay explain <rule-id>
   html5assay verify-receipt <receipt.json>
@@ -35,7 +37,8 @@ const parseCheckOptions = (arguments_: readonly string[]): CheckOptions => {
     const value = arguments_[index + 1];
     if (value === undefined) throw new Error(`${name ?? '(missing option)'} requires a value`);
     if (name === '--format') {
-      if (!['pretty', 'json', 'sarif'].includes(value)) throw new Error(`Unknown format ${value}`);
+      if (!['pretty', 'json', 'sarif', 'bundle'].includes(value))
+        throw new Error(`Unknown format ${value}`);
       format = value as OutputFormat;
     } else if (name === '--manifest') manifest = value;
     else if (name === '--policy') {
@@ -68,33 +71,45 @@ const findHtml = async (root: string, maximum = 10_000): Promise<readonly string
   return found;
 };
 
-const exitCode = (result: AnalyzeResult): number =>
-  result.verdict === 'Pass'
-    ? 0
-    : result.verdict === 'Fail'
-      ? 1
-      : result.verdict === 'Inconclusive'
-        ? 2
-        : 3;
+const verdictExitCode = (verdict: RunVerdict): number =>
+  verdict === 'Pass' ? 0 : verdict === 'Fail' ? 1 : verdict === 'Inconclusive' ? 2 : 3;
 
-const check = async (path: string | undefined, arguments_: readonly string[]): Promise<number> => {
+const exitCode = (result: AnalyzeResult): number => verdictExitCode(result.verdict);
+
+const resolveEntries = async (
+  path: string | undefined,
+  manifest: string | undefined
+): Promise<{ readonly root: string; readonly entries: readonly string[] }> => {
   if (path === undefined) throw new Error('check requires a path');
-  const options = parseCheckOptions(arguments_);
   const absolute = resolve(path);
   const metadata = await stat(absolute);
   const root = metadata.isDirectory() ? absolute : dirname(absolute);
   const entries =
-    metadata.isDirectory() && options.manifest !== undefined
+    metadata.isDirectory() && manifest !== undefined
       ? []
       : metadata.isDirectory()
         ? await findHtml(root)
         : [absolute.slice(root.length + 1)];
-  const result = await analyze({
+  return { root, entries };
+};
+
+const check = async (path: string | undefined, arguments_: readonly string[]): Promise<number> => {
+  const options = parseCheckOptions(arguments_);
+  const { root, entries } = await resolveEntries(path, options.manifest);
+  const request = {
     root,
     entries,
     policy: options.policy,
     ...(options.manifest === undefined ? {} : { manifest: options.manifest })
-  });
+  };
+  if (options.format === 'pretty' || options.format === 'bundle') {
+    const chainResult = await analyzeChain(request);
+    const output =
+      options.format === 'bundle' ? canonicalJson(chainResult) : prettyChainResult(chainResult);
+    process.stdout.write(output);
+    return exitCode(chainResult.html5);
+  }
+  const result = await analyze(request);
   const output =
     options.format === 'json'
       ? canonicalJson(result)
@@ -103,6 +118,23 @@ const check = async (path: string | undefined, arguments_: readonly string[]): P
         : prettyResult(result);
   process.stdout.write(output);
   return exitCode(result);
+};
+
+const chain = async (path: string | undefined, arguments_: readonly string[]): Promise<number> => {
+  const options = parseCheckOptions(arguments_);
+  const { root, entries } = await resolveEntries(path, options.manifest);
+  const chainResult = await analyzeChain({
+    root,
+    entries,
+    policy: options.policy,
+    ...(options.manifest === undefined ? {} : { manifest: options.manifest })
+  });
+  const output =
+    options.format === 'json' || options.format === 'bundle'
+      ? canonicalJson(chainResult)
+      : prettyChainResult(chainResult);
+  process.stdout.write(output);
+  return verdictExitCode(chainResult.verdict);
 };
 
 const catalog = (arguments_: readonly string[]): number => {
@@ -141,6 +173,7 @@ const main = async (): Promise<number> => {
     return 0;
   }
   if (command === 'check') return check(first, remaining);
+  if (command === 'chain') return chain(first, remaining);
   if (command === 'catalog')
     return catalog(first === undefined ? remaining : [first, ...remaining]);
   if (command === 'explain') {
